@@ -1,12 +1,12 @@
 package com.manageTeam.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.manageTeam.dto.MemberConditionDto;
 import com.manageTeam.dto.MemberDto;
 import com.manageTeam.entity.Member;
 import com.manageTeam.entity.Team;
@@ -41,8 +41,8 @@ public class MemberService {
 		return member;
 	}
 	
-	public List<MemberDto.Info> findAll() {
-		return new ArrayList<>();
+	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto conditionDto, Pageable pageable) {
+		return memberRepository.findAllByCondition(conditionDto, pageable);
 	}
 
 }

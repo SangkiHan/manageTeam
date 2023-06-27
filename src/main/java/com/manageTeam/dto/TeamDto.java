@@ -19,7 +19,7 @@ public class TeamDto {
 	
 	@Getter
 	public static class Save{
-		private Long id;
+		private Long teamId;
 		private String teamName;
 		private String city;
 		
@@ -31,15 +31,52 @@ public class TeamDto {
 	
 	@Getter
 	@ToString
-	public static class Info{
-		private Long id;
+	public static class DetailInfo{
+		private Long teamId;
 		private String teamName;
 		private String city;
 		
-		public Info(Team team) {
-			this.id = team.getId();
+		public DetailInfo(Team team) {
+			this.teamId = team.getTeamId();
 			this.teamName = team.getTeamName();
 			this.city = team.getCity();
+		}
+	}
+	
+	@Getter
+	@ToString
+	public static class Info{
+		private Long teamId;
+		private String teamName;
+		private String city;
+		private Long centerCnt;
+		private Long pointCnt;
+		private Long shootCnt;
+		private Long sFowardCnt;
+		private Long fFowardCnt;
+		
+		public Info(Team team) {
+			this.teamId = team.getTeamId();
+			this.teamName = team.getTeamName();
+			this.city = team.getCity();
+		}
+		
+		public Info(
+				Team team,
+				Long centerCnt, 
+				Long pointCnt, 
+				Long shootCnt, 
+				Long sFowardCnt, 
+				Long fFowardCnt
+				) {
+			this.teamId = team.getTeamId();
+			this.teamName = team.getTeamName();
+			this.city = team.getCity();
+			this.centerCnt = centerCnt;
+			this.pointCnt = pointCnt;
+			this.shootCnt = shootCnt;
+			this.sFowardCnt = sFowardCnt;
+			this.fFowardCnt = fFowardCnt;
 		}
 	}
 }

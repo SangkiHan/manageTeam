@@ -21,6 +21,4 @@ public class ManageTeamApplication {
 	JPAQueryFactory jpaQueryFactory(EntityManager em) {
 		return new JPAQueryFactory(em);
 	}
-
-
 }

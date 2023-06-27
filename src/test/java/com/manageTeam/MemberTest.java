@@ -14,6 +14,9 @@ public class MemberTest {
 	
 	@Autowired MemberService memberService;
 	
+	/*
+	 * 저장 테스트
+	 * */
 	@Test
 	@Rollback(value = true)
 	void save() {
@@ -22,6 +25,9 @@ public class MemberTest {
 		memberService.save(member);
 	}
 	
+	/*
+	 * 단건 조회 테스트
+	 * */
 	@Test
 	void findById() {
 		MemberDto.Info member = memberService.findById(4L);

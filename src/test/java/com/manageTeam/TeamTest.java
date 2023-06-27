@@ -13,6 +13,9 @@ public class TeamTest {
 	
 	@Autowired TeamService teamService;
 	
+	/*
+	 * 저장 테스트
+	 * */
 	@Test	
 	@Rollback(value = true)
 	void save() {
@@ -20,6 +23,9 @@ public class TeamTest {
 		teamService.save(teamDto);
 	}
 	
+	/*
+	 * 단건 조회 테스트
+	 * */
 	@Test	
 	void findById() {
 		TeamDto.Id teamId = new TeamDto.Id(1L);

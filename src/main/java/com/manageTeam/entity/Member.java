@@ -31,7 +31,8 @@ public class Member extends BaseEntity{
 	private String birth;
 	@Embedded
 	private Address address;
-	private String position;
+	@Enumerated(EnumType.STRING)
+	private Position position;
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -51,7 +52,7 @@ public class Member extends BaseEntity{
 		this.age = member.getAge();
 		this.birth = member.getBirth();
 		this.address = new Address(member.getAddress());
-		this.position = member.getPosition();
+		this.position = Position.valueOf(member.getPosition());
 		this.activateStatus = ActivateStatus.YES;
 	}
 }

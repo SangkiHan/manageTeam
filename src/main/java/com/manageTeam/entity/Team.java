@@ -24,7 +24,7 @@ public class Team extends BaseEntity{
 	
 	@Id @GeneratedValue
 	@Column(name = "team_id")
-	private Long id;
+	private Long teamId;
 	@Column(name = "team_name")
 	private String teamName;
 	private String city;
@@ -40,7 +40,7 @@ public class Team extends BaseEntity{
 	public Team() {}
 	
 	public Team(TeamDto.Save team) {
-		this.id = team.getId();
+		this.teamId = team.getTeamId();
 		this.teamName = team.getTeamName();
 		this.city = team.getCity();
 		this.activateStatus = ActivateStatus.YES;
