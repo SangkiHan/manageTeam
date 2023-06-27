@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 
 import lombok.Getter;
 
+/*
+ * 체육관 테이블
+ * */
 @Entity
 @Getter
 public class Gym extends BaseEntity{

@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 
 import lombok.Getter;
 
+/*
+ * 대회 테이블
+ * */
 @Entity
 @Getter
 public class Competition {

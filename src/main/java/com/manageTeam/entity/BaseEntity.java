@@ -14,6 +14,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
 
+
+/*
+ * 생성, 수정 기본 Mapped
+ * */
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @MappedSuperclass

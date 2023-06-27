@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 
+/*
+ * 대회참가팀 테이블
+ * */
 @Entity
 @Getter
 public class CompetitionTeam {

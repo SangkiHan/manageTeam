@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 
+/*
+ * 체육관 예약건 테이블
+ * */
 @Entity
 @Getter
 public class Reservation extends BaseEntity{

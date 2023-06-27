@@ -11,8 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.manageTeam.dto.TeamDto;
+
 import lombok.Getter;
 
+/*
+ * 팀관리 테이블
+ * */
 @Entity
 @Getter
 public class Team extends BaseEntity{
@@ -22,7 +27,6 @@ public class Team extends BaseEntity{
 	private Long id;
 	@Column(name = "team_name")
 	private String teamName;
-	private String activate;
 	private String city;
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
@@ -32,5 +36,13 @@ public class Team extends BaseEntity{
 	private List<Reservation> reservations = new ArrayList<>();
 	@OneToMany(mappedBy = "team")
 	private List<CompetitionTeam> CompetitionTeams = new ArrayList<>();
-
+	
+	public Team() {}
+	
+	public Team(TeamDto.Save team) {
+		this.id = team.getId();
+		this.teamName = team.getTeamName();
+		this.city = team.getCity();
+		this.activateStatus = ActivateStatus.YES;
+	}
 }
