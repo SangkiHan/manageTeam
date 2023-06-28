@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.manageTeam.dto.GymDto;
+
 import lombok.Getter;
 
 /*
@@ -28,5 +30,10 @@ public class Gym extends BaseEntity{
 	private Address address;
 	@OneToMany(mappedBy = "gym")
 	private List<Reservation> reservations = new ArrayList<>();
-
+	
+	public Gym(GymDto.Save gym) {
+		this.gymId = gym.getGymId();
+		this.gymName = gym.getGymName();
+		this.address = gym.getAddress();
+	}
 }
