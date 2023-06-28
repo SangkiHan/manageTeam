@@ -25,9 +25,9 @@ public class Team extends BaseEntity{
 	@Id @GeneratedValue
 	@Column(name = "team_id")
 	private Long teamId;
-	@Column(name = "team_name")
 	private String teamName;
 	private String city;
+	private int memberCount;
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 	@OneToMany(mappedBy = "team")
@@ -43,6 +43,15 @@ public class Team extends BaseEntity{
 		this.teamId = team.getTeamId();
 		this.teamName = team.getTeamName();
 		this.city = team.getCity();
+		this.memberCount = 0;
 		this.activateStatus = ActivateStatus.YES;
+	}
+	
+	public void addMember() {
+		this.memberCount++;
+	}
+	
+	public void minusMember() {
+		this.memberCount--;
 	}
 }
