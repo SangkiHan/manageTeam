@@ -28,8 +28,7 @@ public class TeamTest {
 	 * */
 	@Test	
 	void findById() {
-		TeamDto.Id teamId = new TeamDto.Id(1L);
-		TeamDto.Info team = teamService.findById(teamId);
+		TeamDto.Info team = teamService.findById(1L);
 		System.out.println(team);
 	}
 

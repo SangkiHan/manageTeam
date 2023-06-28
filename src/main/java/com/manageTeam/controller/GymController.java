@@ -26,6 +26,9 @@ public class GymController {
 		gymService.save(request);
 	}
 	
+	/*
+	 * 체육관 단건 조회
+	 * */
 	@GetMapping("/v1/findById")
 	public GymDto.Info findById(Long gymId){
 		return gymService.findById(gymId);

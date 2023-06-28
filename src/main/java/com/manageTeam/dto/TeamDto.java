@@ -2,21 +2,14 @@ package com.manageTeam.dto;
 
 import com.manageTeam.entity.Team;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.ToString;
 
 
 public class TeamDto {
 	
-	@Getter
-	public static class Id{
-		private Long teamId;
-
-		public Id(Long teamId) {
-			this.teamId = teamId;
-		}
-	}
-	
+	@ApiModel(value = "팀 등록 Dto")
 	@Getter
 	public static class Save{
 		private Long teamId;
@@ -29,6 +22,7 @@ public class TeamDto {
 		}
 	}
 	
+	@ApiModel(value = "팀 상세 Dto")
 	@Getter
 	@ToString
 	public static class DetailInfo{
@@ -43,6 +37,7 @@ public class TeamDto {
 		}
 	}
 	
+	@ApiModel(value = "팀 목록 Dto")
 	@Getter
 	@ToString
 	public static class Info{

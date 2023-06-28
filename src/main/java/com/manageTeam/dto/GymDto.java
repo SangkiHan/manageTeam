@@ -2,11 +2,13 @@ package com.manageTeam.dto;
 
 import com.manageTeam.entity.Gym;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.ToString;
 
 public class GymDto {
 	
+	@ApiModel(value = "체육관 등록,수정 Dto")
 	@Getter
 	public static class Save{
 		private Long gymId;
@@ -19,6 +21,7 @@ public class GymDto {
 		}
 	}
 	
+	@ApiModel(value = "체육관 정보 Dto")
 	@Getter
 	@ToString
 	public static class Info{

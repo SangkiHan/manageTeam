@@ -26,8 +26,8 @@ public class TeamService {
 		teamRepository.save(team);
 	}
 	
-	public TeamDto.Info findById(TeamDto.Id request) {
-		Team result = teamRepository.findById(request.getTeamId())
+	public TeamDto.Info findById(Long teamId) {
+		Team result = teamRepository.findById(teamId)
 				.orElseThrow(() -> new GlobalException("해당 팀 데이터가 없음"));
 		
 		TeamDto.Info team = new TeamDto.Info(result);

@@ -3,21 +3,14 @@ package com.manageTeam.dto;
 import com.manageTeam.entity.Address;
 import com.manageTeam.entity.Member;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 public class MemberDto {
 	
-	@Getter
-	public static class Id{
-		private Long memberId;
-
-		public Id(Long memberId) {
-			this.memberId = memberId;
-		}
-	}
-	
+	@ApiModel(value = "팀원 저장 Dto")
 	@Getter
 	@RequiredArgsConstructor
 	public static class Save{
@@ -40,6 +33,7 @@ public class MemberDto {
 		}
 	}
 	
+	@ApiModel(value = "팀원 정보 Dto")
 	@Getter
 	@ToString
 	public static class Info{
