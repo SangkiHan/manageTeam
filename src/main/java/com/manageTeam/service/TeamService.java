@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.manageTeam.dto.MemberConditionDto;
+import com.manageTeam.dto.TeamConditionDto;
 import com.manageTeam.dto.TeamDto;
 import com.manageTeam.entity.Team;
 import com.manageTeam.exception.GlobalException;
@@ -34,7 +34,7 @@ public class TeamService {
 		return team;
 	}
 	
-	public Page<TeamDto.Info> findAllByCondition (MemberConditionDto conditionDto, Pageable pageable){
+	public Page<TeamDto.Info> findAllByCondition (TeamConditionDto conditionDto, Pageable pageable){
 		return teamRepository.findAllByCondition(conditionDto, pageable);
 	}
 }

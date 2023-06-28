@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.dto.MemberConditionDto;
+import com.manageTeam.dto.TeamConditionDto;
 import com.manageTeam.dto.TeamDto;
 import com.manageTeam.service.TeamService;
 
@@ -21,18 +22,27 @@ public class TeamController {
 	
 	private final TeamService teamService;
 	
+	/*
+	 * 팀저장, 수정
+	 * */
 	@PostMapping("/v1/save")
 	public void save(@RequestBody TeamDto.Save request) {
 		teamService.save(request);
 	}
-
+	
+	/*
+	 * 팀상세
+	 * */
 	@GetMapping("/v1/findById")
 	public TeamDto.Info findById(@RequestBody TeamDto.Id request) {
 		return teamService.findById(request);
 	}
 	
+	/*
+	 * 팀목록
+	 * */
 	@GetMapping("/v1/findAll")
-	public Page<TeamDto.Info> findAllByCondition(MemberConditionDto conditionDto, Pageable pageable) {
+	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
 		return teamService.findAllByCondition(conditionDto, pageable);
 	}
 }

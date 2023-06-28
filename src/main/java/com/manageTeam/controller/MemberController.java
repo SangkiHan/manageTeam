@@ -21,16 +21,25 @@ public class MemberController {
 	
 	private final MemberService memberService;
 	
+	/*
+	 * 팀원 수정 저장
+	 * */
 	@PostMapping("/v1/save")
 	public void save(@RequestBody MemberDto.Save request) {
 		memberService.save(request);
 	}
 	
+	/*
+	 * 팀원상세
+	 * */
 	@GetMapping("/v1/findById")
 	public MemberDto.Info findById(Long memberId) {
 		return memberService.findById(memberId);
 	}
 	
+	/*
+	 * 팀원목록 조회
+	 * */
 	@GetMapping("/v1/findAll")
 	public Page<MemberDto.Info> selectList(MemberConditionDto conditionDto, Pageable pageable) {
 		return memberService.findAllByCondition(conditionDto, pageable);
