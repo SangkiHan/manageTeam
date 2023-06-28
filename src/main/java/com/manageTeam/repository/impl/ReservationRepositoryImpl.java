@@ -28,7 +28,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto conditionDto, Pageable pageable) {
+	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable) {
 		
 		List<ReservationDto.Info> results = queryFactory
 				.select(Projections.constructor(ReservationDto.Info.class, 
@@ -69,6 +69,17 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 				.having(reservation.reservationId.isNotNull());
 				
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
+	}
+	
+	@Override
+	public boolean findReservationByDate(ReservationConditionDto.DateCondition condition) {
+		
+		boolean check = queryFactory
+				.select(reservationTeam.count())
+				.from(reservationTeam)
+				.fetch();
+		
+		return false;
 	}
 	
 	public BooleanExpression gymnameLike(String gymname) {

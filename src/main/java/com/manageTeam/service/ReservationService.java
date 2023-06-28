@@ -26,7 +26,8 @@ public class ReservationService {
 		reservationRepository.save(reservation);
 	}
 	
-	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto reservationConditionDto, Pageable pageable) {
+	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition reservationConditionDto, Pageable pageable) {
 		return reservationRepository.findAllByCondition(reservationConditionDto, pageable);
 	}
+
 }

@@ -33,7 +33,7 @@ public class ReservationController {
 	 * 등록된 예약목록
 	 * */
 	@GetMapping("/v1/findAll")
-	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto conditionDto, Pageable pageable) {
+	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable) {
 		return reservationService.findAllByCondition(conditionDto, pageable);
 	}
 }

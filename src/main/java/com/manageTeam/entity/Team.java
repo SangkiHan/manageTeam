@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.manageTeam.dto.TeamDto;
+import com.manageTeam.exception.GlobalException;
 
 import lombok.Getter;
 
@@ -53,5 +54,12 @@ public class Team extends BaseEntity{
 	
 	public void minusMember() {
 		this.memberCount--;
+	}
+	
+	public void checkMemberCnt() {
+		int count = this.memberCount;
+		if(count<5) {
+			throw new GlobalException("팀 인원이 5명 미만입니다.");
+		}
 	}
 }

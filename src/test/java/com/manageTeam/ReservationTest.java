@@ -27,7 +27,7 @@ public class ReservationTest {
 	
 	@Test
 	void findAllByCondition() {
-		Page<ReservationDto.Info> results = reservationService.findAllByCondition(new ReservationConditionDto("비트", null, null, null), PageRequest.of(0, 2));
+		Page<ReservationDto.Info> results = reservationService.findAllByCondition(new ReservationConditionDto.ListCondition("비트", null, null, null), PageRequest.of(0, 2));
 		System.out.println(results);
 	}
 }

@@ -29,6 +29,7 @@ public class ReservationDto {
 		}
 	}
 	
+	
 	@ApiModel(value = "예약 목록 Dto")
 	@Getter
 	@ToString

@@ -24,4 +24,15 @@ public class ReservationTeam extends BaseEntity{
 	private Reservation reservation;
 	
 	public ReservationTeam() {}
+	
+	public void setTeam(Team team) {
+		team.checkMemberCnt();
+		this.team = team;
+		team.getReservationTeams().add(this);
+	}
+	
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
+		reservation.getReservationTeams().add(this);
+	}
 }
