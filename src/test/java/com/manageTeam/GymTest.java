@@ -19,4 +19,10 @@ public class GymTest {
 		GymDto.Save gym = new GymDto.Save("비트바스켓볼",addressDto);
 		gymService.save(gym);
 	}
+	
+	@Test
+	void findById() {
+		GymDto.Info result = gymService.findById(1L);
+		System.out.println(result);
+	}
 }

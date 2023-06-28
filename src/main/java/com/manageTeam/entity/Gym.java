@@ -31,9 +31,17 @@ public class Gym extends BaseEntity{
 	@OneToMany(mappedBy = "gym")
 	private List<Reservation> reservations = new ArrayList<>();
 	
+	public Gym() {};
+	
 	public Gym(GymDto.Save gym) {
 		this.gymId = gym.getGymId();
 		this.gymName = gym.getGymName();
-		this.address = gym.getAddress();
+		this.address = new Address(gym.getAddress());
+	}
+	
+	public Gym(GymDto.Info gym) {
+		this.gymId = gym.getGymId();
+		this.gymName = gym.getGymName();
+		this.address = new Address(gym.getAddress());
 	}
 }
