@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.manageTeam.dto.ReservationDto;
+
 import lombok.Getter;
 
 /*
@@ -32,6 +34,19 @@ public class Reservation extends BaseEntity{
 	private Gym gym;
 	@OneToMany(mappedBy = "reservation")
 	private List<ReservationTeam> reservationTeams = new ArrayList<>();
-	private ActivateStatus activateStatus;
+	private int totalTeamCnt;
+	
+	public Reservation() {}
+	
+	public void createReservation(Gym gym) {
+		this.gym = gym;
+		gym.getReservations().add(this);
+	}
 
+	public Reservation(ReservationDto.Save reservation) {
+		this.reservationId = reservation.getReservationId();
+		this.startTime = reservation.getStartTime();
+		this.endTime = reservation.getEndTime();
+		this.totalTeamCnt = reservation.getTotalTeamCnt();
+	};
 }
