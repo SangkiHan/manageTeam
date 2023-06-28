@@ -46,8 +46,8 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 				.leftJoin(reservation.reservationTeams, reservationTeam)
 				.where(
 						gymnameLike(conditionDto.getGymName()),
-						dateGoe(conditionDto.getDateGoe()),
-						dateLoe(conditionDto.getDateLoe()),
+						startGoe(conditionDto.getDateGoe()),
+						endLoe(conditionDto.getDateLoe()),
 						cityLike(conditionDto.getCity())
 						)
 				.groupBy(reservation.reservationId)
@@ -61,8 +61,8 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 				.leftJoin(reservation.reservationTeams, reservationTeam)
 				.where(
 						gymnameLike(conditionDto.getGymName()),
-						dateGoe(conditionDto.getDateGoe()),
-						dateLoe(conditionDto.getDateLoe()),
+						startGoe(conditionDto.getDateGoe()),
+						endLoe(conditionDto.getDateLoe()),
 						cityLike(conditionDto.getCity())
 						)
 				.groupBy(reservation.reservationId)
@@ -72,24 +72,35 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	}
 	
 	@Override
-	public boolean findReservationByDate(ReservationConditionDto.DateCondition condition) {
+	public boolean findReservationByDate(ReservationConditionDto.DateCondition condition, Long teamId) {
 		
-		boolean check = queryFactory
+		Long check = queryFactory
 				.select(reservationTeam.count())
 				.from(reservationTeam)
-				.fetch();
+				.where(
+						reservationTeam.team.teamId.eq(teamId),
+						startLoe(condition.getEndDate()),
+						endLoe(condition.getStartDate())
+						)
+				.fetchOne();
 		
-		return false;
+		return check>0 ? true : false;
 	}
 	
 	public BooleanExpression gymnameLike(String gymname) {
 		return StringUtils.hasText(gymname) ? gym.gymName.contains(gymname) : null;
 	}
-	public BooleanExpression dateGoe(LocalDateTime dateGoe) {
+	public BooleanExpression startGoe(LocalDateTime dateGoe) {
 		return dateGoe!=null ? reservation.startTime.goe(dateGoe) : null;
 	}
-	public BooleanExpression dateLoe(LocalDateTime dateLoe) {
+	public BooleanExpression endLoe(LocalDateTime dateLoe) {
 		return dateLoe!=null ? reservation.endTime.loe(dateLoe) : null;
+	}
+	public BooleanExpression startLoe(LocalDateTime dateGoe) {
+		return dateGoe!=null ? reservation.startTime.loe(dateGoe) : null;
+	}
+	public BooleanExpression endGoe(LocalDateTime dateLoe) {
+		return dateLoe!=null ? reservation.endTime.goe(dateLoe) : null;
 	}
 	public BooleanExpression cityLike(String city) {
 		return StringUtils.hasText(city) ? gym.address.city.contains(city) : null;

@@ -26,6 +26,11 @@ public class ReservationConditionDto {
 	public static class DateCondition{
 		private LocalDateTime startDate;
 		private LocalDateTime endDate;
+		
+		public DateCondition(LocalDateTime startDate, LocalDateTime endDate) {
+			this.startDate = startDate;
+			this.endDate = endDate;
+		}
 	}
 	
 }
