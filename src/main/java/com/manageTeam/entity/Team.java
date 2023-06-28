@@ -33,9 +33,9 @@ public class Team extends BaseEntity{
 	@OneToMany(mappedBy = "team")
 	private List<Member> members = new ArrayList<>();
 	@OneToMany(mappedBy = "team")
-	private List<Reservation> reservations = new ArrayList<>();
+	private List<CompetitionTeam> competitionTeams = new ArrayList<>();
 	@OneToMany(mappedBy = "team")
-	private List<CompetitionTeam> CompetitionTeams = new ArrayList<>();
+	private List<ReservationTeam> reservationTeams = new ArrayList<>();
 	
 	public Team() {}
 	

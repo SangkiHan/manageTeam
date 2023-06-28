@@ -1,6 +1,8 @@
 package com.manageTeam.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 
@@ -25,11 +28,10 @@ public class Reservation extends BaseEntity{
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "team_id")
-	private Team team;
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "gym_id")
 	private Gym gym;
+	@OneToMany(mappedBy = "reservation")
+	private List<ReservationTeam> reservationTeams = new ArrayList<>();
 	private ActivateStatus activateStatus;
 
 }
