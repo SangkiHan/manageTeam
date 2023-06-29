@@ -1,5 +1,7 @@
 package com.manageTeam.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.manageTeam.dto.GymDto;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class GymService {
 	
 	private final GymRepository gymRepository;

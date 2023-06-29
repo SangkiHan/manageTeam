@@ -1,5 +1,7 @@
 package com.manageTeam.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.manageTeam.dto.ReservationConditionDto;
@@ -16,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ReservationTeamService {
 	
 	private final ReservationTeamRepository reservationTeamRepository;

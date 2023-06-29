@@ -77,14 +77,15 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 		Long check = queryFactory
 				.select(reservationTeam.count())
 				.from(reservationTeam)
+				.join(reservationTeam.reservation, reservation)
 				.where(
 						reservationTeam.team.teamId.eq(teamId),
 						startLoe(condition.getEndDate()),
-						endLoe(condition.getStartDate())
+						endGoe(condition.getStartDate())
 						)
 				.fetchOne();
 		
-		return check>0 ? true : false;
+		return check>0 ? false : true;
 	}
 	
 	public BooleanExpression gymnameLike(String gymname) {

@@ -9,6 +9,11 @@ public class ReservationTeamDto {
 		private Long reservationTeamId;
 		private Long teamId;
 		private Long reservationId;
+		
+		public Save(Long teamId, Long reservationId) {
+			this.teamId = teamId;
+			this.reservationId = reservationId;
+		}
 	}
 
 }
