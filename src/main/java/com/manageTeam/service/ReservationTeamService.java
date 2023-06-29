@@ -2,6 +2,8 @@ package com.manageTeam.service;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.manageTeam.dto.ReservationConditionDto;
@@ -46,6 +48,10 @@ public class ReservationTeamService {
 		if(!reservationRepository.findReservationByDate(condition,teamId)) {
 			throw new GlobalException("해당 시간에 이미 예약된 체육관이 존재합니다.");
 		}
+	}
+	
+	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, Pageable pageable){
+		return reservationTeamRepository.findAllByTeam(teamId, pageable);
 	}
 
 }
