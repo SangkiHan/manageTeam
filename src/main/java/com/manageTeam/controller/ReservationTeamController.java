@@ -3,6 +3,8 @@ package com.manageTeam.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,11 @@ public class ReservationTeamController {
 	@GetMapping("/findAllbyTeam")
 	public Page<ReservationTeamDto.Info> findAllbyTeam(Long teamId, Pageable pageable){
 		return reservationTeamService.findAllByTeam(teamId, pageable);
+	}
+	
+	@PostMapping("/save")
+	public void save(@RequestBody ReservationTeamDto.Save request){
+		reservationTeamService.save(request);
 	}
 
 }
