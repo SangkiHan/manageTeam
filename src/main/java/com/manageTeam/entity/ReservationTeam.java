@@ -22,6 +22,7 @@ public class ReservationTeam extends BaseEntity{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reservation_id")
 	private Reservation reservation;
+	private ActivateStatus activateStatus;
 	
 	public ReservationTeam() {}
 	

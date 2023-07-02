@@ -46,5 +46,4 @@ public class ReservationTeamDto {
 			this.endDate = endDate;
 		}
 	}
-
 }
