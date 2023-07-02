@@ -2,6 +2,8 @@ package com.manageTeam.dto;
 
 import java.time.LocalDateTime;
 
+import com.manageTeam.entity.ActivateStatus;
+
 import lombok.Getter;
 import lombok.ToString;
 
@@ -12,10 +14,12 @@ public class ReservationTeamDto {
 		private Long reservationTeamId;
 		private Long teamId;
 		private Long reservationId;
+		private ActivateStatus activateStatus;
 		
 		public Save(Long teamId, Long reservationId) {
 			this.teamId = teamId;
 			this.reservationId = reservationId;
+			this.activateStatus = ActivateStatus.YES;
 		}
 	}
 	
@@ -28,13 +32,14 @@ public class ReservationTeamDto {
 		private Long gymId;
 		private String gymName;
 		private String city;
+		private ActivateStatus activateStatus;
 		private LocalDateTime startDate;
 		private LocalDateTime endDate;
 		
 		public Info() {};
 		
 		public Info(Long reservationTeamId, Long teamId, Long reservationId, Long gymId, String gymName, String city,
-				LocalDateTime startDate, LocalDateTime endDate) {
+				ActivateStatus activateStatus, LocalDateTime startDate, LocalDateTime endDate) {
 			super();
 			this.reservationTeamId = reservationTeamId;
 			this.teamId = teamId;
@@ -42,6 +47,7 @@ public class ReservationTeamDto {
 			this.gymId = gymId;
 			this.gymName = gymName;
 			this.city = city;
+			this.activateStatus = activateStatus;
 			this.startDate = startDate;
 			this.endDate = endDate;
 		}
