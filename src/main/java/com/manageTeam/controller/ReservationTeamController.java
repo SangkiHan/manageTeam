@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.dto.ReservationTeamDto;
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.service.ReservationTeamService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,8 @@ public class ReservationTeamController {
 	private final ReservationTeamService reservationTeamService;
 	
 	@GetMapping("/findAllbyTeam")
-	public Page<ReservationTeamDto.Info> findAllbyTeam(Long teamId, Pageable pageable){
-		return reservationTeamService.findAllByTeam(teamId, pageable);
+	public Page<ReservationTeamDto.Info> findAllbyTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
+		return reservationTeamService.findAllByTeam(teamId, activateStatus, pageable);
 	}
 	
 	@PostMapping("/save")

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.manageTeam.dto.ReservationConditionDto;
 import com.manageTeam.dto.ReservationTeamDto;
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.entity.Reservation;
 import com.manageTeam.entity.ReservationTeam;
 import com.manageTeam.entity.Team;
@@ -50,8 +51,8 @@ public class ReservationTeamService {
 		}
 	}
 	
-	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, Pageable pageable){
-		return reservationTeamRepository.findAllByTeam(teamId, pageable);
+	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
+		return reservationTeamRepository.findAllByTeam(teamId, activateStatus, pageable);
 	}
 
 }

@@ -9,10 +9,13 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.util.StringUtils;
 
 import com.manageTeam.dto.ReservationTeamDto;
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.repository.ReservationTeamRepositoryCustom;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -24,7 +27,7 @@ public class ReservationTeamRepositoryImpl implements ReservationTeamRepositoryC
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, Pageable pageable) {
+	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable) {
 		
 		List<ReservationTeamDto.Info> results = queryFactory
 				.select(Projections.constructor(ReservationTeamDto.Info.class,
@@ -34,13 +37,16 @@ public class ReservationTeamRepositoryImpl implements ReservationTeamRepositoryC
 						gym.gymId,
 						gym.gymName,
 						gym.address.city,
+						reservationTeam.activateStatus,
 						reservation.startTime,
 						reservation.endTime
 						))
 				.from(reservationTeam)
 				.join(reservationTeam.reservation, reservation)
 				.join(reservation.gym, gym)
-				.where(reservationTeam.team.teamId.eq(teamId))
+				.where(
+						reservationTeam.team.teamId.eq(teamId),
+						activateStatus(activateStatus))
 				.offset(pageable.getOffset())
 				.limit(pageable.getPageSize())
 				.fetch();
@@ -54,5 +60,9 @@ public class ReservationTeamRepositoryImpl implements ReservationTeamRepositoryC
 		
 		
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
+	}
+	
+	public BooleanExpression activateStatus(ActivateStatus activateStatus) {
+		return activateStatus!=null ? reservationTeam.activateStatus.eq(activateStatus) : null;
 	}
 }
