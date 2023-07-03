@@ -1,5 +1,6 @@
 package com.manageTeam.dto;
 
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.entity.Team;
 
 import io.swagger.annotations.ApiModel;
@@ -15,6 +16,7 @@ public class TeamDto {
 		private Long teamId;
 		private String teamName;
 		private String city;
+		private ActivateStatus activateStatus;
 		
 		public Save(String teamName, String city) {
 			this.teamName = teamName;
@@ -49,11 +51,13 @@ public class TeamDto {
 		private Long shootCnt;
 		private Long sFowardCnt;
 		private Long fFowardCnt;
+		private ActivateStatus activateStatus;
 		
 		public Info(Team team) {
 			this.teamId = team.getTeamId();
 			this.teamName = team.getTeamName();
 			this.city = team.getCity();
+			this.activateStatus = team.getActivateStatus();
 		}
 		
 		public Info(
@@ -62,7 +66,8 @@ public class TeamDto {
 				Long pointCnt, 
 				Long shootCnt, 
 				Long sFowardCnt, 
-				Long fFowardCnt
+				Long fFowardCnt,
+				ActivateStatus activateStatus
 				) {
 			this.teamId = team.getTeamId();
 			this.teamName = team.getTeamName();
@@ -72,6 +77,7 @@ public class TeamDto {
 			this.shootCnt = shootCnt;
 			this.sFowardCnt = sFowardCnt;
 			this.fFowardCnt = fFowardCnt;
+			this.activateStatus = activateStatus;
 		}
 	}
 }

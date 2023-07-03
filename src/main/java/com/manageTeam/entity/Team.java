@@ -47,7 +47,7 @@ public class Team extends BaseEntity{
 		this.teamName = team.getTeamName();
 		this.city = team.getCity();
 		this.memberCount = 0;
-		this.activateStatus = ActivateStatus.YES;
+		this.activateStatus = team.getActivateStatus();
 	}
 	
 	public void addMember() {

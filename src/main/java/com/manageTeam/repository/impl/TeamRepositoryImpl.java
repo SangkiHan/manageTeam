@@ -39,7 +39,8 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count(),
 						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count(),
 						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count()
+						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count(),
+						team.activateStatus
 						))
 				.from(team)
 				.join(team.members, member)
