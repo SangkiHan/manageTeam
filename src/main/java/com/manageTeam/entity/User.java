@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.manageTeam.dto.UserDto;
+import com.manageTeam.util.AESUtil;
+
 import lombok.Getter;
 
 /*
@@ -32,4 +35,19 @@ public class User extends BaseEntity{
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 	
+	public void changeTeam(Team team) {
+		this.team = team;
+		team.getUsers().add(this);
+	}
+	
+	public User(UserDto.Save user) throws Exception {
+		this.userId = user.getUserId();
+		this.password = user.getPassword();
+		this.username = user.getUsername();
+		this.rsdntRgnmb = AESUtil.encrypt(user.getRsdntRgnmb());
+		this.phone = AESUtil.encrypt(user.getPhone());
+		this.address = new Address(user.getAddress());
+		this.auth = user.getAuth();
+		this.activateStatus = user.getActivateStatus();
+	}
 }
