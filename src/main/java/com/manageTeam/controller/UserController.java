@@ -27,7 +27,7 @@ public class UserController {
 	}
 	
 	@GetMapping("findById")
-	public UserDto.Info findUserInfo(Long userId){
+	public UserDto.Info findUserInfo(String userId){
 		return userService.findUserInfo(userId);
 	}
 }
