@@ -20,7 +20,7 @@ public class MemberTest {
 	@Test
 	@Rollback(value = true)
 	void save() {
-		for(int i=0; i<4; i++) {
+		for(int i=0; i<5; i++) {
 			AddressDto address = new AddressDto("수원시","화서로"+i,"16225");
 			MemberDto.Save member = new MemberDto.Save(3L, "테스트"+i, 28+i, "970212", address, "PG");
 			memberService.save(member);

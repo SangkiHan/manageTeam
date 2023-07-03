@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -35,8 +37,15 @@ public class Reservation extends BaseEntity{
 	@OneToMany(mappedBy = "reservation")
 	private List<ReservationTeam> reservationTeams = new ArrayList<>();
 	private int totalTeamCnt;
+	@Enumerated(EnumType.STRING)
+	private ActivateStatus activateStatus;
 	
 	public Reservation() {}
+	
+	public void cancel() {
+		this.activateStatus = ActivateStatus.NO;
+		reservationTeams.forEach(team -> team.cancel());
+	}
 	
 	public void createReservation(Gym gym) {
 		this.gym = gym;
@@ -48,5 +57,6 @@ public class Reservation extends BaseEntity{
 		this.startTime = reservation.getStartTime();
 		this.endTime = reservation.getEndTime();
 		this.totalTeamCnt = reservation.getTotalTeamCnt();
+		this.activateStatus = ActivateStatus.YES;
 	};
 }

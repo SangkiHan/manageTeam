@@ -31,13 +31,13 @@ public class ReservationTeamService {
 	public void save(ReservationTeamDto.Save request) {
 		
 		Team team = temRepository.findById(request.getTeamId())
-				.orElseThrow(() -> new GlobalException("RET0001","해당 팀 데이터가 없음"));
+				.orElseThrow(() -> new GlobalException("RET0001", "해당 팀 데이터가 없음"));
 		Reservation reservation = reservationRepository.findById(request.getReservationId())
-				.orElseThrow(() -> new GlobalException("RET0002","해당 예약 데이터가 없음"));
+				.orElseThrow(() -> new GlobalException("RET0002", "해당 예약 데이터가 없음"));
 		
 		checkTime(reservation, team.getTeamId());
 		
-		ReservationTeam reservationTeam = new ReservationTeam();
+		ReservationTeam reservationTeam = new ReservationTeam(request.getActivateStatus());
 		reservationTeam.setTeam(team);
 		reservationTeam.setReservation(reservation);
 		
@@ -47,7 +47,7 @@ public class ReservationTeamService {
 	public void checkTime(Reservation reservation, Long teamId) {
 		ReservationConditionDto.DateCondition condition = new ReservationConditionDto.DateCondition(reservation.getStartTime(), reservation.getEndTime());
 		if(!reservationRepository.findReservationByDate(condition,teamId)) {
-			throw new GlobalException("해당 시간에 이미 예약된 체육관이 존재합니다.");
+			throw new GlobalException("RET0003", "해당 시간에 이미 예약된 체육관이 존재합니다.");
 		}
 	}
 	

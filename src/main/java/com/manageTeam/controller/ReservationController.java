@@ -30,6 +30,14 @@ public class ReservationController {
 	}
 	
 	/*
+	 * 체육관 예약 삭제
+	 * */
+	@PostMapping("/v1/cancel")
+	public void cancel(@RequestBody ReservationDto.Id request) {
+		reservationService.cancel(request);
+	}
+	
+	/*
 	 * 등록된 예약목록
 	 * */
 	@GetMapping("/v1/findAll")

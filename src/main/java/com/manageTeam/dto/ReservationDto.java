@@ -10,6 +10,18 @@ import lombok.ToString;
 
 public class ReservationDto {
 	
+	@ApiModel(value = "Id Dto")
+	@Getter
+	public static class Id{
+		private Long reservationId;
+		
+		public Id() {};
+		
+		public Id(Long reservationId) {
+			this.reservationId = reservationId;
+		}
+	}
+	
 	@ApiModel(value = "예약 등록 Dto")
 	@Getter
 	public static class Save{
@@ -28,7 +40,6 @@ public class ReservationDto {
 			this.endTime = endTime;
 		}
 	}
-	
 	
 	@ApiModel(value = "예약 목록 Dto")
 	@Getter

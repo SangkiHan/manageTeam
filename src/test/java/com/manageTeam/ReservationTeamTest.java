@@ -18,9 +18,10 @@ public class ReservationTeamTest {
 	
 	@Test
 	void save() {
-		ReservationTeamDto.Save save = new ReservationTeamDto.Save(3L, 2L);
+		ReservationTeamDto.Save save = new ReservationTeamDto.Save(3L, 19L);
 		reservationTeamServices.save(save);
 	}
+
 	
 	@Test
 	void findAllByTeam() {

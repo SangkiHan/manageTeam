@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 
 import com.manageTeam.dto.ReservationConditionDto;
 import com.manageTeam.dto.ReservationDto;
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.repository.ReservationRepositoryCustom;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -80,6 +81,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 				.join(reservationTeam.reservation, reservation)
 				.where(
 						reservationTeam.team.teamId.eq(teamId),
+						reservationTeam.activateStatus.eq(ActivateStatus.YES),
 						startLoe(condition.getEndDate()),
 						endGoe(condition.getStartDate())
 						)
@@ -106,4 +108,6 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	public BooleanExpression cityLike(String city) {
 		return StringUtils.hasText(city) ? gym.address.city.contains(city) : null;
 	}
+
+	
 }

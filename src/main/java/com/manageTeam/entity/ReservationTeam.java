@@ -2,6 +2,8 @@ package com.manageTeam.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,9 +24,18 @@ public class ReservationTeam extends BaseEntity{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reservation_id")
 	private Reservation reservation;
+	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 	
 	public ReservationTeam() {}
+	
+	public ReservationTeam(ActivateStatus activateStatus) {
+		this.activateStatus = activateStatus;
+	}
+	
+	public void cancel() {
+		this.activateStatus = ActivateStatus.NO;
+	}
 	
 	public void setTeam(Team team) {
 		team.checkMemberCnt();
