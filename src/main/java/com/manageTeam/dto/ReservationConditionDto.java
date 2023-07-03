@@ -2,6 +2,8 @@ package com.manageTeam.dto;
 
 import java.time.LocalDateTime;
 
+import com.manageTeam.entity.ActivateStatus;
+
 import lombok.Getter;
 
 
@@ -13,6 +15,7 @@ public class ReservationConditionDto {
 		private LocalDateTime dateGoe;
 		private LocalDateTime dateLoe;
 		private String city;
+		private ActivateStatus activateStatus;
 		
 		public ListCondition(String gymName, LocalDateTime dateGoe, LocalDateTime dateLoe, String city) {
 			this.gymName = gymName;

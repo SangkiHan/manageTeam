@@ -49,7 +49,8 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 						gymnameLike(conditionDto.getGymName()),
 						startGoe(conditionDto.getDateGoe()),
 						endLoe(conditionDto.getDateLoe()),
-						cityLike(conditionDto.getCity())
+						cityLike(conditionDto.getCity()),
+						activateEq(conditionDto.getActivateStatus())
 						)
 				.groupBy(reservation.reservationId)
 				.having(reservation.reservationId.isNotNull())
@@ -64,7 +65,8 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 						gymnameLike(conditionDto.getGymName()),
 						startGoe(conditionDto.getDateGoe()),
 						endLoe(conditionDto.getDateLoe()),
-						cityLike(conditionDto.getCity())
+						cityLike(conditionDto.getCity()),
+						activateEq(conditionDto.getActivateStatus())
 						)
 				.groupBy(reservation.reservationId)
 				.having(reservation.reservationId.isNotNull());
@@ -108,6 +110,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	public BooleanExpression cityLike(String city) {
 		return StringUtils.hasText(city) ? gym.address.city.contains(city) : null;
 	}
-
-	
+	public BooleanExpression activateEq(ActivateStatus activateStatus) {
+		return activateStatus!=null ? reservation.activateStatus.eq(activateStatus) : null;
+	}
 }
