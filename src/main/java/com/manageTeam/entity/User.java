@@ -35,14 +35,16 @@ public class User extends BaseEntity{
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 	
-	public void changeTeam(Team team) {
+	public User() {};
+	
+	public void setTeam(Team team) {
 		this.team = team;
 		team.getUsers().add(this);
 	}
 	
 	public User(UserDto.Save user) throws Exception {
 		this.userId = user.getUserId();
-		this.password = user.getPassword();
+		this.password =  AESUtil.encrypt(user.getPassword());
 		this.username = user.getUsername();
 		this.rsdntRgnmb = AESUtil.encrypt(user.getRsdntRgnmb());
 		this.phone = AESUtil.encrypt(user.getPhone());

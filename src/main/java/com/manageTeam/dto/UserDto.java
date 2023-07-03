@@ -18,6 +18,19 @@ public class UserDto {
 		private AddressDto address;
 		private Auth auth;
 		private ActivateStatus activateStatus;
+		
+		public Save(String userId, Long team_id, String password, String username, String rsdntRgnmb, String phone,
+				AddressDto address, Auth auth, ActivateStatus activateStatus) {
+			this.userId = userId;
+			this.team_id = team_id;
+			this.password = password;
+			this.username = username;
+			this.rsdntRgnmb = rsdntRgnmb;
+			this.phone = phone;
+			this.address = address;
+			this.auth = auth;
+			this.activateStatus = activateStatus;
+		}
 	}
 
 }
