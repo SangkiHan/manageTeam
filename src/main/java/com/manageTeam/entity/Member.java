@@ -41,6 +41,10 @@ public class Member extends BaseEntity{
 	
 	public Member() {}
 	
+	public void changeStatus(ActivateStatus activateStatus) {
+		this.activateStatus = activateStatus;
+	}
+	
 	public void changeTeam(Team team) {
 		this.team = team;
 		team.getMembers().add(this);

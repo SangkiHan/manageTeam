@@ -19,14 +19,17 @@ public class UserController {
 	private final UserService userService;
 	
 	/*
-	 * 회원가입
+	 * 회원가입 및 수정
 	 * */
 	@PostMapping("/save")
 	public void save(@RequestBody UserDto.Save request) throws Exception {
 		userService.save(request);
 	}
 	
-	@GetMapping("findById")
+	/*
+	 * 사용자 상세조회
+	 * */
+	@GetMapping("/findUserInfo")
 	public UserDto.Info findUserInfo(String userId){
 		return userService.findUserInfo(userId);
 	}

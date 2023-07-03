@@ -26,16 +26,22 @@ public class MemberService {
 	
 	public void save(MemberDto.Save request) {
 		Team team = teamRepository.findById(request.getTeamId())
-				.orElseThrow(() -> new GlobalException("MEM0002","해당 팀 데이터가 없음"));
+				.orElseThrow(() -> new GlobalException("MEM0001","해당 팀원이 존재하지 않습니다. 관리자에게 문의해주세요."));
 		Member member = new Member(request);
 		member.changeTeam(team);
 		
 		memberRepository.save(member);
 	}
 	
+	public void status(MemberDto.Status request) {
+		Member member = memberRepository.findById(request.getMemberId())
+				.orElseThrow(() -> new GlobalException("MEM0002","해당 팀원이 존재하지 않습니다. 관리자에게 문의해주세요."));
+		member.changeStatus(request.getActivateStatus());
+	}
+	
 	public MemberDto.Info findById(Long memberId) {
 		Member result = memberRepository.findById(memberId)
-				.orElseThrow(() -> new GlobalException("MEM0001","해당 팀원 데이터가 없음"));
+				.orElseThrow(() -> new GlobalException("MEM0003","해당 팀원이 존재하지 않습니다. 관리자에게 문의해주세요."));
 		
 		MemberDto.Info member = new MemberDto.Info(result);
 		return member;

@@ -1,18 +1,26 @@
 package com.manageTeam.dto;
 
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.entity.Address;
 import com.manageTeam.entity.Member;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 public class MemberDto {
 	
+	@ApiModel(value = "팀원 상태 변경 Dto")
+	@Getter
+	public static class Status{
+		private Long memberId;
+		private ActivateStatus activateStatus;
+		
+		public Status() {};
+	}
+	
 	@ApiModel(value = "팀원 저장 Dto")
 	@Getter
-	@RequiredArgsConstructor
 	public static class Save{
 		private Long memberId;
 		private Long teamId;
@@ -21,6 +29,8 @@ public class MemberDto {
 		private String birth;
 		private AddressDto address;
 		private String position;
+		
+		public Save() {};
 		
 		public Save(Long teamId, String memberName, int age, String birth, AddressDto address,
 				String position) {

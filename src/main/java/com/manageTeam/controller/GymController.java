@@ -19,7 +19,7 @@ public class GymController {
 	private final GymService gymService;
 	
 	/*
-	 * 체육관 저장
+	 * 체육관 저장 및 수정
 	 * */
 	@PostMapping("/v1/save")
 	public void save(@RequestBody GymDto.Save request) {

@@ -30,6 +30,14 @@ public class MemberController {
 	}
 	
 	/*
+	 * 팀원 상태 변경
+	 * */
+	@PostMapping("/v1/status")
+	public void status(@RequestBody MemberDto.Status request) {
+		memberService.status(request);
+	}
+	
+	/*
 	 * 팀원상세
 	 * */
 	@GetMapping("/v1/findById")
