@@ -50,6 +50,10 @@ public class Team extends BaseEntity{
 		this.activateStatus = team.getActivateStatus();
 	}
 	
+	public void activate() {
+		this.activateStatus = ActivateStatus.YES;
+	}
+	
 	public void addMember() {
 		this.memberCount++;
 	}

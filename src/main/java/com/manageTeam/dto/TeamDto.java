@@ -10,6 +10,12 @@ import lombok.ToString;
 
 public class TeamDto {
 	
+	@ApiModel(value = "TeamId Dto")
+	@Getter
+	public static class teamId{
+		Long teamId;
+	}
+	
 	@ApiModel(value = "팀 등록 Dto")
 	@Getter
 	public static class Save{

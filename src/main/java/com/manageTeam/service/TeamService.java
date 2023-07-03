@@ -26,9 +26,15 @@ public class TeamService {
 		teamRepository.save(team);
 	}
 	
+	public void activate(TeamDto.teamId request) {
+		Team team = teamRepository.findById(request.getTeamId())
+				.orElseThrow(() -> new GlobalException("TEA0001","해당 팀이 존재하지 않습니다. 관리자에게 문의 부탁드립니다."));
+		team.activate();
+	}
+	
 	public TeamDto.Info findById(Long teamId) {
 		Team result = teamRepository.findById(teamId)
-				.orElseThrow(() -> new GlobalException("해당 팀 데이터가 없음"));
+				.orElseThrow(() -> new GlobalException("TEA0002","해당 팀이 존재하지 않습니다. 관리자에게 문의 부탁드립니다."));
 		
 		TeamDto.Info team = new TeamDto.Info(result);
 		return team;

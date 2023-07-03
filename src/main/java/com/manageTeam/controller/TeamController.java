@@ -30,6 +30,14 @@ public class TeamController {
 	}
 	
 	/*
+	 * 팀 활성화
+	 * */
+	@PostMapping("/v1/activate")
+	public void activateTeam(TeamDto.teamId request) {
+		teamService.activate(request);
+	}
+	
+	/*
 	 * 팀상세
 	 * */
 	@GetMapping("/v1/findById")
