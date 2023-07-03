@@ -12,8 +12,19 @@ public class TeamDto {
 	
 	@ApiModel(value = "TeamId Dto")
 	@Getter
-	public static class teamId{
-		Long teamId;
+	public static class TeamId{
+		private Long teamId;
+
+		public TeamId(Long teamId) {
+			this.teamId = teamId;
+		}
+	}
+	
+	@ApiModel(value = "상태값 변경 Dto")
+	@Getter
+	public static class Status{
+		private Long teamId;
+		private ActivateStatus activateStatus;
 	}
 	
 	@ApiModel(value = "팀 등록 Dto")

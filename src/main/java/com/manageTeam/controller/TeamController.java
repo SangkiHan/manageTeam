@@ -30,10 +30,10 @@ public class TeamController {
 	}
 	
 	/*
-	 * 팀 활성화
+	 * 팀 활성화 상태 변경
 	 * */
-	@PostMapping("/v1/activate")
-	public void activateTeam(TeamDto.teamId request) {
+	@PostMapping("/v1/status")
+	public void status(@RequestBody TeamDto.Status request) {
 		teamService.activate(request);
 	}
 	
@@ -41,8 +41,8 @@ public class TeamController {
 	 * 팀상세
 	 * */
 	@GetMapping("/v1/findById")
-	public TeamDto.Info findById(Long teamId) {
-		return teamService.findById(teamId);
+	public TeamDto.Info findById(@RequestBody TeamDto.TeamId request) {
+		return teamService.findById(request);
 	}
 	
 	/*

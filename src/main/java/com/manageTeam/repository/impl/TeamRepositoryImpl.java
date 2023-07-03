@@ -28,6 +28,29 @@ import lombok.RequiredArgsConstructor;
 public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	
 	private final JPAQueryFactory queryFactory;
+	
+	@Override
+	public TeamDto.Info findTeamInfo(Long teamId) {
+		
+		TeamDto.Info results = queryFactory
+				.select(Projections.constructor(TeamDto.Info.class,
+						team,
+						new CaseBuilder().when(member.position.eq(Position.C)).then(1).otherwise(Expressions.nullExpression()).count(),
+						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count(),
+						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count(),
+						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count(),
+						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count(),
+						team.activateStatus
+						))
+				.from(team)
+				.join(team.members, member)
+				.where(
+						team.teamId.eq(teamId)
+						)
+				.fetchOne();
+		
+		return results;
+	}
 
 	@Override
 	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
