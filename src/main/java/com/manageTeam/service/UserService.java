@@ -28,4 +28,8 @@ public class UserService {
 		user.setTeam(team);
 		userRepository.save(user);
 	}
+	
+	public UserDto.Info findUserInfo(String userId){
+		return userRepository.findUserInfo(userId);
+	}
 }

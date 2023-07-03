@@ -1,5 +1,6 @@
 package com.manageTeam.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,16 @@ public class UserController {
 	
 	private final UserService userService;
 	
+	/*
+	 * 회원가입
+	 * */
 	@PostMapping("/save")
 	public void save(@RequestBody UserDto.Save request) throws Exception {
 		userService.save(request);
+	}
+	
+	@GetMapping("findById")
+	public UserDto.Info findUserInfo(Long userId){
+		return userService.findUserInfo(userId);
 	}
 }

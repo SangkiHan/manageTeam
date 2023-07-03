@@ -21,11 +21,17 @@ public class ReservationTeamController {
 	
 	private final ReservationTeamService reservationTeamService;
 	
+	/*
+	 * 특정팀이 예약한 체육관 목록 보기
+	 * */
 	@GetMapping("/findAllbyTeam")
 	public Page<ReservationTeamDto.Info> findAllbyTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
 		return reservationTeamService.findAllByTeam(teamId, activateStatus, pageable);
 	}
 	
+	/*
+	 * 특정팀 쳬육관예약
+	 * */
 	@PostMapping("/save")
 	public void save(@RequestBody ReservationTeamDto.Save request){
 		reservationTeamService.save(request);

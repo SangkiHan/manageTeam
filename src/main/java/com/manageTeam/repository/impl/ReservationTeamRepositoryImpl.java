@@ -1,15 +1,14 @@
 package com.manageTeam.repository.impl;
 
-import static com.manageTeam.entity.QReservationTeam.reservationTeam;
-import static com.manageTeam.entity.QReservation.reservation;
 import static com.manageTeam.entity.QGym.gym;
+import static com.manageTeam.entity.QReservation.reservation;
+import static com.manageTeam.entity.QReservationTeam.reservationTeam;
 
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
-import org.springframework.util.StringUtils;
 
 import com.manageTeam.dto.ReservationTeamDto;
 import com.manageTeam.entity.ActivateStatus;

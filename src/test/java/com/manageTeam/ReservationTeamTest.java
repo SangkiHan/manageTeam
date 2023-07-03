@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.manageTeam.dto.ReservationTeamDto;
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.service.ReservationTeamService;
 
 @SpringBootTest
@@ -25,7 +26,7 @@ public class ReservationTeamTest {
 	void findAllByTeam() {
 		Pageable pageable = PageRequest.of(0, 2);
 		
-		Page<ReservationTeamDto.Info> results = reservationTeamServices.findAllByTeam(3L,pageable);
+		Page<ReservationTeamDto.Info> results = reservationTeamServices.findAllByTeam(3L,ActivateStatus.YES,pageable);
 		
 		System.out.println(results.getContent());
 	}

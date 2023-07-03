@@ -25,5 +25,11 @@ public class UserTest {
 				);
 		userService.save(user);
 	}
+	
+	@Test
+	void findUser() {
+		UserDto.Info info = userService.findUserInfo("tkdrl8908");
+		System.out.println(info.toString());
+	}
 
 }
