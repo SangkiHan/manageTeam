@@ -1,5 +1,7 @@
 package com.manageTeam.dto;
 
+import com.manageTeam.entity.ActivateStatus;
+
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 
@@ -27,5 +29,9 @@ public class MemberConditionDto {
 	 * 도시
 	 */
 	private String city;
+	/**
+	 * 활성화 상태
+	 */
+	private ActivateStatus activateStatus;
 
 }

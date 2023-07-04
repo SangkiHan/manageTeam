@@ -46,7 +46,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 						teamEq(memberConditionDto.getTeamName()),
 						ageGoe(memberConditionDto.getAgeGoe()),
 						ageLoe(memberConditionDto.getAgeLoe()),
-						cityEq(memberConditionDto.getTeamName())
+						cityEq(memberConditionDto.getTeamName()),
+						activateStatusEq(memberConditionDto.getActivateStatus())
 						)
 				.offset(pageable.getOffset())
 				.limit(pageable.getPageSize())
@@ -61,7 +62,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 						teamEq(memberConditionDto.getTeamName()),
 						ageGoe(memberConditionDto.getAgeGoe()),
 						ageLoe(memberConditionDto.getAgeLoe()),
-						cityEq(memberConditionDto.getTeamName())
+						cityEq(memberConditionDto.getTeamName()),
+						activateStatusEq(memberConditionDto.getActivateStatus())
 						);
 		
 		return PageableExecutionUtils.getPage(results, pageable, totalQuery::fetchOne);
@@ -81,6 +83,9 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	}
 	public BooleanExpression cityEq(String city) {
 		return StringUtils.hasText(city) ? member.address.city.eq(city) : null;
+	}
+	public BooleanExpression activateStatusEq(ActivateStatus activateStatus) {
+		return activateStatus!=null ? member.activateStatus.eq(activateStatus) : null;
 	}
 
 	@Override
