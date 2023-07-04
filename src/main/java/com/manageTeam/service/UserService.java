@@ -10,6 +10,7 @@ import com.manageTeam.entity.User;
 import com.manageTeam.exception.GlobalException;
 import com.manageTeam.repository.TeamRepository;
 import com.manageTeam.repository.UserRepository;
+import com.manageTeam.util.AESUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,5 +32,11 @@ public class UserService {
 	
 	public UserDto.Info findUserInfo(String userId){
 		return userRepository.findUserInfo(userId);
+	}
+	
+	public void existsByRsdntRgnmb(String rsdntRgnmb){
+		if(userRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
+			new GlobalException("USR0002","이미 해당 주민번호로 등록된 팀원이 존재합니다.");
+		}
 	}
 }

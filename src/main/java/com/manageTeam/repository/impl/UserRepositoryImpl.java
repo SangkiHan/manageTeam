@@ -4,6 +4,7 @@ import static com.manageTeam.entity.QUser.user;
 
 import com.manageTeam.dto.AddressDto;
 import com.manageTeam.dto.UserDto;
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.repository.UserRepositoryCustom;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -39,4 +40,12 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 		return results;
 	}
 
+	@Override
+	public boolean existsByRsdntRgnmb(String rsdntRgnmb) {
+		return queryFactory
+				.select(user.count())
+				.from(user)
+				.where(user.activateStatus.eq(ActivateStatus.YES))
+				.fetchOne() < 0;
+	}
 }

@@ -29,11 +29,17 @@ public class ReservationTeamService {
 	private final ReservationRepository reservationRepository;
 	
 	public void save(ReservationTeamDto.Save request) {
-		
 		Team team = temRepository.findById(request.getTeamId())
 				.orElseThrow(() -> new GlobalException("RET0001", "해당 팀 데이터가 없음"));
 		Reservation reservation = reservationRepository.findById(request.getReservationId())
 				.orElseThrow(() -> new GlobalException("RET0002", "해당 예약 데이터가 없음"));
+		
+		int teamCnt = reservation.getTotalTeamCnt();
+		int joinTeamCnt = reservationRepository.findTeamCntReservation(request.getReservationId()).intValue();
+		
+		if(teamCnt==joinTeamCnt) {
+			throw new GlobalException("RET0003", "해당 체육관은 예약이 마감되었습니다.");
+		}
 		
 		checkTime(reservation, team.getTeamId());
 		
@@ -47,7 +53,7 @@ public class ReservationTeamService {
 	public void checkTime(Reservation reservation, Long teamId) {
 		ReservationConditionDto.DateCondition condition = new ReservationConditionDto.DateCondition(reservation.getStartTime(), reservation.getEndTime());
 		if(!reservationRepository.findReservationByDate(condition,teamId)) {
-			throw new GlobalException("RET0003", "해당 시간에 이미 예약된 체육관이 존재합니다.");
+			throw new GlobalException("RET0004", "해당 시간에 이미 예약된 체육관이 존재합니다.");
 		}
 	}
 	

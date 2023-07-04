@@ -19,7 +19,7 @@ public class UserTest {
 	void save() throws Exception {
 		AddressDto addressDto = new AddressDto("수원시","영통구","16225");
 		UserDto.Save user = new UserDto.Save(
-				"tkdrl8908",3L,"navskd1048","한상기 수정 테스트",
+				"tkdrl",21L,"navskd1048","케이저 테스트",
 				"961027-1164524","01064091048",addressDto,
 				Auth.TEAM, ActivateStatus.YES
 				);

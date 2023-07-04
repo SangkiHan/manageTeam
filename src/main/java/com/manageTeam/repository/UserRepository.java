@@ -8,5 +8,5 @@ import com.manageTeam.entity.Team;
 import com.manageTeam.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String>, UserRepositoryCustom{
-	Optional<User> findByTeam(Team team);
+	public Optional<User> findByTeam(Team team);
 }

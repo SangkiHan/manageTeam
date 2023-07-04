@@ -27,7 +27,7 @@ public class AESUtil {
 		}
     }
 
-    public static String decrypt(String cipherText) throws Exception {
+    public static String decrypt(String cipherText){
     	try {
     		Cipher cipher = Cipher.getInstance(alg);
             SecretKeySpec keySpec = new SecretKeySpec(iv.getBytes(), "AES");

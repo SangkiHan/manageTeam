@@ -8,4 +8,5 @@ import com.manageTeam.dto.MemberDto;
 
 public interface MemberRepositoryCustom {
 	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable);
+	public boolean existsByRsdntRgnmb(String rsdntRgnmb);
 }

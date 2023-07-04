@@ -3,6 +3,7 @@ package com.manageTeam.dto;
 import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.entity.Address;
 import com.manageTeam.entity.Member;
+import com.manageTeam.util.AESUtil;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
@@ -81,8 +82,8 @@ public class MemberDto {
 			this.memberId = member.getMemberId();
 			this.memberName = member.getMembername();
 			this.age = member.getAge();
-			this.rsdntRgnmb = member.getRsdntRgnmb();
-			this.phone = member.getPhone();
+			this.rsdntRgnmb = AESUtil.decrypt(member.getRsdntRgnmb());
+			this.phone = AESUtil.decrypt(member.getPhone());
 			this.address = new AddressDto(member.getAddress());
 			this.position = member.getPosition().toString();
 		}

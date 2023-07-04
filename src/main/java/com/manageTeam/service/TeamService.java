@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.manageTeam.dto.TeamConditionDto;
 import com.manageTeam.dto.TeamDto;
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.entity.Team;
 import com.manageTeam.exception.GlobalException;
 import com.manageTeam.repository.TeamRepository;
@@ -23,6 +24,7 @@ public class TeamService {
 	
 	public void save(TeamDto.Save request) {
 		Team team = new Team(request);
+		team.setStatus(ActivateStatus.YES);
 		teamRepository.save(team);
 	}
 	

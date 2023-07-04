@@ -77,7 +77,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	@Override
 	public boolean findReservationByDate(ReservationConditionDto.DateCondition condition, Long teamId) {
 		
-		Long check = queryFactory
+		return queryFactory
 				.select(reservationTeam.count())
 				.from(reservationTeam)
 				.join(reservationTeam.reservation, reservation)
@@ -87,9 +87,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 						startLoe(condition.getEndDate()),
 						endGoe(condition.getStartDate())
 						)
-				.fetchOne();
-		
-		return check>0 ? false : true;
+				.fetchOne() < 0;
 	}
 	
 	public BooleanExpression gymnameLike(String gymname) {
@@ -112,5 +110,17 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	}
 	public BooleanExpression activateEq(ActivateStatus activateStatus) {
 		return activateStatus!=null ? reservation.activateStatus.eq(activateStatus) : null;
+	}
+
+	@Override
+	public Long findTeamCntReservation(Long reservationId) {
+		Long count = queryFactory
+				.select(reservationTeam.count())
+				.from(reservation)
+				.innerJoin(reservation.reservationTeams, reservationTeam)
+				.where(reservationTeam.activateStatus.eq(ActivateStatus.YES))
+				.fetchOne();
+		
+		return count;
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.dto.MemberConditionDto;
@@ -51,6 +52,11 @@ public class MemberController {
 	@GetMapping("/v1/findAll")
 	public Page<MemberDto.Info> selectList(MemberConditionDto conditionDto, Pageable pageable) {
 		return memberService.findAllByCondition(conditionDto, pageable);
+	}
+	
+	@PostMapping("/existsByRsdntRgnmb")
+	public void existsByRsdntRgnmb(@RequestParam(value = "rsdntRgnmb") String rsdntRgnmb) {
+		memberService.existsByRsdntRgnmb(rsdntRgnmb);
 	}
 
 }

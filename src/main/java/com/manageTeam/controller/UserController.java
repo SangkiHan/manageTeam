@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.dto.UserDto;
@@ -32,5 +33,10 @@ public class UserController {
 	@GetMapping("/findUserInfo")
 	public UserDto.Info findUserInfo(String userId){
 		return userService.findUserInfo(userId);
+	}
+	
+	@PostMapping("/existsByRsdntRgnmb")
+	public void existsByRsdntRgnmb(@RequestParam(value = "rsdntRgnmb") String rsdntRgnmb) {
+		userService.existsByRsdntRgnmb(rsdntRgnmb);
 	}
 }

@@ -19,7 +19,7 @@ public class TeamTest {
 	@Test	
 	@Rollback(value = true)
 	void save() {
-		TeamDto.Save teamDto = new TeamDto.Save("창공","수원시");
+		TeamDto.Save teamDto = new TeamDto.Save("케이저","화성시");
 		teamService.save(teamDto);
 	}
 	
@@ -28,7 +28,7 @@ public class TeamTest {
 	 * */
 	@Test	
 	void findById() {
-		TeamDto.TeamId teamId = new TeamDto.TeamId(3L);
+		TeamDto.TeamId teamId = new TeamDto.TeamId(21L);
 		TeamDto.Info team = teamService.findById(teamId);
 		System.out.println(team);
 	}

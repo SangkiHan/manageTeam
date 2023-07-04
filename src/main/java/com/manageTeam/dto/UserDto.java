@@ -52,7 +52,7 @@ public class UserDto {
 		public Info() {};
 		
 		public Info(String userId, Long teamId, String teamName, String password, String username, String rsdntRgnmb,
-				String phone, AddressDto address, Auth auth, ActivateStatus activateStatus) throws Exception {
+				String phone, AddressDto address, Auth auth, ActivateStatus activateStatus){
 			this.userId = userId;
 			this.teamId = teamId;
 			this.teamName = teamName;

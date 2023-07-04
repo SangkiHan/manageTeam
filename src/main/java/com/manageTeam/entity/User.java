@@ -42,7 +42,7 @@ public class User extends BaseEntity{
 		team.getUsers().add(this);
 	}
 	
-	public User(UserDto.Save user) throws Exception {
+	public User(UserDto.Save user){
 		this.userId = user.getUserId();
 		this.password =  AESUtil.encrypt(user.getPassword());
 		this.username = user.getUsername();

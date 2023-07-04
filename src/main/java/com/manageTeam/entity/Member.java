@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.manageTeam.dto.MemberDto;
+import com.manageTeam.util.AESUtil;
 
 import lombok.Getter;
 
@@ -56,8 +57,8 @@ public class Member extends BaseEntity{
 		this.memberId = member.getMemberId();
 		this.membername = member.getMemberName();
 		this.age = member.getAge();
-		this.rsdntRgnmb = member.getRsdntRgnmb();
-		this.phone = member.getPhone();
+		this.rsdntRgnmb = AESUtil.encrypt(member.getRsdntRgnmb());
+		this.phone = AESUtil.encrypt(member.getPhone());
 		this.address = new Address(member.getAddress());
 		this.position = Position.valueOf(member.getPosition());
 		this.activateStatus = ActivateStatus.YES;

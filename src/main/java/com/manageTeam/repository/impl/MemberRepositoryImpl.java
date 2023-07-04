@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 
 import com.manageTeam.dto.MemberConditionDto;
 import com.manageTeam.dto.MemberDto;
+import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.repository.MemberRepositoryCustom;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -80,6 +81,15 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	}
 	public BooleanExpression cityEq(String city) {
 		return StringUtils.hasText(city) ? member.address.city.eq(city) : null;
+	}
+
+	@Override
+	public boolean existsByRsdntRgnmb(String rsdntRgnmb) {
+		return queryFactory
+				.select(member.count())
+				.from(member)
+				.where(member.activateStatus.eq(ActivateStatus.YES))
+				.fetchOne()<0;
 	}
 
 }
