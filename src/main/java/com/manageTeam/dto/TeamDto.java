@@ -5,13 +5,14 @@ import com.manageTeam.entity.Team;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-
 
 public class TeamDto {
 	
 	@ApiModel(value = "TeamId Dto")
 	@Getter
+	@RequiredArgsConstructor
 	public static class TeamId{
 		/**
 		 * 팀 ID
@@ -55,6 +56,8 @@ public class TeamDto {
 		 * 활성화상태
 		 */
 		private ActivateStatus activateStatus;
+		
+		public Save() {};
 		
 		/**
 		 * Entity to Dto Constructor

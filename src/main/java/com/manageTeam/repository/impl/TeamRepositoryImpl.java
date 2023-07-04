@@ -43,7 +43,7 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 						team.activateStatus
 						))
 				.from(team)
-				.join(team.members, member)
+				.leftJoin(team.members, member)
 				.where(
 						team.teamId.eq(teamId)
 						)

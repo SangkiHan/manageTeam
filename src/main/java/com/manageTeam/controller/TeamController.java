@@ -26,7 +26,7 @@ public class TeamController {
 	 * @description 팀 저장 및 수정한다.
 	 * @throws Exception
 	 * @author skhan
-	 * */
+	 */
 	@PostMapping("/v1/save")
 	public void save(@RequestBody TeamDto.Save request) {
 		teamService.save(request);
@@ -36,7 +36,7 @@ public class TeamController {
 	 * @description 팀의 활성화 상태를 번경한다.
 	 * @throws GlobalException, Exception
 	 * @author skhan
-	 * */
+	 */
 	@PostMapping("/v1/status")
 	public void status(@RequestBody TeamDto.Status request) {
 		teamService.status(request);
@@ -46,8 +46,8 @@ public class TeamController {
 	 * @description 팀상세를 조회한다.
 	 * @throws Exception
 	 * @author skhan
-	 * */
-	@GetMapping("/v1/findById")
+	 */
+	@PostMapping("/v1/findById")
 	public TeamDto.Info findById(@RequestBody TeamDto.TeamId request) {
 		return teamService.findById(request);
 	}
@@ -56,7 +56,7 @@ public class TeamController {
 	 * @description 팀목록을 조회한다.
 	 * @throws Exception
 	 * @author skhan
-	 * */
+	 */
 	@GetMapping("/v1/findAll")
 	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
 		return teamService.findAllByCondition(conditionDto, pageable);

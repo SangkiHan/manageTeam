@@ -28,7 +28,6 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	
 	@Override
 	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable) {
-		
 		List<MemberDto.Info> results = queryFactory
 				.select(Projections.constructor(MemberDto.Info.class,
 						member.memberId,
@@ -96,5 +95,4 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 				.where(member.activateStatus.eq(ActivateStatus.YES))
 				.fetchOne()<0;
 	}
-
 }
