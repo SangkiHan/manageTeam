@@ -28,7 +28,8 @@ public class Member extends BaseEntity{
 	@Column(name = "member_name")
 	private String membername;
 	private int age;
-	private String birth;
+	private String rsdntRgnmb;
+	private String phone;
 	@Embedded
 	private Address address;
 	@Enumerated(EnumType.STRING)
@@ -55,7 +56,8 @@ public class Member extends BaseEntity{
 		this.memberId = member.getMemberId();
 		this.membername = member.getMemberName();
 		this.age = member.getAge();
-		this.birth = member.getBirth();
+		this.rsdntRgnmb = member.getRsdntRgnmb();
+		this.phone = member.getPhone();
 		this.address = new Address(member.getAddress());
 		this.position = Position.valueOf(member.getPosition());
 		this.activateStatus = ActivateStatus.YES;

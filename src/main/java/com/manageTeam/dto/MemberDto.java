@@ -26,18 +26,20 @@ public class MemberDto {
 		private Long teamId;
 		private String memberName;
 		private int age;
-		private String birth;
+		private String rsdntRgnmb;
+		private String phone;
 		private AddressDto address;
 		private String position;
 		
 		public Save() {};
 		
-		public Save(Long teamId, String memberName, int age, String birth, AddressDto address,
+		public Save(Long teamId, String memberName, int age, String rsdntRgnmb, String phone, AddressDto address,
 				String position) {
 			this.teamId = teamId;
 			this.memberName = memberName;
 			this.age = age;
-			this.birth = birth;
+			this.rsdntRgnmb = rsdntRgnmb;
+			this.phone = phone;
 			this.address = address;
 			this.position = position;
 		}
@@ -50,7 +52,8 @@ public class MemberDto {
 		private Long memberId;
 		private String memberName;
 		private int age;
-		private String birth;
+		private String rsdntRgnmb;
+		private String phone;
 		private AddressDto address;
 		private String teamName;
 		private String position;
@@ -58,14 +61,16 @@ public class MemberDto {
 		public Info(Long memberId, 
 				String memberName, 
 				int age, 
-				String birth, 
+				String rsdntRgnmb, 
+				String phone,
 				Address address, 
 				String position,
 				String teamName) {
 			this.memberId = memberId;
 			this.memberName = memberName;
 			this.age = age;
-			this.birth = birth;
+			this.rsdntRgnmb = rsdntRgnmb;
+			this.phone = phone;
 			this.address = new AddressDto(address);
 			this.teamName= teamName;
 			this.position = position;
@@ -76,7 +81,8 @@ public class MemberDto {
 			this.memberId = member.getMemberId();
 			this.memberName = member.getMembername();
 			this.age = member.getAge();
-			this.birth = member.getBirth();
+			this.rsdntRgnmb = member.getRsdntRgnmb();
+			this.phone = member.getPhone();
 			this.address = new AddressDto(member.getAddress());
 			this.position = member.getPosition().toString();
 		}
