@@ -28,6 +28,12 @@ public class ReservationTeamService {
 	private final TeamRepository temRepository;
 	private final ReservationRepository reservationRepository;
 	
+	/**
+	 * @api /api/reservationTeam/v1/save
+	 * @description 특정팀의 체육관을 예약한다.
+	 * @throws GlobalException, Exception
+	 * @author skhan
+	 * */
 	public void save(ReservationTeamDto.Save request) {
 		Team team = temRepository.findById(request.getTeamId())
 				.orElseThrow(() -> new GlobalException("RET0001", "해당 팀 데이터가 없음"));
@@ -50,15 +56,27 @@ public class ReservationTeamService {
 		reservationTeamRepository.save(reservationTeam);
 	}
 	
+	/**
+	 * @api /api/reservationTeam/v1/findAllbyTeam
+	 * @description 특정팀이 예약한 체육관 목록을 조회한다.
+	 * @throws Exception
+	 * @author skhan
+	 * */
+	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
+		return reservationTeamRepository.findAllByTeam(teamId, activateStatus, pageable);
+	}
+
+	/**
+	 * @description 체육관 예약시 해당 시간에 이미 예약된 시간이 있는 지 체크한다.
+	 * @throws GlobalException
+	 * @author skhan
+	 * @param reservation, teamId
+	 * */
 	public void checkTime(Reservation reservation, Long teamId) {
 		ReservationConditionDto.DateCondition condition = new ReservationConditionDto.DateCondition(reservation.getStartTime(), reservation.getEndTime());
 		if(!reservationRepository.findReservationByDate(condition,teamId)) {
 			throw new GlobalException("RET0004", "해당 시간에 이미 예약된 체육관이 존재합니다.");
 		}
-	}
-	
-	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
-		return reservationTeamRepository.findAllByTeam(teamId, activateStatus, pageable);
 	}
 
 }

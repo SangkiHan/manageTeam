@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.dto.MemberConditionDto;
 import com.manageTeam.dto.MemberDto;
+import com.manageTeam.exception.GlobalException;
 import com.manageTeam.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,38 +23,52 @@ public class MemberController {
 	
 	private final MemberService memberService;
 	
-	/*
-	 * 팀원 수정 저장
-	 * */
+	/**
+	 * @description 팀원을 저장 및 수정한다.
+	 * @throws GlobalException, Exception
+	 * @author skhan
+	 */
 	@PostMapping("/v1/save")
 	public void save(@RequestBody MemberDto.Save request) {
 		memberService.save(request);
 	}
 	
-	/*
-	 * 팀원 상태 변경
-	 * */
+	/**
+	 * @description 팀원의 상태를 변경한다.
+	 * @throws GlobalException, Exception
+	 * @author skhan
+	 */
 	@PostMapping("/v1/status")
 	public void status(@RequestBody MemberDto.Status request) {
 		memberService.status(request);
 	}
 	
-	/*
-	 * 팀원상세
+	/**
+	 * @description 팀원을 상세조회한다.
+	 * @throws GlobalException ,Exception
+	 * @author skhan
 	 * */
 	@GetMapping("/v1/findById")
 	public MemberDto.Info findById(Long memberId) {
 		return memberService.findById(memberId);
 	}
 	
-	/*
-	 * 팀원목록 조회
+	/**
+	 * @description 팀원의 목록을 조회한다.
+	 * @throws Exception
+	 * @author skhan
 	 * */
 	@GetMapping("/v1/findAll")
 	public Page<MemberDto.Info> selectList(MemberConditionDto conditionDto, Pageable pageable) {
 		return memberService.findAllByCondition(conditionDto, pageable);
 	}
 	
+	
+	/**
+	 * @description 이미 등록된 주민번호 인지 체크한다.
+	 * @throws GlobalException, Exception
+	 * @author skhan
+	 * */
 	@PostMapping("/existsByRsdntRgnmb")
 	public void existsByRsdntRgnmb(@RequestParam(value = "rsdntRgnmb") String rsdntRgnmb) {
 		memberService.existsByRsdntRgnmb(rsdntRgnmb);

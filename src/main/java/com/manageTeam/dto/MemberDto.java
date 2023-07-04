@@ -14,7 +14,13 @@ public class MemberDto {
 	@ApiModel(value = "팀원 상태 변경 Dto")
 	@Getter
 	public static class Status{
+		/**
+		 * 팀원ID
+		 */
 		private Long memberId;
+		/**
+		 * 활성화 상태
+		 */
 		private ActivateStatus activateStatus;
 		
 		public Status() {};
@@ -23,13 +29,37 @@ public class MemberDto {
 	@ApiModel(value = "팀원 저장 Dto")
 	@Getter
 	public static class Save{
+		/**
+		 * 팀원ID
+		 */
 		private Long memberId;
+		/**
+		 * 팀ID
+		 */
 		private Long teamId;
+		/**
+		 * 팀원이름
+		 */
 		private String memberName;
+		/**
+		 * 나이
+		 */
 		private int age;
+		/**
+		 * 주민번호
+		 */
 		private String rsdntRgnmb;
+		/**
+		 * 전화번호
+		 */
 		private String phone;
+		/**
+		 * 주소
+		 */
 		private AddressDto address;
+		/**
+		 * 포지션
+		 */
 		private String position;
 		
 		public Save() {};
@@ -50,13 +80,37 @@ public class MemberDto {
 	@Getter
 	@ToString
 	public static class Info{
+		/**
+		 * 팀원ID
+		 */
 		private Long memberId;
+		/**
+		 * 팀원이름
+		 */
 		private String memberName;
+		/**
+		 * 나이
+		 */
 		private int age;
+		/**
+		 * 주민번호
+		 */
 		private String rsdntRgnmb;
+		/**
+		 * 전화번호
+		 */
 		private String phone;
+		/**
+		 * 주소
+		 */
 		private AddressDto address;
+		/**
+		 * 팀명
+		 */
 		private String teamName;
+		/**
+		 * 포지션
+		 */
 		private String position;
 		
 		public Info(Long memberId, 
@@ -77,7 +131,9 @@ public class MemberDto {
 			this.position = position;
 		}
 		
-		
+		/**
+		 * Entity to Dto Constructor
+		 */
 		public Info(Member member) {
 			this.memberId = member.getMemberId();
 			this.memberName = member.getMembername();

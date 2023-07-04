@@ -11,10 +11,22 @@ public class GymDto {
 	@ApiModel(value = "체육관 등록,수정 Dto")
 	@Getter
 	public static class Save{
+		/**
+		 * 체육관 ID
+		 */
 		private Long gymId;
+		/**
+		 * 체육관 명
+		 */
 		private String gymName;
+		/**
+		 * 체육관 주소
+		 */
 		private AddressDto address;
 
+		/**
+		 * Entity to Dto Constructor
+		 */
 		public Save(String gymName, AddressDto address) {
 			this.gymName = gymName;
 			this.address = address;
@@ -25,10 +37,22 @@ public class GymDto {
 	@Getter
 	@ToString
 	public static class Info{
+		/**
+		 * 체육관 ID
+		 */
 		private Long gymId;
+		/**
+		 * 체육관 명
+		 */
 		private String gymName;
+		/**
+		 * 체육관 주소
+		 */
 		private AddressDto address;
 		
+		/**
+		 * Entity to Dto Constructor
+		 */
 		public Info(Gym gym) {
 			this.gymId = gym.getGymId();
 			this.gymName = gym.getGymName();

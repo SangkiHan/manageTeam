@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.dto.TeamConditionDto;
 import com.manageTeam.dto.TeamDto;
+import com.manageTeam.exception.GlobalException;
 import com.manageTeam.service.TeamService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,32 +22,40 @@ public class TeamController {
 	
 	private final TeamService teamService;
 	
-	/*
-	 * 팀저장, 수정
+	/**
+	 * @description 팀 저장 및 수정한다.
+	 * @throws Exception
+	 * @author skhan
 	 * */
 	@PostMapping("/v1/save")
 	public void save(@RequestBody TeamDto.Save request) {
 		teamService.save(request);
 	}
 	
-	/*
-	 * 팀 활성화 상태 변경
+	/**
+	 * @description 팀의 활성화 상태를 번경한다.
+	 * @throws GlobalException, Exception
+	 * @author skhan
 	 * */
 	@PostMapping("/v1/status")
 	public void status(@RequestBody TeamDto.Status request) {
-		teamService.activate(request);
+		teamService.status(request);
 	}
 	
-	/*
-	 * 팀상세
+	/**
+	 * @description 팀상세를 조회한다.
+	 * @throws Exception
+	 * @author skhan
 	 * */
 	@GetMapping("/v1/findById")
 	public TeamDto.Info findById(@RequestBody TeamDto.TeamId request) {
 		return teamService.findById(request);
 	}
 	
-	/*
-	 * 팀목록
+	/**
+	 * @description 팀목록을 조회한다.
+	 * @throws Exception
+	 * @author skhan
 	 * */
 	@GetMapping("/v1/findAll")
 	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {

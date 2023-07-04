@@ -5,9 +5,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * @description API호출 중 발생 예외들을 처리하기 위한 ExceptionHandler
+ * @author skhan
+ * */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
+	/**
+	 * @description 커스텀한 GlobalException을 처리하는 Handler
+	 * @author skhan
+	 */
 	@ExceptionHandler(GlobalException.class)
 	protected ResponseEntity<ErrorDto> handleTesseractException(GlobalException e){
 		
@@ -16,6 +24,10 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	/**
+	 * @description 커스텀한 GlobalException을 제외한 Exception을 처리하기 위한 Handler
+	 * @author skhan
+	 */
 	@ExceptionHandler(Exception.class)
 	protected ResponseEntity<ErrorDto> handleTesseractException(Exception e){
 		e.printStackTrace();

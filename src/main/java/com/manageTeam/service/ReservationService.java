@@ -29,6 +29,12 @@ public class ReservationService {
 	private final UserRepository userRepository;
 	private final GymService gymService;
 	
+	/**
+	 * @api /api/reservation/v1/save
+	 * @description 체육관 예약을 등록한다.
+	 * @throws Exception
+	 * @author skhan
+	 * */
 	public void save(ReservationDto.Save request) {
 		Gym gym = new Gym(gymService.findById(request.getGymId()));
 		Reservation reservation = new Reservation(request);
@@ -36,6 +42,12 @@ public class ReservationService {
 		reservationRepository.save(reservation);
 	}
 	
+	/**
+	 * @api /api/reservation/v1/cancel
+	 * @description 체육관 예약등록을 취소한다.
+	 * @throws GlobalException, Exception
+	 * @author skhan
+	 * */
 	public void cancel(ReservationDto.Id request) {
 		Reservation reservation = reservationRepository.findById(request.getReservationId())
 				.orElseThrow(() -> new GlobalException("RES0001","해당 예약이 존재하지 않습니다. 관리자에게 문의해주세요."));
@@ -54,6 +66,12 @@ public class ReservationService {
 		}
 	}
 	
+	/**
+	 * @api /api/reservation/v1/findAll
+	 * @description 등록된 체육관 예약목록을 조회한다.
+	 * @throws Exception
+	 * @author skhan
+	 * */
 	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition reservationConditionDto, Pageable pageable) {
 		return reservationRepository.findAllByCondition(reservationConditionDto, pageable);
 	}

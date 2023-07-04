@@ -18,17 +18,21 @@ public class GymController {
 	
 	private final GymService gymService;
 	
-	/*
+	/**
 	 * 체육관 저장 및 수정
-	 * */
+	 * 
+	 * @author skhan
+	 */
 	@PostMapping("/v1/save")
 	public void save(@RequestBody GymDto.Save request) {
 		gymService.save(request);
 	}
 	
-	/*
-	 * 체육관 단건 조회
-	 * */
+	/**
+	 * 체육관 상세조회
+	 * 
+	 * @author skhan
+	 */
 	@GetMapping("/v1/findById")
 	public GymDto.Info findById(Long gymId){
 		return gymService.findById(gymId);

@@ -11,9 +11,18 @@ public class ReservationTeamDto {
 	
 	@Getter
 	public static class Save{
+		/**
+		 * 예약 팀 ID
+		 */
 		private Long reservationTeamId;
 		private Long teamId;
+		/**
+		 * 팀ID
+		 */
 		private Long reservationId;
+		/**
+		 * 활성화 상태
+		 */
 		private ActivateStatus activateStatus;
 		
 		public Save(Long teamId, Long reservationId) {
@@ -26,18 +35,48 @@ public class ReservationTeamDto {
 	@Getter
 	@ToString
 	public static class Info{
+		/**
+		 * 예약 팀 ID
+		 */
 		private Long reservationTeamId;
+		/**
+		 * 팀 ID
+		 */
 		private Long teamId;
+		/**
+		 * 예약 ID
+		 */
 		private Long reservationId;
+		/**
+		 * 체육관 ID
+		 */
 		private Long gymId;
+		/**
+		 * 체육관 이름
+		 */
 		private String gymName;
+		/**
+		 * 도시
+		 */
 		private String city;
+		/**
+		 * 활성화 상태
+		 */
 		private ActivateStatus activateStatus;
+		/**
+		 * 예약 시작날짜
+		 */
 		private LocalDateTime startDate;
+		/**
+		 * 예약 종료날짜
+		 */
 		private LocalDateTime endDate;
 		
 		public Info() {};
 		
+		/**
+		 * Entity to Dto Constructor
+		 */
 		public Info(Long reservationTeamId, Long teamId, Long reservationId, Long gymId, String gymName, String city,
 				ActivateStatus activateStatus, LocalDateTime startDate, LocalDateTime endDate) {
 			super();

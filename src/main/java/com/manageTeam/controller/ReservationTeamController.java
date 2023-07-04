@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.dto.ReservationTeamDto;
 import com.manageTeam.entity.ActivateStatus;
+import com.manageTeam.exception.GlobalException;
 import com.manageTeam.service.ReservationTeamService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,20 +22,23 @@ public class ReservationTeamController {
 	
 	private final ReservationTeamService reservationTeamService;
 	
-	/*
-	 * 특정팀이 예약한 체육관 목록 보기
-	 * */
-	@GetMapping("/findAllbyTeam")
-	public Page<ReservationTeamDto.Info> findAllbyTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
-		return reservationTeamService.findAllByTeam(teamId, activateStatus, pageable);
-	}
-	
-	/*
-	 * 특정팀 쳬육관예약
+	/**
+	 * @description 특정팀의 체육관을 예약한다.
+	 * @throws GlobalException
+	 * @author skhan
 	 * */
 	@PostMapping("/save")
 	public void save(@RequestBody ReservationTeamDto.Save request){
 		reservationTeamService.save(request);
 	}
-
+	
+	/**
+	 * @description 특정팀이 예약한 체육관 목록을 조회한다.
+	 * @throws GlobalException, Exception
+	 * @author skhan
+	 * */
+	@GetMapping("/findAllbyTeam")
+	public Page<ReservationTeamDto.Info> findAllbyTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
+		return reservationTeamService.findAllByTeam(teamId, activateStatus, pageable);
+	}
 }
