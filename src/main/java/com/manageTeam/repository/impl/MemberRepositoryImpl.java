@@ -29,11 +29,12 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	@Override
 	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable) {
 		List<MemberDto.Info> results = queryFactory
-				.select(Projections.constructor(MemberDto.Info.class,
+				.select(Projections.bean(MemberDto.Info.class,
 						member.memberId,
 						member.membername,
 						member.age,
-						member.birth,
+						member.rsdntRgnmb,
+						member.phone,
 						member.address,
 						member.position,
 						team.teamName

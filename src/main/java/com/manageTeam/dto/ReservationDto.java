@@ -72,7 +72,7 @@ public class ReservationDto {
 		 */
 		private int totalTeamCnt;
 		/**
-		 * 현재 예약한 팀ID
+		 * 현재 예약한 팀의 수
 		 */
 		private Long joinTeam;
 		/**
@@ -86,7 +86,7 @@ public class ReservationDto {
 		/**
 		 * 체육관 주소
 		 */
-		private AddressDto gymAddress;
+		private AddressDto address;
 		/**
 		 * 예약 시작시작
 		 */
@@ -116,7 +116,7 @@ public class ReservationDto {
 			this.joinTeam = joinTeam;
 			this.gymId = gymId;
 			this.gymName = gymName;
-			this.gymAddress = new AddressDto(address);
+			this.address = new AddressDto(address);
 			this.startTime = startTime;
 			this.endTime = endTime;
 		}

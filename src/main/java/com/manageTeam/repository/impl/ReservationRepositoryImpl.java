@@ -32,10 +32,10 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable) {
 		
 		List<ReservationDto.Info> results = queryFactory
-				.select(Projections.constructor(ReservationDto.Info.class, 
+				.select(Projections.bean(ReservationDto.Info.class, 
 						reservation.reservationId,
 						reservation.totalTeamCnt,
-						reservationTeam.count(),
+						reservationTeam.count().as("joinTeam"),
 						gym.gymId,
 						gym.gymName,
 						gym.address,

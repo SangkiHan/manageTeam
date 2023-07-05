@@ -2,7 +2,6 @@ package com.manageTeam.repository.impl;
 
 import static com.manageTeam.entity.QUser.user;
 
-import com.manageTeam.dto.AddressDto;
 import com.manageTeam.dto.UserDto;
 import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.repository.UserRepositoryCustom;
@@ -19,7 +18,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 	@Override
 	public UserDto.Info findUserInfo(String userId) {
 		UserDto.Info results = queryFactory
-				.select(Projections.constructor(UserDto.Info.class,
+				.select(Projections.bean(UserDto.Info.class,
 						user.userId,
 						user.team.teamId,
 						user.team.teamName,
@@ -27,9 +26,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 						user.username,
 						user.rsdntRgnmb,
 						user.phone,
-						Projections.constructor(AddressDto.class, 
-								user.address
-								),
+						user.address,
 						user.auth,
 						user.activateStatus
 						))

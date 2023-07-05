@@ -6,6 +6,7 @@ import com.manageTeam.entity.Team;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 public class TeamDto {
@@ -70,6 +71,7 @@ public class TeamDto {
 	
 	@ApiModel(value = "팀 상세 Dto")
 	@Getter
+	@Setter
 	@ToString
 	public static class DetailInfo{
 		/**
@@ -97,6 +99,7 @@ public class TeamDto {
 	
 	@ApiModel(value = "팀 목록 Dto")
 	@Getter
+	@Setter
 	@ToString
 	public static class Info{
 		/**
@@ -136,6 +139,8 @@ public class TeamDto {
 		 */
 		private ActivateStatus activateStatus;
 		
+		public Info(){};
+		
 		/**
 		 * Entity to Dto Constructor
 		 */
@@ -144,29 +149,6 @@ public class TeamDto {
 			this.teamName = team.getTeamName();
 			this.city = team.getCity();
 			this.activateStatus = team.getActivateStatus();
-		}
-		
-		/**
-		 * Entity to Dto Constructor
-		 */
-		public Info(
-				Team team,
-				Long centerCnt, 
-				Long pointCnt, 
-				Long shootCnt, 
-				Long sFowardCnt, 
-				Long fFowardCnt,
-				ActivateStatus activateStatus
-				) {
-			this.teamId = team.getTeamId();
-			this.teamName = team.getTeamName();
-			this.city = team.getCity();
-			this.centerCnt = centerCnt;
-			this.pointCnt = pointCnt;
-			this.shootCnt = shootCnt;
-			this.sFowardCnt = sFowardCnt;
-			this.fFowardCnt = fFowardCnt;
-			this.activateStatus = activateStatus;
 		}
 	}
 }

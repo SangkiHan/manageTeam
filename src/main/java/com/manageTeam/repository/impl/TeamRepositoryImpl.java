@@ -33,13 +33,15 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	public TeamDto.Info findTeamInfo(Long teamId) {
 		
 		TeamDto.Info results = queryFactory
-				.select(Projections.constructor(TeamDto.Info.class,
-						team,
-						new CaseBuilder().when(member.position.eq(Position.C)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count(),
+				.select(Projections.bean(TeamDto.Info.class,
+						team.teamId,
+						team.teamName,
+						team.city,
+						new CaseBuilder().when(member.position.eq(Position.C)).then(1).otherwise(Expressions.nullExpression()).count().as("centerCnt"),
+						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count().as("pointCnt"),
+						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count().as("shootCnt"),
+						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count().as("sForwardCnt"),
+						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count().as("fFowardCnt"),
 						team.activateStatus
 						))
 				.from(team)
@@ -56,13 +58,15 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
 		
 		List<TeamDto.Info> results = queryFactory
-				.select(Projections.constructor(TeamDto.Info.class,
-						team,
-						new CaseBuilder().when(member.position.eq(Position.C)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count(),
-						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count(),
+				.select(Projections.bean(TeamDto.Info.class,
+						team.teamId,
+						team.teamName,
+						team.city,
+						new CaseBuilder().when(member.position.eq(Position.C)).then(1).otherwise(Expressions.nullExpression()).count().as("centerCnt"),
+						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count().as("pointCnt"),
+						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count().as("shootCnt"),
+						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count().as("sforwardCnt"),
+						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count().as("ffowardCnt"),
 						team.activateStatus
 						))
 				.from(team)
@@ -72,6 +76,9 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 						activatestatusEq(conditionDto.getActivateStatus()),
 						cityEq(conditionDto.getCity())
 						)
+				.offset(pageable.getOffset())
+				.limit(pageable.getPageSize())
+				.groupBy(team.teamId)
 				.fetch();
 		
 		JPAQuery<Long> countQuery = queryFactory

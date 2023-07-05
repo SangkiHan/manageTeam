@@ -29,7 +29,7 @@ public class ReservationTeamRepositoryImpl implements ReservationTeamRepositoryC
 	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable) {
 		
 		List<ReservationTeamDto.Info> results = queryFactory
-				.select(Projections.constructor(ReservationTeamDto.Info.class,
+				.select(Projections.bean(ReservationTeamDto.Info.class,
 						reservationTeam.reservationTeamId,
 						reservationTeam.team.teamId,
 						reservation.reservationId,

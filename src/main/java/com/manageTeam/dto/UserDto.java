@@ -5,6 +5,7 @@ import com.manageTeam.entity.Auth;
 import com.manageTeam.util.AESUtil;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 public class UserDto {
@@ -65,6 +66,7 @@ public class UserDto {
 	}
 	
 	@Getter
+	@Setter
 	@ToString
 	public static class Info{
 		private String userId;
