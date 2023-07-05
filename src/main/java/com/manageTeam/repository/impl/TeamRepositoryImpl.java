@@ -40,8 +40,8 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 						new CaseBuilder().when(member.position.eq(Position.C)).then(1).otherwise(Expressions.nullExpression()).count().as("centerCnt"),
 						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count().as("pointCnt"),
 						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count().as("shootCnt"),
-						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count().as("sForwardCnt"),
-						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count().as("fFowardCnt"),
+						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count().as("sforwardCnt"),
+						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count().as("ffowardCnt"),
 						team.activateStatus
 						))
 				.from(team)

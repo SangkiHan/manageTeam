@@ -2,7 +2,6 @@ package com.manageTeam.dto;
 
 import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.entity.Auth;
-import com.manageTeam.util.AESUtil;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -81,19 +80,5 @@ public class UserDto {
 		private ActivateStatus activateStatus;
 		
 		public Info() {};
-		
-		public Info(String userId, Long teamId, String teamName, String password, String username, String rsdntRgnmb,
-				String phone, AddressDto address, Auth auth, ActivateStatus activateStatus){
-			this.userId = userId;
-			this.teamId = teamId;
-			this.teamName = teamName;
-			this.password = AESUtil.decrypt(password);
-			this.username = username;
-			this.rsdntRgnmb = AESUtil.decrypt(rsdntRgnmb);
-			this.phone = AESUtil.decrypt(phone);
-			this.address = address;
-			this.auth = auth;
-			this.activateStatus = activateStatus;
-		}
 	}
 }

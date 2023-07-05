@@ -25,7 +25,7 @@ public class UserController {
 	 * @throws GlobalException, Exception
 	 * @author skhan
 	 * */
-	@PostMapping("/save")
+	@PostMapping("/v1/save")
 	public void save(@RequestBody UserDto.Save request) throws Exception {
 		userService.save(request);
 	}
@@ -35,7 +35,7 @@ public class UserController {
 	 * @throws Exception
 	 * @author skhan
 	 * */
-	@GetMapping("/findUserInfo")
+	@GetMapping("/v1/findUserInfo")
 	public UserDto.Info findUserInfo(String userId){
 		return userService.findUserInfo(userId);
 	}
@@ -45,7 +45,7 @@ public class UserController {
 	 * @throws GlobalException, Exception
 	 * @author skhan
 	 * */
-	@PostMapping("/existsByRsdntRgnmb")
+	@PostMapping("/v1/existsByRsdntRgnmb")
 	public void existsByRsdntRgnmb(@RequestParam(value = "rsdntRgnmb") String rsdntRgnmb) {
 		userService.existsByRsdntRgnmb(rsdntRgnmb);
 	}

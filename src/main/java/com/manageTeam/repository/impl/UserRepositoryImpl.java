@@ -2,6 +2,9 @@ package com.manageTeam.repository.impl;
 
 import static com.manageTeam.entity.QUser.user;
 
+import java.util.Optional;
+
+import com.manageTeam.dto.AddressDto;
 import com.manageTeam.dto.UserDto;
 import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.repository.UserRepositoryCustom;
@@ -16,8 +19,8 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 	private final JPAQueryFactory queryFactory;
 	
 	@Override
-	public UserDto.Info findUserInfo(String userId) {
-		UserDto.Info results = queryFactory
+	public Optional<UserDto.Info> findUserInfo(String userId) {
+		Optional<UserDto.Info> results = Optional.ofNullable(queryFactory
 				.select(Projections.bean(UserDto.Info.class,
 						user.userId,
 						user.team.teamId,
@@ -26,13 +29,17 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 						user.username,
 						user.rsdntRgnmb,
 						user.phone,
-						user.address,
+						Projections.bean(AddressDto.class,
+								user.address.city,
+								user.address.street,
+								user.address.zipcode
+								).as("address"),
 						user.auth,
 						user.activateStatus
 						))
 				.from(user)
 				.where(user.userId.eq(userId))
-				.fetchOne();
+				.fetchOne());
 		
 		return results;
 	}

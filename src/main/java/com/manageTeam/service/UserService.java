@@ -43,7 +43,8 @@ public class UserService {
 	 * @author skhan
 	 */
 	public UserDto.Info findUserInfo(String userId){
-		return userRepository.findUserInfo(userId);
+		return userRepository.findUserInfo(userId)
+				.orElseThrow(() -> new GlobalException("USR0002","해당 사용자 데이터가 없습니다. 관리자에게 문의 해주세요"));
 	}
 	
 	/**
@@ -54,7 +55,7 @@ public class UserService {
 	 */
 	public void existsByRsdntRgnmb(String rsdntRgnmb){
 		if(userRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
-			new GlobalException("USR0002","이미 해당 주민번호로 등록된 팀원이 존재합니다.");
+			new GlobalException("USR0003","이미 해당 주민번호로 등록된 팀원이 존재합니다.");
 		}
 	}
 }

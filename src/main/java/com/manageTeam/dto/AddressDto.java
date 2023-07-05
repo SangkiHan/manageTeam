@@ -4,10 +4,12 @@ import com.manageTeam.entity.Address;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @ApiModel(value = "주소 Dto")
 @Getter
+@Setter
 @ToString
 public class AddressDto {
 	/**
@@ -22,14 +24,9 @@ public class AddressDto {
 	 * 우편번호
 	 */
 	private String zipcode;
-	/**
-	 * Entity to Dto Constructor
-	 */
-	public AddressDto(String city, String street, String zipcode) {
-		this.city = city;
-		this.street = street;
-		this.zipcode = zipcode;
-	}
+	
+	public AddressDto() {};
+	
 	/**
 	 * Entity to Dto Constructor
 	 */
