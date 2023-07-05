@@ -27,7 +27,7 @@ public class ReservationTeamController {
 	 * @throws GlobalException
 	 * @author skhan
 	 * */
-	@PostMapping("/save")
+	@PostMapping("/v1/save")
 	public void save(@RequestBody ReservationTeamDto.Save request){
 		reservationTeamService.save(request);
 	}
@@ -37,7 +37,7 @@ public class ReservationTeamController {
 	 * @throws GlobalException, Exception
 	 * @author skhan
 	 * */
-	@GetMapping("/findAllbyTeam")
+	@GetMapping("/v1/findAllbyTeam")
 	public Page<ReservationTeamDto.Info> findAllbyTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
 		return reservationTeamService.findAllByTeam(teamId, activateStatus, pageable);
 	}
