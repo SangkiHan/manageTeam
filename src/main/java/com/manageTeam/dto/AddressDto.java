@@ -27,6 +27,7 @@ public class AddressDto {
 	
 	public AddressDto() {};
 	
+	
 	/**
 	 * Entity to Dto Constructor
 	 */
@@ -34,5 +35,12 @@ public class AddressDto {
 		this.city = address.getCity();
 		this.street = address.getStreet();
 		this.zipcode = address.getZipcode();
+	}
+
+
+	public AddressDto(String city, String street, String zipcode) {
+		this.city = city;
+		this.street = street;
+		this.zipcode = zipcode;
 	}
 }
