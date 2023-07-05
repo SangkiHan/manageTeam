@@ -69,7 +69,7 @@ public class MemberController {
 	 * @throws GlobalException, Exception
 	 * @author skhan
 	 * */
-	@PostMapping("/existsByRsdntRgnmb")
+	@PostMapping("/v1/existsByRsdntRgnmb")
 	public void existsByRsdntRgnmb(@RequestParam(value = "rsdntRgnmb") String rsdntRgnmb) {
 		memberService.existsByRsdntRgnmb(rsdntRgnmb);
 	}
