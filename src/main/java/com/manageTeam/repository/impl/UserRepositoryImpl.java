@@ -4,6 +4,7 @@ import static com.manageTeam.entity.QUser.user;
 
 import java.util.Optional;
 
+import com.manageTeam.config.security.CustumUserDetails;
 import com.manageTeam.dto.AddressDto;
 import com.manageTeam.dto.UserDto;
 import com.manageTeam.entity.ActivateStatus;
@@ -51,5 +52,16 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 				.from(user)
 				.where(user.activateStatus.eq(ActivateStatus.YES))
 				.fetchOne() < 0;
+	}
+
+	@Override
+	public CustumUserDetails findUser(String userId) {
+		return queryFactory
+				.select(Projections.bean(CustumUserDetails.class, 
+						user.userId.as("username"),
+						user.password))
+				.from(user)
+				.where(user.userId.eq(userId))
+				.fetchOne();
 	}
 }
