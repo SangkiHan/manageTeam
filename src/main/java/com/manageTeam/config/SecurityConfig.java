@@ -1,53 +1,38 @@
 package com.manageTeam.config;
 
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.Jwt;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.token.TokenService;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 
+@Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig  {
-	
-	private final AuthenticationSuccessHandler authenticationSuccessHandler;
-	private final AuthenticationFailureHandler authenticationFailureHandler;
-	private final AuthenticationEntryPoint authentictionEnctryPoint;
-	private final AccessDeniedHandler accessDeniedHandler;
     
     @Bean
-	public SecurityFilterChain filterChain(HttpSecurity http, Jwt jwt, TokenService tokenService) throws
-		Exception {
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	
-    	http
-        .authorizeRequests()
-            .antMatchers( "/login", "/singUp", "/access_denied", "/resources/**").permitAll()
-            .antMatchers("/userAccess").hasRole("USER")
-            .antMatchers("/userAccess").hasRole("ADMIN")
-            .and()
-        .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/login_proc")
-            .defaultSuccessUrl("/user_access")
-            .failureUrl("/access_denied")
-            .successHandler(authenticationSuccessHandler)
-			.failureHandler(authenticationFailureHandler)
-            .and()
-        .logout()
-			.logoutSuccessUrl("/view/logoutOK")
-			.invalidateHttpSession(true)
-			.and()
-        .csrf().disable()
-    	.exceptionHandling()
-			.authenticationEntryPoint(authentictionEnctryPoint)
-			.accessDeniedHandler(accessDeniedHandler);
+	    	http
+	        .authorizeRequests()
+		        .antMatchers("/","/login", "/view/login").permitAll() // 루트 경로와 로그인 페이지는 모두 접근 허용
+	            .anyRequest().authenticated() // 나머지 요청은 인증 필요
+	            .and()
+	        .formLogin()
+		        .usernameParameter("id")
+				.passwordParameter("password")
+	            .loginPage("/view/login")
+	            .loginProcessingUrl("/login")
+	            .defaultSuccessUrl("/user_access")
+	            .failureUrl("/access_denied")
+	            .and()
+	        .logout()
+		        .logoutUrl("/logout") // 로그아웃 URL 경로
+	            .logoutSuccessUrl("/login") // 로그아웃 성공 시 이동할 경로
+	            .permitAll(); // 로그아웃은 모두 접근 허용
 
 		return http.build();
 	}
