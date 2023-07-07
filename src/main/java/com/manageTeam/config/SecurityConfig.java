@@ -6,10 +6,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig{
+	
+	private final AuthenticationFailureHandler authenticationFailureHandler;
     
     @Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -22,7 +28,8 @@ public class SecurityConfig{
 			        .usernameParameter("id")
 					.passwordParameter("password")
 		            .loginPage("/view/login")	
-		            .loginProcessingUrl("/login");
+		            .loginProcessingUrl("/login")
+	    			.failureHandler(authenticationFailureHandler);
 	    	http
 	        	.logout()
 			        .logoutUrl("/logout") // 로그아웃 URL 경로
