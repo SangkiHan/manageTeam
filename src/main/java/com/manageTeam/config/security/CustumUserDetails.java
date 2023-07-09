@@ -19,6 +19,7 @@ public class CustumUserDetails implements UserDetails{
 	private String username;
 	private String password;
 	private String role;
+	private String enale;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -52,7 +53,7 @@ public class CustumUserDetails implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return ("YES".equals(enale)) ? true : false;
 	}
 
 }
