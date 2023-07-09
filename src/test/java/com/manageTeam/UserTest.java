@@ -6,9 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.manageTeam.domain.user.dto.UserDto;
 import com.manageTeam.domain.user.service.UserService;
-import com.manageTeam.dto.AddressDto;
-import com.manageTeam.entity.ActivateStatus;
-import com.manageTeam.entity.Auth;
+import com.manageTeam.global.dto.AddressDto;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.entity.Auth;
 
 @SpringBootTest
 public class UserTest {

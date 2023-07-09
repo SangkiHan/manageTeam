@@ -2,8 +2,8 @@ package com.manageTeam.domain.user.repository;
 
 import java.util.Optional;
 
-import com.manageTeam.config.security.CustumUserDetails;
 import com.manageTeam.domain.user.dto.UserDto;
+import com.manageTeam.global.security.CustumUserDetails;
 
 public interface UserRepositoryCustom {
 	public CustumUserDetails findUser(String userId);

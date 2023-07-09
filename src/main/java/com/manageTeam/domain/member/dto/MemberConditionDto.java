@@ -1,6 +1,6 @@
 package com.manageTeam.domain.member.dto;
 
-import com.manageTeam.entity.ActivateStatus;
+import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;

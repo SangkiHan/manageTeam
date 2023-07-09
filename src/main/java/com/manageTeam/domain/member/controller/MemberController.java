@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageTeam.domain.member.dto.MemberConditionDto;
 import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.service.MemberService;
-import com.manageTeam.exception.GlobalException;
+import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
 

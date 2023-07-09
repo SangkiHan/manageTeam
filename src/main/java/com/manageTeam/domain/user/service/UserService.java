@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import com.manageTeam.domain.team.repository.TeamRepository;
 import com.manageTeam.domain.user.dto.UserDto;
 import com.manageTeam.domain.user.repository.UserRepository;
-import com.manageTeam.entity.Team;
-import com.manageTeam.entity.User;
-import com.manageTeam.exception.GlobalException;
-import com.manageTeam.util.AESUtil;
+import com.manageTeam.global.entity.Team;
+import com.manageTeam.global.entity.User;
+import com.manageTeam.global.exception.GlobalException;
+import com.manageTeam.global.util.AESUtil;
 
 import lombok.RequiredArgsConstructor;
 

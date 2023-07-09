@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.manageTeam.domain.team.dto.TeamConditionDto;
 import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.domain.team.repository.TeamRepository;
-import com.manageTeam.entity.Team;
-import com.manageTeam.exception.GlobalException;
+import com.manageTeam.global.entity.Team;
+import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
 

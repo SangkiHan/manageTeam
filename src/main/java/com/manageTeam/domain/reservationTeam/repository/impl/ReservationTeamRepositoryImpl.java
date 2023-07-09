@@ -12,7 +12,7 @@ import org.springframework.data.support.PageableExecutionUtils;
 
 import com.manageTeam.domain.reservationTeam.dto.ReservationTeamDto;
 import com.manageTeam.domain.reservationTeam.repository.ReservationTeamRepositoryCustom;
-import com.manageTeam.entity.ActivateStatus;
+import com.manageTeam.global.entity.ActivateStatus;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;

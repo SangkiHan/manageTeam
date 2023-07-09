@@ -4,11 +4,11 @@ import static com.manageTeam.entity.QUser.user;
 
 import java.util.Optional;
 
-import com.manageTeam.config.security.CustumUserDetails;
 import com.manageTeam.domain.user.dto.UserDto;
 import com.manageTeam.domain.user.repository.UserRepositoryCustom;
-import com.manageTeam.dto.AddressDto;
-import com.manageTeam.entity.ActivateStatus;
+import com.manageTeam.global.dto.AddressDto;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.security.CustumUserDetails;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 

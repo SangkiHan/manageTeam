@@ -1,8 +1,8 @@
 package com.manageTeam.domain.user.dto;
 
-import com.manageTeam.dto.AddressDto;
-import com.manageTeam.entity.ActivateStatus;
-import com.manageTeam.entity.Auth;
+import com.manageTeam.global.dto.AddressDto;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.entity.Auth;
 
 import lombok.Getter;
 import lombok.Setter;

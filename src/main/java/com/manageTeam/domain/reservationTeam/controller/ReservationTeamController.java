@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.domain.reservationTeam.dto.ReservationTeamDto;
 import com.manageTeam.domain.reservationTeam.service.ReservationTeamService;
-import com.manageTeam.entity.ActivateStatus;
-import com.manageTeam.exception.GlobalException;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
 

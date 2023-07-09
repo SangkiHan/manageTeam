@@ -10,10 +10,10 @@ import com.manageTeam.domain.member.dto.MemberConditionDto;
 import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.repository.MemberRepository;
 import com.manageTeam.domain.team.repository.TeamRepository;
-import com.manageTeam.entity.Member;
-import com.manageTeam.entity.Team;
-import com.manageTeam.exception.GlobalException;
-import com.manageTeam.util.AESUtil;
+import com.manageTeam.global.entity.Member;
+import com.manageTeam.global.entity.Team;
+import com.manageTeam.global.exception.GlobalException;
+import com.manageTeam.global.util.AESUtil;
 
 import lombok.RequiredArgsConstructor;
 

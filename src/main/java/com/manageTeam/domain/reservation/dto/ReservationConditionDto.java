@@ -2,7 +2,7 @@ package com.manageTeam.domain.reservation.dto;
 
 import java.time.LocalDateTime;
 
-import com.manageTeam.entity.ActivateStatus;
+import com.manageTeam.global.entity.ActivateStatus;
 
 import lombok.Getter;
 

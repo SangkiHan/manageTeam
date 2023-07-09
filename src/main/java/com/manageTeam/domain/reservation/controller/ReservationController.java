@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
 import com.manageTeam.domain.reservation.dto.ReservationDto;
 import com.manageTeam.domain.reservation.service.ReservationService;
-import com.manageTeam.exception.GlobalException;
+import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
 

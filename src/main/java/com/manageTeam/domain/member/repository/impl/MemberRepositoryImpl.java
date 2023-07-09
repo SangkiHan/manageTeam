@@ -13,7 +13,7 @@ import org.springframework.util.StringUtils;
 import com.manageTeam.domain.member.dto.MemberConditionDto;
 import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.repository.MemberRepositoryCustom;
-import com.manageTeam.entity.ActivateStatus;
+import com.manageTeam.global.entity.ActivateStatus;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;

@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.manageTeam.domain.reservationTeam.dto.ReservationTeamDto;
 import com.manageTeam.domain.reservationTeam.service.ReservationTeamService;
-import com.manageTeam.entity.ActivateStatus;
+import com.manageTeam.global.entity.ActivateStatus;
 
 @SpringBootTest
 public class ReservationTeamTest {

@@ -2,8 +2,8 @@ package com.manageTeam.domain.reservation.dto;
 
 import java.time.LocalDateTime;
 
-import com.manageTeam.dto.AddressDto;
-import com.manageTeam.entity.Address;
+import com.manageTeam.global.dto.AddressDto;
+import com.manageTeam.global.entity.Address;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;

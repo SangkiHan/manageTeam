@@ -1,10 +1,10 @@
 package com.manageTeam.domain.member.dto;
 
-import com.manageTeam.dto.AddressDto;
-import com.manageTeam.entity.ActivateStatus;
-import com.manageTeam.entity.Address;
-import com.manageTeam.entity.Member;
-import com.manageTeam.util.AESUtil;
+import com.manageTeam.global.dto.AddressDto;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.entity.Address;
+import com.manageTeam.global.entity.Member;
+import com.manageTeam.global.util.AESUtil;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;

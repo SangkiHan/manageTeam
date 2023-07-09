@@ -11,11 +11,11 @@ import com.manageTeam.domain.reservation.repository.ReservationRepository;
 import com.manageTeam.domain.reservationTeam.dto.ReservationTeamDto;
 import com.manageTeam.domain.reservationTeam.repository.ReservationTeamRepository;
 import com.manageTeam.domain.team.repository.TeamRepository;
-import com.manageTeam.entity.ActivateStatus;
-import com.manageTeam.entity.Reservation;
-import com.manageTeam.entity.ReservationTeam;
-import com.manageTeam.entity.Team;
-import com.manageTeam.exception.GlobalException;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.entity.Reservation;
+import com.manageTeam.global.entity.ReservationTeam;
+import com.manageTeam.global.entity.Team;
+import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
 

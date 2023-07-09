@@ -7,7 +7,7 @@ import org.springframework.test.annotation.Rollback;
 
 import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.service.MemberService;
-import com.manageTeam.dto.AddressDto;
+import com.manageTeam.global.dto.AddressDto;
 
 @SpringBootTest
 public class MemberTest {

@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.manageTeam.domain.gym.dto.GymDto;
 import com.manageTeam.domain.gym.service.GymService;
-import com.manageTeam.dto.AddressDto;
+import com.manageTeam.global.dto.AddressDto;
 
 @SpringBootTest
 public class GymTest {

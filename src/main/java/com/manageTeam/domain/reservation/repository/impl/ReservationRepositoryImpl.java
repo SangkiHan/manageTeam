@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
 import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
 import com.manageTeam.domain.reservation.dto.ReservationDto;
 import com.manageTeam.domain.reservation.repository.ReservationRepositoryCustom;
-import com.manageTeam.entity.ActivateStatus;
+import com.manageTeam.global.entity.ActivateStatus;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;

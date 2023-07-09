@@ -13,11 +13,11 @@ import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
 import com.manageTeam.domain.reservation.dto.ReservationDto;
 import com.manageTeam.domain.reservation.repository.ReservationRepository;
 import com.manageTeam.domain.user.repository.UserRepository;
-import com.manageTeam.entity.Gym;
-import com.manageTeam.entity.Reservation;
-import com.manageTeam.entity.ReservationTeam;
-import com.manageTeam.entity.User;
-import com.manageTeam.exception.GlobalException;
+import com.manageTeam.global.entity.Gym;
+import com.manageTeam.global.entity.Reservation;
+import com.manageTeam.global.entity.ReservationTeam;
+import com.manageTeam.global.entity.User;
+import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
 

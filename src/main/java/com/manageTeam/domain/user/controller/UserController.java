@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageTeam.domain.user.dto.UserDto;
 import com.manageTeam.domain.user.service.UserService;
-import com.manageTeam.exception.GlobalException;
+import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
 
