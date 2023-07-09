@@ -12,7 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.manageTeam.dto.GymDto;
+import com.manageTeam.domain.gym.dto.GymDto;
 
 import lombok.Getter;
 

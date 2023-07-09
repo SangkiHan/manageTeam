@@ -12,8 +12,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import com.manageTeam.domain.user.repository.UserRepository;
 import com.manageTeam.exception.GlobalException;
-import com.manageTeam.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

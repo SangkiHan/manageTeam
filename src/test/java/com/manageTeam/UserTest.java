@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.manageTeam.domain.user.dto.UserDto;
+import com.manageTeam.domain.user.service.UserService;
 import com.manageTeam.dto.AddressDto;
-import com.manageTeam.dto.UserDto;
 import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.entity.Auth;
-import com.manageTeam.service.UserService;
 
 @SpringBootTest
 public class UserTest {

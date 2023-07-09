@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.manageTeam.dto.TeamDto;
-import com.manageTeam.service.TeamService;
+import com.manageTeam.domain.team.dto.TeamDto;
+import com.manageTeam.domain.team.service.TeamService;
 
 @SpringBootTest
 public class TeamTest {

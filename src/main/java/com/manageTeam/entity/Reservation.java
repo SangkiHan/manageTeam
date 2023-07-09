@@ -15,7 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.manageTeam.dto.ReservationDto;
+import com.manageTeam.domain.reservation.dto.ReservationDto;
 
 import lombok.Getter;
 

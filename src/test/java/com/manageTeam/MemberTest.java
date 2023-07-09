@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.manageTeam.domain.member.dto.MemberDto;
+import com.manageTeam.domain.member.service.MemberService;
 import com.manageTeam.dto.AddressDto;
-import com.manageTeam.dto.MemberDto;
-import com.manageTeam.service.MemberService;
 
 @SpringBootTest
 public class MemberTest {

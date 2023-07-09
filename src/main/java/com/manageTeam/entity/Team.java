@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.manageTeam.dto.TeamDto;
+import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.exception.GlobalException;
 
 import lombok.Getter;

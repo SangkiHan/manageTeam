@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.manageTeam.dto.UserDto;
+import com.manageTeam.domain.user.dto.UserDto;
 import com.manageTeam.util.AESUtil;
 
 import lombok.Getter;

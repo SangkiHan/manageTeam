@@ -7,10 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 
-import com.manageTeam.dto.ReservationConditionDto;
-import com.manageTeam.dto.ReservationDto;
-import com.manageTeam.service.GymService;
-import com.manageTeam.service.ReservationService;
+import com.manageTeam.domain.gym.service.GymService;
+import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
+import com.manageTeam.domain.reservation.dto.ReservationDto;
+import com.manageTeam.domain.reservation.service.ReservationService;
 
 @SpringBootTest
 public class ReservationTest {
