@@ -59,7 +59,8 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 		return queryFactory
 				.select(Projections.bean(CustumUserDetails.class, 
 						user.userId.as("username"),
-						user.password))
+						user.password
+						))
 				.from(user)
 				.where(user.userId.eq(userId))
 				.fetchOne();

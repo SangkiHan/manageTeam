@@ -36,6 +36,7 @@ public class Competition {
 	 * 대회 개최지
 	 */
 	@Embedded
+	@Column()
 	private Address address;
 	/**
 	 * 활성화 상태

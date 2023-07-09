@@ -14,6 +14,7 @@ import com.manageTeam.dto.MemberConditionDto;
 import com.manageTeam.dto.MemberDto;
 import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.repository.MemberRepositoryCustom;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -28,6 +29,14 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	
 	@Override
 	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable) {
+		
+		Predicate predicate = usernameEq(memberConditionDto.getMemberName())
+	            .and(teamEq(memberConditionDto.getTeamName()))
+	            .and(ageGoe(memberConditionDto.getAgeGoe()))
+	            .and(ageLoe(memberConditionDto.getAgeLoe()))
+	            .and(cityEq(memberConditionDto.getTeamName()))
+	            .and(activateStatusEq(memberConditionDto.getActivateStatus()));
+		
 		List<MemberDto.Info> results = queryFactory
 				.select(Projections.bean(MemberDto.Info.class,
 						member.memberId,
@@ -41,14 +50,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 						))
 				.from(member)
 				.join(member.team, team)
-				.where(
-						usernameEq(memberConditionDto.getMemberName()),
-						teamEq(memberConditionDto.getTeamName()),
-						ageGoe(memberConditionDto.getAgeGoe()),
-						ageLoe(memberConditionDto.getAgeLoe()),
-						cityEq(memberConditionDto.getTeamName()),
-						activateStatusEq(memberConditionDto.getActivateStatus())
-						)
+				.where(predicate)
 				.offset(pageable.getOffset())
 				.limit(pageable.getPageSize())
 				.fetch();
@@ -57,14 +59,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 				.select(member.count())
 				.from(member)
 				.join(member.team, team)
-				.where(
-						usernameEq(memberConditionDto.getMemberName()),
-						teamEq(memberConditionDto.getTeamName()),
-						ageGoe(memberConditionDto.getAgeGoe()),
-						ageLoe(memberConditionDto.getAgeLoe()),
-						cityEq(memberConditionDto.getTeamName()),
-						activateStatusEq(memberConditionDto.getActivateStatus())
-						);
+				.where(predicate);
 		
 		return PageableExecutionUtils.getPage(results, pageable, totalQuery::fetchOne);
 	}

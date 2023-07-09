@@ -16,6 +16,7 @@ import com.manageTeam.dto.ReservationConditionDto;
 import com.manageTeam.dto.ReservationDto;
 import com.manageTeam.entity.ActivateStatus;
 import com.manageTeam.repository.ReservationRepositoryCustom;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -31,6 +32,12 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	@Override
 	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable) {
 		
+		Predicate predicate = gymnameLike(conditionDto.getGymName())
+						.and(startGoe(conditionDto.getDateGoe()))
+						.and(endLoe(conditionDto.getDateLoe()))
+						.and(cityLike(conditionDto.getCity()))
+						.and(activateEq(conditionDto.getActivateStatus()));
+		
 		List<ReservationDto.Info> results = queryFactory
 				.select(Projections.bean(ReservationDto.Info.class, 
 						reservation.reservationId,
@@ -45,13 +52,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 				.from(reservation)
 				.join(reservation.gym, gym)
 				.leftJoin(reservation.reservationTeams, reservationTeam)
-				.where(
-						gymnameLike(conditionDto.getGymName()),
-						startGoe(conditionDto.getDateGoe()),
-						endLoe(conditionDto.getDateLoe()),
-						cityLike(conditionDto.getCity()),
-						activateEq(conditionDto.getActivateStatus())
-						)
+				.where(predicate)
 				.groupBy(reservation.reservationId)
 				.having(reservation.reservationId.isNotNull())
 				.fetch();
@@ -61,13 +62,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 				.from(reservation)
 				.join(reservation.gym, gym)
 				.leftJoin(reservation.reservationTeams, reservationTeam)
-				.where(
-						gymnameLike(conditionDto.getGymName()),
-						startGoe(conditionDto.getDateGoe()),
-						endLoe(conditionDto.getDateLoe()),
-						cityLike(conditionDto.getCity()),
-						activateEq(conditionDto.getActivateStatus())
-						)
+				.where(predicate)
 				.groupBy(reservation.reservationId)
 				.having(reservation.reservationId.isNotNull());
 				

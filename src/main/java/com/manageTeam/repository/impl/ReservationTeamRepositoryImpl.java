@@ -55,7 +55,8 @@ public class ReservationTeamRepositoryImpl implements ReservationTeamRepositoryC
 				.from(reservationTeam)
 				.join(reservationTeam.reservation, reservation)
 				.join(reservation.gym, gym)
-				.where(reservationTeam.team.teamId.eq(teamId));
+				.where(reservationTeam.team.teamId.eq(teamId),
+					   activateStatus(activateStatus));
 		
 		
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
