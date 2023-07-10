@@ -15,6 +15,7 @@ import com.manageTeam.domain.reservationTeam.repository.ReservationTeamRepositor
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.team.repository.TeamRepository;
 import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
@@ -36,15 +37,15 @@ public class ReservationTeamService {
 	 * */
 	public void save(ReservationTeamDto.Save request) {
 		Team team = temRepository.findById(request.getTeamId())
-				.orElseThrow(() -> new GlobalException("RET0001", "해당 팀 데이터가 없음"));
+				.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_UNKNOWN));
 		Reservation reservation = reservationRepository.findById(request.getReservationId())
-				.orElseThrow(() -> new GlobalException("RET0002", "해당 예약 데이터가 없음"));
+				.orElseThrow(() -> new GlobalException(ErrorCode.RESERVATION_UNKNOWN));
 		
 		int teamCnt = reservation.getTotalTeamCnt();
 		int joinTeamCnt = reservationRepository.findTeamCntReservation(request.getReservationId()).intValue();
 		
 		if(teamCnt==joinTeamCnt) {
-			throw new GlobalException("RET0003", "해당 체육관은 예약이 마감되었습니다.");
+			throw new GlobalException(ErrorCode.RESERVATION_END);
 		}
 		
 		checkTime(reservation, team.getTeamId());
@@ -75,7 +76,7 @@ public class ReservationTeamService {
 	public void checkTime(Reservation reservation, Long teamId) {
 		ReservationConditionDto.DateCondition condition = new ReservationConditionDto.DateCondition(reservation.getStartTime(), reservation.getEndTime());
 		if(!reservationRepository.findReservationByDate(condition,teamId)) {
-			throw new GlobalException("RET0004", "해당 시간에 이미 예약된 체육관이 존재합니다.");
+			throw new GlobalException(ErrorCode.RESERVATION_TIME);
 		}
 	}
 

@@ -12,6 +12,7 @@ import com.manageTeam.domain.member.entity.Member;
 import com.manageTeam.domain.member.repository.MemberRepository;
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.team.repository.TeamRepository;
+import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 import com.manageTeam.global.util.AESUtil;
 
@@ -34,7 +35,7 @@ public class MemberService {
 	 * */
 	public void save(MemberDto.Save request) {
 		Team team = teamRepository.findById(request.getTeamId())
-				.orElseThrow(() -> new GlobalException("MEM0001","해당 팀원이 존재하지 않습니다. 관리자에게 문의해주세요."));
+				.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_UNKNOWN));
 		Member member = new Member(request);
 		member.changeTeam(team);
 		
@@ -49,7 +50,7 @@ public class MemberService {
 	 * */
 	public void status(MemberDto.Status request) {
 		Member member = memberRepository.findById(request.getMemberId())
-				.orElseThrow(() -> new GlobalException("MEM0002","해당 팀원이 존재하지 않습니다. 관리자에게 문의해주세요."));
+				.orElseThrow(() -> new GlobalException(ErrorCode.MEMBER_UNKNOWN));
 		member.changeStatus(request.getActivateStatus());
 	}
 	
@@ -61,7 +62,7 @@ public class MemberService {
 	 * */
 	public MemberDto.Info findById(Long memberId) {
 		Member result = memberRepository.findById(memberId)
-				.orElseThrow(() -> new GlobalException("MEM0003","해당 팀원이 존재하지 않습니다. 관리자에게 문의해주세요."));
+				.orElseThrow(() -> new GlobalException(ErrorCode.MEMBER_UNKNOWN));
 		
 		MemberDto.Info member = new MemberDto.Info(result);
 		return member;
@@ -86,7 +87,7 @@ public class MemberService {
 	 * */
 	public void existsByRsdntRgnmb(String rsdntRgnmb){
 		if(memberRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
-			new GlobalException("USR0002","이미 해당 주민번호로 등록된 팀원이 존재합니다.");
+			new GlobalException(ErrorCode.USER_EXIST);
 		}
 	}
 }

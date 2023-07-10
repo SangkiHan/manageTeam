@@ -9,6 +9,7 @@ import com.manageTeam.domain.team.repository.TeamRepository;
 import com.manageTeam.domain.user.dto.UserDto;
 import com.manageTeam.domain.user.entity.User;
 import com.manageTeam.domain.user.repository.UserRepository;
+import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 import com.manageTeam.global.util.AESUtil;
 
@@ -30,7 +31,7 @@ public class UserService {
 	 */
 	public void save(UserDto.Save request) throws Exception{
 		Team team = teamRepository.findById(request.getTeam_id())
-				.orElseThrow(() -> new GlobalException("USR0001","해당 팀 데이터가 없습니다. 관리자에게 문의 해주세요"));
+				.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_UNKNOWN));
 		User user = new User(request);
 		user.setTeam(team);
 		userRepository.save(user);
@@ -44,7 +45,7 @@ public class UserService {
 	 */
 	public UserDto.Info findUserInfo(String userId){
 		return userRepository.findUserInfo(userId)
-				.orElseThrow(() -> new GlobalException("USR0002","해당 사용자 데이터가 없습니다. 관리자에게 문의 해주세요"));
+				.orElseThrow(() -> new GlobalException(ErrorCode.USER_UNKNOWN));
 	}
 	
 	/**
@@ -55,7 +56,7 @@ public class UserService {
 	 */
 	public void existsByRsdntRgnmb(String rsdntRgnmb){
 		if(userRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
-			new GlobalException("USR0003","이미 해당 주민번호로 등록된 팀원이 존재합니다.");
+			new GlobalException(ErrorCode.USER_EXIST);
 		}
 	}
 }

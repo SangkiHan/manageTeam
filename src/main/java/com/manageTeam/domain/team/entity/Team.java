@@ -18,6 +18,7 @@ import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.domain.user.entity.User;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.BaseEntity;
+import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 
 import lombok.Getter;
@@ -109,7 +110,7 @@ public class Team extends BaseEntity{
 	public void checkMemberCnt() {
 		int count = this.memberCount;
 		if(count<5) {
-			throw new GlobalException("팀 인원이 5명 미만입니다.");
+			throw new GlobalException(ErrorCode.TEAM_NUMBER);
 		}
 	}
 }

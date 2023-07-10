@@ -6,6 +6,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 
 public class AESUtil {
@@ -23,7 +24,7 @@ public class AESUtil {
             byte[] encrypted = cipher.doFinal(text.getBytes("UTF-8"));
             return Base64.getEncoder().encodeToString(encrypted);
 		} catch (Exception e) {
-			throw new GlobalException("암호화 도중 에러가 발생하였습니다.");
+			throw new GlobalException(ErrorCode.ENCRYPT_ERROR);
 		}
     }
 
@@ -38,7 +39,7 @@ public class AESUtil {
             byte[] decrypted = cipher.doFinal(decodedBytes);
             return new String(decrypted, "UTF-8");
 		} catch (Exception e) {
-			throw new GlobalException("복호화 도중 에러가 발생하였습니다.");
+			throw new GlobalException(ErrorCode.DECRYPT_ERROR);
 		}
     }
 }

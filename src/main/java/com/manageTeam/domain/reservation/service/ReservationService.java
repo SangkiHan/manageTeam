@@ -17,6 +17,7 @@ import com.manageTeam.domain.reservation.repository.ReservationRepository;
 import com.manageTeam.domain.reservationTeam.entity.ReservationTeam;
 import com.manageTeam.domain.user.entity.User;
 import com.manageTeam.domain.user.repository.UserRepository;
+import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
@@ -51,7 +52,7 @@ public class ReservationService {
 	 * */
 	public void cancel(ReservationDto.Id request) {
 		Reservation reservation = reservationRepository.findById(request.getReservationId())
-				.orElseThrow(() -> new GlobalException("RES0001","해당 예약이 존재하지 않습니다. 관리자에게 문의해주세요."));
+				.orElseThrow(() -> new GlobalException(ErrorCode.RESERVATION_UNKNOWN));
 		
 		reservation.cancel();
 		
@@ -59,7 +60,7 @@ public class ReservationService {
 		if(teams.size()>0) {
 			for(ReservationTeam team : teams) {
 				User user = userRepository.findByTeam(team.getTeam())
-						.orElseThrow(() -> new GlobalException("RES0002","해당 팀의 관리자가 존재하지 않습니다. 관리자에게 문의해주세요."));
+						.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_MANAGER));
 				
 				String phone = user.getPhone();
 				System.out.println(phone+"에 문자발송");

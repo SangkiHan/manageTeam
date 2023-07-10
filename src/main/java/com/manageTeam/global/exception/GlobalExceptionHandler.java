@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(GlobalException.class)
 	protected ResponseEntity<ErrorDto> handleTesseractException(GlobalException e){
 		e.printStackTrace();
-		ErrorDto errorDto = new ErrorDto(e.getCode(), e.getMessage());
+		ErrorDto errorDto = new ErrorDto(e.getErrorCode());
 		return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	

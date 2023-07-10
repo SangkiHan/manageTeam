@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import com.manageTeam.domain.user.repository.UserRepository;
+import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 import com.manageTeam.global.util.AESUtil;
 
@@ -32,13 +33,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 			
 			CustumUserDetails user = userRepository.findUser(userId);
 			if(user==null) {
-				throw new GlobalException("존재하지 않는 회원입니다.");
+				throw new GlobalException(ErrorCode.USER_UNKNOWN);
 			}
 			
 			String decPassword = AESUtil.decrypt(user.getPassword());
 			
 			if(!password.equals(decPassword)) {
-				throw new GlobalException("비밀번호가 일치하지 않습니다.");
+				throw new GlobalException(ErrorCode.PASSWORD_ERROR);
 			}
 			
 			List<GrantedAuthority> authorities = new ArrayList<>();

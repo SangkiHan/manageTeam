@@ -10,6 +10,7 @@ import com.manageTeam.domain.team.dto.TeamConditionDto;
 import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.team.repository.TeamRepository;
+import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,7 @@ public class TeamService {
 	 */
 	public void status(TeamDto.Status request) {
 		Team team = teamRepository.findById(request.getTeamId())
-				.orElseThrow(() -> new GlobalException("TEA0001","해당 팀이 존재하지 않습니다. 관리자에게 문의 부탁드립니다."));
+				.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_UNKNOWN));
 		team.setStatus(request.getActivateStatus());
 	}
 	
