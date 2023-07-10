@@ -32,6 +32,8 @@ public class Gym extends BaseEntity{
 	private Address address;
 	@OneToMany(mappedBy = "gym")
 	private List<Reservation> reservations = new ArrayList<>();
+	@OneToMany(mappedBy = "gym")
+	private List<Competition> competition = new ArrayList<>();
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 	
