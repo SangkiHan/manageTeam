@@ -1,4 +1,4 @@
-package com.manageTeam.global.entity;
+package com.manageTeam.domain.user.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,7 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.user.dto.UserDto;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.entity.Address;
+import com.manageTeam.global.entity.Auth;
+import com.manageTeam.global.entity.BaseEntity;
 import com.manageTeam.global.util.AESUtil;
 
 import lombok.Getter;

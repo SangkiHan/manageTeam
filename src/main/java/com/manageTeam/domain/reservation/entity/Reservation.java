@@ -1,4 +1,4 @@
-package com.manageTeam.global.entity;
+package com.manageTeam.domain.reservation.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.domain.reservation.dto.ReservationDto;
+import com.manageTeam.domain.reservationTeam.entity.ReservationTeam;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.entity.BaseEntity;
 
 import lombok.Getter;
 

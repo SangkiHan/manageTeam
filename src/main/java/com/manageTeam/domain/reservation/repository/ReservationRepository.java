@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.manageTeam.domain.reservation.entity.Reservation;
 import com.manageTeam.global.entity.ActivateStatus;
-import com.manageTeam.global.entity.Reservation;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long>, ReservationRepositoryCustom{
 	@Query("select r from Reservation r join fetch r.reservationTeams rt join fetch rt.team where r.reservationId = :id")

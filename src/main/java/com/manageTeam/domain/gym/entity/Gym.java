@@ -1,4 +1,4 @@
-package com.manageTeam.global.entity;
+package com.manageTeam.domain.gym.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.manageTeam.domain.competition.entity.Competition;
 import com.manageTeam.domain.gym.dto.GymDto;
+import com.manageTeam.domain.reservation.entity.Reservation;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.entity.Address;
+import com.manageTeam.global.entity.BaseEntity;
 
 import lombok.Getter;
 

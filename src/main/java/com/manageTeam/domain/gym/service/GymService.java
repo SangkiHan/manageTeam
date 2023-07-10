@@ -5,8 +5,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.manageTeam.domain.gym.dto.GymDto;
+import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.domain.gym.repository.GymRepository;
-import com.manageTeam.global.entity.Gym;
 import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.manageTeam.domain.user.repository.impl;
 
-import static com.manageTeam.global.entity.QUser.user;
+import static com.manageTeam.domain.user.entity.QUser.user;
 
 import java.util.Optional;
 

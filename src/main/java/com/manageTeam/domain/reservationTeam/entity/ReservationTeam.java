@@ -1,4 +1,4 @@
-package com.manageTeam.global.entity;
+package com.manageTeam.domain.reservationTeam.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.manageTeam.domain.reservation.entity.Reservation;
+import com.manageTeam.domain.team.entity.Team;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.entity.BaseEntity;
 
 import lombok.Getter;
 

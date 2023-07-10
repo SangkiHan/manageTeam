@@ -1,7 +1,7 @@
 package com.manageTeam.domain.gym.dto;
 
+import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.global.dto.AddressDto;
-import com.manageTeam.global.entity.Gym;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;

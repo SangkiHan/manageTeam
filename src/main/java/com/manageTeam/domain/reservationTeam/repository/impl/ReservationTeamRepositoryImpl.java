@@ -1,8 +1,8 @@
 package com.manageTeam.domain.reservationTeam.repository.impl;
 
-import static com.manageTeam.global.entity.QReservationTeam.reservationTeam;
-import static com.manageTeam.global.entity.QReservation.reservation;
-import static com.manageTeam.global.entity.QGym.gym;
+import static com.manageTeam.domain.reservation.entity.QReservation.reservation;
+import static com.manageTeam.domain.gym.entity.QGym.gym;
+import static com.manageTeam.domain.reservationTeam.entity.QReservationTeam.reservationTeam;
 
 import java.util.List;
 

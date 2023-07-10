@@ -1,8 +1,8 @@
 package com.manageTeam.domain.reservation.repository.impl;
 
-import static com.manageTeam.global.entity.QReservation.reservation;
-import static com.manageTeam.global.entity.QGym.gym;
-import static com.manageTeam.global.entity.QReservationTeam.reservationTeam;
+import static com.manageTeam.domain.reservation.entity.QReservation.reservation;
+import static com.manageTeam.domain.gym.entity.QGym.gym;
+import static com.manageTeam.domain.reservationTeam.entity.QReservationTeam.reservationTeam;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,7 +37,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 						.and(endLoe(conditionDto.getDateLoe()))
 						.and(cityLike(conditionDto.getCity()))
 						.and(activateEq(conditionDto.getActivateStatus()));
-		
+
 		List<ReservationDto.Info> results = queryFactory
 				.select(Projections.bean(ReservationDto.Info.class, 
 						reservation.reservationId,

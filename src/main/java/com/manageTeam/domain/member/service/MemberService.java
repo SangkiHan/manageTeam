@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.manageTeam.domain.member.dto.MemberConditionDto;
 import com.manageTeam.domain.member.dto.MemberDto;
+import com.manageTeam.domain.member.entity.Member;
 import com.manageTeam.domain.member.repository.MemberRepository;
+import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.team.repository.TeamRepository;
-import com.manageTeam.global.entity.Member;
-import com.manageTeam.global.entity.Team;
 import com.manageTeam.global.exception.GlobalException;
 import com.manageTeam.global.util.AESUtil;
 

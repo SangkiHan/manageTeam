@@ -7,14 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
+import com.manageTeam.domain.reservation.entity.Reservation;
 import com.manageTeam.domain.reservation.repository.ReservationRepository;
 import com.manageTeam.domain.reservationTeam.dto.ReservationTeamDto;
+import com.manageTeam.domain.reservationTeam.entity.ReservationTeam;
 import com.manageTeam.domain.reservationTeam.repository.ReservationTeamRepository;
+import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.team.repository.TeamRepository;
 import com.manageTeam.global.entity.ActivateStatus;
-import com.manageTeam.global.entity.Reservation;
-import com.manageTeam.global.entity.ReservationTeam;
-import com.manageTeam.global.entity.Team;
 import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;

@@ -8,15 +8,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.domain.gym.service.GymService;
 import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
 import com.manageTeam.domain.reservation.dto.ReservationDto;
+import com.manageTeam.domain.reservation.entity.Reservation;
 import com.manageTeam.domain.reservation.repository.ReservationRepository;
+import com.manageTeam.domain.reservationTeam.entity.ReservationTeam;
+import com.manageTeam.domain.user.entity.User;
 import com.manageTeam.domain.user.repository.UserRepository;
-import com.manageTeam.global.entity.Gym;
-import com.manageTeam.global.entity.Reservation;
-import com.manageTeam.global.entity.ReservationTeam;
-import com.manageTeam.global.entity.User;
 import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;

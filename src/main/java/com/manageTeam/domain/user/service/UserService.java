@@ -4,11 +4,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.team.repository.TeamRepository;
 import com.manageTeam.domain.user.dto.UserDto;
+import com.manageTeam.domain.user.entity.User;
 import com.manageTeam.domain.user.repository.UserRepository;
-import com.manageTeam.global.entity.Team;
-import com.manageTeam.global.entity.User;
 import com.manageTeam.global.exception.GlobalException;
 import com.manageTeam.global.util.AESUtil;
 

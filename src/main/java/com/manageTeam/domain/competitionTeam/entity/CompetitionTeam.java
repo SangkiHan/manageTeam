@@ -1,4 +1,4 @@
-package com.manageTeam.global.entity;
+package com.manageTeam.domain.competitionTeam.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.manageTeam.domain.competition.entity.Competition;
+import com.manageTeam.domain.team.entity.Team;
 
 import lombok.Getter;
 

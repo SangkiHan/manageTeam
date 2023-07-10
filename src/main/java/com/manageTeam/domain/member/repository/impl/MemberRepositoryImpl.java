@@ -1,7 +1,7 @@
 package com.manageTeam.domain.member.repository.impl;
 
-import static com.manageTeam.global.entity.QMember.member;
-import static com.manageTeam.global.entity.QTeam.team;
+import static com.manageTeam.domain.member.entity.QMember.member;
+import static com.manageTeam.domain.team.entity.QTeam.team;
 
 import java.util.List;
 

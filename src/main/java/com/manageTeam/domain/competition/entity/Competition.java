@@ -1,4 +1,4 @@
-package com.manageTeam.global.entity;
+package com.manageTeam.domain.competition.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.manageTeam.domain.competition.dto.CompetitionDto;
+import com.manageTeam.domain.competitionTeam.entity.CompetitionTeam;
+import com.manageTeam.domain.gym.entity.Gym;
+import com.manageTeam.global.entity.ActivateStatus;
 
 import lombok.Getter;
 
