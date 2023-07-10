@@ -1,7 +1,7 @@
 package com.manageTeam.domain.member.repository.impl;
 
-import static com.manageTeam.entity.QMember.member;
-import static com.manageTeam.entity.QTeam.team;
+import static com.manageTeam.global.entity.QMember.member;
+import static com.manageTeam.global.entity.QTeam.team;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import com.manageTeam.domain.member.dto.MemberConditionDto;
 import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.repository.MemberRepositoryCustom;
 import com.manageTeam.global.entity.ActivateStatus;
+
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -29,7 +30,6 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	
 	@Override
 	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable) {
-		
 		Predicate predicate = usernameEq(memberConditionDto.getMemberName())
 	            .and(teamEq(memberConditionDto.getTeamName()))
 	            .and(ageGoe(memberConditionDto.getAgeGoe()))

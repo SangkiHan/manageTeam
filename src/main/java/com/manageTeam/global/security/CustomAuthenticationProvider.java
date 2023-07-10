@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.manageTeam.domain.user.repository.UserRepository;
 import com.manageTeam.global.exception.GlobalException;
+import com.manageTeam.global.util.AESUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,8 +32,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 			
 			CustumUserDetails user = userRepository.findUser(userId);
 			if(user==null) {
-				throw new GlobalException("LOG0001", "존재하지 않는 회원입니다.");
+				throw new GlobalException("존재하지 않는 회원입니다.");
 			}
+			
+			String decPassword = AESUtil.decrypt(user.getPassword());
+			
+			if(!password.equals(decPassword)) {
+				throw new GlobalException("비밀번호가 일치하지 않습니다.");
+			}
+			
 			List<GrantedAuthority> authorities = new ArrayList<>();
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 			

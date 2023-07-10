@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,12 +17,13 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig{
 	
 	private final AuthenticationFailureHandler authenticationFailureHandler;
+	private final AuthenticationSuccessHandler authenticationSuccessHandler;
     
     @Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    	http
 		        .authorizeRequests()
-			        .antMatchers("/","/login", "/view/login").permitAll() // 루트 경로와 로그인 페이지는 모두 접근 허용
+			        .antMatchers("/","/login", "/view/login","/swagger-ui/**", "/v2/api-docs").permitAll() // 루트 경로와 로그인 페이지는 모두 접근 허용
 		            .anyRequest().authenticated(); // 나머지 요청은 인증 필요
 	    	http
 		        .formLogin()
@@ -29,7 +31,9 @@ public class SecurityConfig{
 					.passwordParameter("password")
 		            .loginPage("/view/login")	
 		            .loginProcessingUrl("/login")
-	    			.failureHandler(authenticationFailureHandler);
+	    			.failureHandler(authenticationFailureHandler)
+	    			.successHandler(authenticationSuccessHandler);
+	    	
 	    	http
 	        	.logout()
 			        .logoutUrl("/logout") // 로그아웃 URL 경로

@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     @Bean
     Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.manageTeam.controller"))
                 .paths(PathSelectors.any())
@@ -32,4 +32,5 @@ public class SwaggerConfig {
                 .version("1.0.0")
                 .build();
     }
+
 }
