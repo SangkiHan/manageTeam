@@ -48,16 +48,20 @@ public class LoggingInterceptor implements HandlerInterceptor{
             }
         }   
         
-        logging(url, method, requestStr, responseStr);
+        logging(url, method, requestStr, responseStr, ex);
 	}
 	
-	public void logging(String url, String method, String requestStr, String responseStr) {
+	public void logging(String url, String method, String requestStr, String responseStr, Exception e) {
 		StringBuilder logMessageBuilder = new StringBuilder("\n");
 		logMessageBuilder.append("┌───────────────────────────────────────────────────────────────────────────────────────\n");
 		logMessageBuilder.append("│Request URL: "+url+"\n");
 		logMessageBuilder.append("│Request Method: "+method+"\n");
-		logMessageBuilder.append("│Request Body: "+requestStr);
-		logMessageBuilder.append("│Response Body: "+responseStr);
+		if(!"".equals(requestStr)&&requestStr!=null) {
+		logMessageBuilder.append("│Request Body: "+responseStr+"\n");
+		}
+		if(!"".equals(responseStr)&&responseStr!=null) {
+		logMessageBuilder.append("│Response Body: "+responseStr+"\n");
+		}
 		logMessageBuilder.append("└───────────────────────────────────────────────────────────────────────────────────────\n");
 		log.info(logMessageBuilder.toString());
 	}
