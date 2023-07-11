@@ -18,6 +18,10 @@ import com.manageTeam.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @descreption: Spring Security 로그인 성공 시 CustomHandler
+ * @author skhan
+ * */
 @Component
 @RequiredArgsConstructor
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
@@ -37,7 +41,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         ObjectMapper mapper= new ObjectMapper();
         String jsonBody = mapper.writeValueAsString(userInfo);
         response.getWriter().write(jsonBody);
-        
 	}
 
 }

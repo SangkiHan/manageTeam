@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * @descreption: Spring Security 로그인 실패 시 CustomHandler
+ * @author skhan
+ * */
 @Component
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler{
 	@Override

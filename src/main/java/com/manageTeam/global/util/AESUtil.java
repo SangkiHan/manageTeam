@@ -14,6 +14,11 @@ public class AESUtil {
     private static final String key = "12345678910111213";
     private static final String iv = key.substring(0, 16); // 16byte
 
+    /**
+     * @descreption: AES256 암호화메소드
+     * @Request: String text (평문 데이터)
+     * @author skhan
+     * */
     public static String encrypt(String text){
     	try {
     		Cipher cipher = Cipher.getInstance(alg);
@@ -28,6 +33,11 @@ public class AESUtil {
 		}
     }
 
+    /**
+     * @descreption: AES256 복호화 메소드
+     * @Request: String cipherText (암호화 데이터)
+     * @author skhan
+     * */
     public static String decrypt(String cipherText){
     	try {
     		Cipher cipher = Cipher.getInstance(alg);

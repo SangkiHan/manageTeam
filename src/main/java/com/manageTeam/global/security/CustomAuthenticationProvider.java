@@ -19,6 +19,10 @@ import com.manageTeam.global.util.AESUtil;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @descreption: Spring Security 로그인 비지니스 로직
+ * @author skhan
+ * */
 @Component
 @RequiredArgsConstructor
 public class CustomAuthenticationProvider implements AuthenticationProvider{

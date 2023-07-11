@@ -9,6 +9,10 @@ import com.manageTeam.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @descreption: Spring Security 사용자조회 CustomService
+ * @author skhan
+ * */
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService{

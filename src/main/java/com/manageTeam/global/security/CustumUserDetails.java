@@ -10,6 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * @descreption: Spring Security 사용자 Custom Dto
+ * @author skhan
+ * */
 @Setter
 @Getter
 public class CustumUserDetails implements UserDetails{
