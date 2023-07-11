@@ -32,6 +32,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 }
 
 tasks.named('test') {
@@ -50,6 +51,9 @@ sourceSets {
 }
 configurations {
 	querydsl.extendsFrom compileClasspath
+	 all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 compileQuerydsl{
