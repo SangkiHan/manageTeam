@@ -26,30 +26,39 @@ public class LoggingInterceptor implements HandlerInterceptor{
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-		StringBuilder logMessageBuilder = new StringBuilder("\n------------------------------------------------------------------------------------------\n");
-		
 		if (request.getClass().getName().contains("SecurityContextHolderAwareRequestWrapper")) {
 			return;
 		}
         final ContentCachingRequestWrapper cachingRequest = (ContentCachingRequestWrapper) request;
         final ContentCachingResponseWrapper cachingResponse = (ContentCachingResponseWrapper) response;
-
+        
+        String url = request.getRequestURL().toString()+"/"+request.getQueryString();
 		String method = cachingRequest.getMethod();
-		String url = request.getRequestURL().toString();
-		String queryString = request.getQueryString();
-		logMessageBuilder.append("|Request URL : "+url+"/"+queryString+"\n");
-		logMessageBuilder.append("|Request Method : "+method+"\n");
+		String requestStr = "";
+		String responseStr = "";
+		
         if (cachingRequest.getContentType() != null && cachingRequest.getContentType().contains("application/json")) {
             if (cachingRequest.getContentAsByteArray() != null && cachingRequest.getContentAsByteArray().length != 0){
-            	logMessageBuilder.append("Request Body : "+objectMapper.readTree(cachingRequest.getContentAsByteArray())+"\n");
+            	requestStr = objectMapper.readTree(cachingRequest.getContentAsByteArray()).textValue();
             }
         }
         if (cachingResponse.getContentType() != null && cachingResponse.getContentType().contains("application/json")) {
         	if (cachingResponse.getContentAsByteArray() != null && cachingResponse.getContentAsByteArray().length != 0) {
-        		logMessageBuilder.append("|Response Body : "+objectMapper.readTree(cachingResponse.getContentAsByteArray())+"\n");
+        		responseStr = objectMapper.readTree(cachingResponse.getContentAsByteArray()).textValue();
             }
         }   
-        logMessageBuilder.append("------------------------------------------------------------------------------------------\n");
-        log.info(logMessageBuilder.toString());
+        
+        logging(url, method, requestStr, responseStr);
+	}
+	
+	public void logging(String url, String method, String requestStr, String responseStr) {
+		StringBuilder logMessageBuilder = new StringBuilder("\n");
+		logMessageBuilder.append("┌───────────────────────────────────────────────────────────────────────────────────────\n");
+		logMessageBuilder.append("│Request URL: "+url+"\n");
+		logMessageBuilder.append("│Request Method: "+method+"\n");
+		logMessageBuilder.append("│Request Body: "+requestStr);
+		logMessageBuilder.append("│Response Body: "+responseStr);
+		logMessageBuilder.append("└───────────────────────────────────────────────────────────────────────────────────────\n");
+		log.info(logMessageBuilder.toString());
 	}
 }
