@@ -33,6 +33,7 @@
 		<Async name="Async-error">
 			<AppenderRef ref="manageTeam-error" />
 		</Async>
+		
 	</Appenders>
 	
 	<Loggers>
@@ -41,5 +42,9 @@
 			<AppenderRef ref="Async-log" />
 			<AppenderRef ref="Async-error" level="WARN"/>
 		</Root>
+		<Logger name="org.zaxxer.hikari" level="ERROR" additivity="false">
+			<AppenderRef ref="manageTeam-error" />
+		</Logger>
 	</Loggers>
+	
 </Configuration>
