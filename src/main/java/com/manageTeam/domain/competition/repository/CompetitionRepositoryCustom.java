@@ -1,5 +1,7 @@
 package com.manageTeam.domain.competition.repository;
 
-public interface CompetitionRepositoryCustom {
+import com.manageTeam.domain.competition.dto.CompetitionConditionDto;
 
+public interface CompetitionRepositoryCustom {
+	public boolean checkCompetitionGym(CompetitionConditionDto.DateCheck request);
 }

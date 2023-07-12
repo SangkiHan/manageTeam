@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.manageTeam.domain.competition.dto.CompetitionConditionDto;
 import com.manageTeam.domain.competition.dto.CompetitionDto;
 import com.manageTeam.domain.competition.entity.Competition;
 import com.manageTeam.domain.competition.repository.CompetitionRepository;
@@ -27,6 +28,11 @@ public class CompetitionService {
 	 * @author skhan
 	 */
 	public void save(CompetitionDto.Save request) {
+		CompetitionConditionDto.DateCheck conditionDto = new CompetitionConditionDto.DateCheck(request);
+		if(!competitionRepository.checkCompetitionGym(conditionDto)) {
+			throw new GlobalException(ErrorCode.COMPETITION_DATE);
+		}
+		
 		Competition competition = new Competition(request);
 		Gym gym = gymRepository.findById(request.getGymId())
 				.orElseThrow(() -> new GlobalException(ErrorCode.GYM_UNKNOWN));
