@@ -33,8 +33,8 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable) {
 		
 		Predicate predicate = gymnameLike(conditionDto.getGymName())
-						.and(startGoe(conditionDto.getDateGoe()))
-						.and(endLoe(conditionDto.getDateLoe()))
+						.and(startGoe(conditionDto.getStartDate()))
+						.and(endLoe(conditionDto.getEndDate()))
 						.and(cityLike(conditionDto.getCity()))
 						.and(activateEq(conditionDto.getActivateStatus()));
 

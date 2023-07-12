@@ -18,13 +18,13 @@ public class ReservationConditionDto {
 		 */
 		private String gymName;
 		/**
-		 * 날짜 >=
-		 */
-		private LocalDateTime dateGoe;
-		/**
 		 * 날짜 <=
 		 */
-		private LocalDateTime dateLoe;
+		private LocalDateTime startDate;
+		/**
+		 * 날짜 >=
+		 */
+		private LocalDateTime endDate;
 		/**
 		 * 도시
 		 */
@@ -34,10 +34,10 @@ public class ReservationConditionDto {
 		 */
 		private ActivateStatus activateStatus;
 		
-		public ListCondition(String gymName, LocalDateTime dateGoe, LocalDateTime dateLoe, String city) {
+		public ListCondition(String gymName, LocalDateTime startDate, LocalDateTime endDate, String city) {
 			this.gymName = gymName;
-			this.dateGoe = dateGoe;
-			this.dateLoe = dateLoe;
+			this.startDate = startDate;
+			this.endDate = endDate;
 			this.city = city;
 		}
 	}
