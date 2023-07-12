@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 
 import com.manageTeam.global.entity.ActivateStatus;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 
 
 public class ReservationConditionDto {
 	
+	@ApiModel(value = "체육관 예약 목록 조회 조건 Dto")
 	@Getter
 	public static class ListCondition{
 		/**
@@ -40,6 +42,7 @@ public class ReservationConditionDto {
 		}
 	}
 	
+	@ApiModel(value = "체육관 예약 등록일 조회 Dto")
 	@Getter
 	public static class DateCondition{
 		/**

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.manageTeam.global.entity.ActivateStatus;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +15,7 @@ public class CompetitionDto {
 	 * @description 대회를 등록 및 수정 DTO
 	 * @author skhan
 	 */
+	@ApiModel(value = "대회 등록 Dto")
 	@Getter
 	@RequiredArgsConstructor
 	public static class Save{

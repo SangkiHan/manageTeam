@@ -4,12 +4,14 @@ import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Auth;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 public class UserDto {
 	
+	@ApiModel(value = "관리인 사용자 화원가입 Dto")
 	@Getter
 	public static class Save{
 		/**
@@ -65,6 +67,7 @@ public class UserDto {
 		}
 	}
 	
+	@ApiModel(value = "대회 등록 Dto")
 	@Getter
 	@Setter
 	@ToString
