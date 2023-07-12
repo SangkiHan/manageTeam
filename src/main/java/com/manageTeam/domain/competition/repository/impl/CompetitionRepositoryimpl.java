@@ -23,7 +23,7 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 						competition.endDate.loe(request.getStartDate()),
 						competition.gym.gymId.eq(request.getGymId())
 						)
-				.fetchOne()<0;
+				.fetchOne()<1;
 	}
 
 }

@@ -89,6 +89,6 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 				.select(member.count())
 				.from(member)
 				.where(member.activateStatus.eq(ActivateStatus.YES))
-				.fetchOne()<0;
+				.fetchOne()<1;
 	}
 }

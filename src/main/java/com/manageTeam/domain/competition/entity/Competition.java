@@ -21,6 +21,7 @@ import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.global.entity.ActivateStatus;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @description 대회테이블 Entity
@@ -28,6 +29,7 @@ import lombok.Getter;
  */
 @Entity
 @Getter
+@RequiredArgsConstructor
 public class Competition {
 	/**
 	 * 대회ID
