@@ -13,6 +13,7 @@ public enum ErrorCode {
 	TEAM_UNKNOWN("TEA0001","팀이 존재하지않습니다. 관리자에게 문의 해주세요"),
 	TEAM_NUMBER("TEA0002","팀 인원이 5명 미만입니다."),
 	TEAM_MANAGER("TEA0003","팀의 관리자가 존재 하지않습니다."),
+	TEAM_EXIST("TEA0004", "팀이 이미 존재합니다."),
 	
 	//MEMBER
 	MEMBER_UNKNOWN("MEM0001","팀원이 존재하지 않습니다."),
@@ -24,6 +25,14 @@ public enum ErrorCode {
 	
 	//GYM
 	GYM_UNKNOWN("GYM0001","체육관이 존재하지않습니다."),
+	GYM_EXIST("GYM0001","이미 존재하는 체육관입니다."),
+	
+	//COMPETITION
+	COMPETITION_UNKNOWN("COP0001","대회가 존재하지 않습니다."),
+	COMPETITION_DATE("COP0002","대회가 해당 시간에 이미 등록되어있습니다."),
+	
+	//COMPETITION_TEAM
+	COMPETITION_TEAM_DATE("COT0001","해당 날짜에 타 대회가 이미 등록되어있습니다."),
 	
 	//AES
 	ENCRYPT_ERROR("ENC0001", "암호화 중 에러가 발생하였습니다."),
