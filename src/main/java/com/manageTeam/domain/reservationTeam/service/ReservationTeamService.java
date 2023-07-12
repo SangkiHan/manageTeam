@@ -51,8 +51,8 @@ public class ReservationTeamService {
 		checkTime(reservation, team.getTeamId());
 		
 		ReservationTeam reservationTeam = new ReservationTeam(request.getActivateStatus());
-		reservationTeam.setTeam(team);
-		reservationTeam.setReservation(reservation);
+		reservationTeam.createTeam(team);
+		reservationTeam.createReservation(reservation);
 		
 		reservationTeamRepository.save(reservationTeam);
 	}

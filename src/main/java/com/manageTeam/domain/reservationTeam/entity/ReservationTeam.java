@@ -70,7 +70,7 @@ public class ReservationTeam extends BaseEntity{
 	 * @description 팀예약건에 팀을 세팅해준다.
 	 * @author skhan
 	 * */
-	public void setTeam(Team team) {
+	public void createTeam(Team team) {
 		team.checkMemberCnt();
 		this.team = team;
 		team.getReservationTeams().add(this);
@@ -80,7 +80,7 @@ public class ReservationTeam extends BaseEntity{
 	 * @description 팀예약건에 예약을 세팅해준다.
 	 * @author skhan
 	 * */
-	public void setReservation(Reservation reservation) {
+	public void createReservation(Reservation reservation) {
 		this.reservation = reservation;
 		reservation.getReservationTeams().add(this);
 	}
