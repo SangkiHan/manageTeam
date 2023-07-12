@@ -29,6 +29,10 @@ public class TeamService {
 	 * @author skhan
 	 */
 	public void save(TeamDto.Save request) {
+		if(!teamRepository.checkTeamExist(request)) {
+			throw new GlobalException(ErrorCode.TEAM_EXIST);
+		}
+		
 		Team team = new Team(request);
 		team.setStatus(request.getActivateStatus());
 		teamRepository.save(team);

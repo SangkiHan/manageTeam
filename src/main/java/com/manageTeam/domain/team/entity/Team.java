@@ -87,7 +87,7 @@ public class Team extends BaseEntity{
 	 * @author skhan
 	 */
 	public void setStatus(ActivateStatus activateStatus) {
-		this.activateStatus = activateStatus;
+		this.activateStatus = (activateStatus==null)?ActivateStatus.YES:activateStatus;
 	}
 	/**
 	 * @description 팀의 총원수를 +1 해준다.

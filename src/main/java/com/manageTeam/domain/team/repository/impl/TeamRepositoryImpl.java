@@ -91,6 +91,17 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
 	}
 	
+	public boolean checkTeamExist(TeamDto.Save request) {
+		return queryFactory
+				.select(team.count())
+				.from(team)
+				.where(
+						team.teamName.eq(request.getTeamName()),
+						team.city.eq(request.getCity())
+						)
+				.fetchOne()<1;
+	}
+	
 	public BooleanExpression teamnameEq(String membername) {
 		return StringUtils.hasText(membername) ? team.teamName.eq(membername) : null;
 	}

@@ -9,4 +9,5 @@ import com.manageTeam.domain.team.dto.TeamDto;
 public interface TeamRepositoryCustom {
 	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable);
 	public TeamDto.Info findTeamInfo(Long teamId);
+	public boolean checkTeamExist(TeamDto.Save request);
 }
