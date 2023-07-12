@@ -1,5 +1,7 @@
 package com.manageTeam.domain.competition.dto;
 
+import java.time.LocalDateTime;
+
 import com.manageTeam.global.entity.ActivateStatus;
 
 import lombok.Getter;
@@ -31,6 +33,14 @@ public class CompetitionDto {
 		 * 활성화 상태
 		 */
 		private ActivateStatus activateStatus;
+		/**
+		 * 시작 날짜
+		 */
+		private LocalDateTime startDate;
+		/**
+		 * 종료 날짜
+		 */
+		private LocalDateTime endDate;
 		
 		/**
 		 * 테스트용

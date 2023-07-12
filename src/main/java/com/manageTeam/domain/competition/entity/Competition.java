@@ -1,5 +1,6 @@
 package com.manageTeam.domain.competition.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,16 +52,25 @@ public class Competition {
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 	/**
+	 * 시작 날짜
+	 */
+	private LocalDateTime startDate;
+	/**
+	 * 종료 날짜
+	 */
+	private LocalDateTime endDate;
+	/**
 	 * 대회 참가팀 List
 	 */
 	@OneToMany(mappedBy = "competition")
 	private List<CompetitionTeam> CompetitionTeams = new ArrayList<>();
-	public Competition(
-			CompetitionDto.Save competition
-			) {
+	
+	public Competition(CompetitionDto.Save competition) {
 		this.competitionId = competition.getCompetitionId();
 		this.teamCnt = competition.getTeamCnt();
 		this.activateStatus = (competition.getActivateStatus()==null)?ActivateStatus.YES:competition.getActivateStatus();
+		this.startDate = competition.getStartDate();
+		this.endDate = competition.getEndDate();
 	}
 	/**
 	 * 대회 개최 체육관 세팅
