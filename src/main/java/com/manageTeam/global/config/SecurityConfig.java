@@ -21,9 +21,12 @@ public class SecurityConfig{
     
     @Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    		http
+    			.csrf().disable();
+    	
 	    	http
 		        .authorizeRequests()
-			        .antMatchers("/","/login", "/view/login","/swagger-ui/**", "/v2/api-docs").permitAll() // 루트 경로와 로그인 페이지는 모두 접근 허용
+		        	.antMatchers("/","/login", "/view/login","/swagger-ui/**", "/v2/api-docs", "/**", "/swagger-resources/**").permitAll() // 루트 경로와 로그인 페이지는 모두 접근 허용
 		            .anyRequest().authenticated(); // 나머지 요청은 인증 필요
 	    	http
 		        .formLogin()
