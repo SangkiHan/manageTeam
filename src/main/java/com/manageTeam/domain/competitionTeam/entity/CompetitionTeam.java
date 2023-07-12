@@ -2,6 +2,8 @@ package com.manageTeam.domain.competitionTeam.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.manageTeam.domain.competition.entity.Competition;
+import com.manageTeam.domain.competitionTeam.dto.CompetitionTeamDto;
 import com.manageTeam.domain.team.entity.Team;
+import com.manageTeam.global.entity.ActivateStatus;
 
 import lombok.Getter;
 
@@ -29,4 +33,22 @@ public class CompetitionTeam {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "competition_id")
 	private Competition competition;
+	@Enumerated(EnumType.STRING)
+	private ActivateStatus activateStatus;
+	
+	public CompetitionTeam(CompetitionTeamDto.Save competitionTeam) {
+		this.competitionTeamId = competitionTeam.getCompetitionTeamId();
+		this.activateStatus = (competitionTeam.getActivateStatus()==null)?ActivateStatus.YES:competitionTeam.getActivateStatus();
+	}
+	
+	public void createTeam(Team team) {
+		team.checkMemberCnt();
+		this.team = team;
+		team.getCompetitionTeams().add(this);
+	}
+	
+	public void createCompetition(Competition competition) {
+		this.competition = competition;
+		competition.getCompetitionTeams().add(this);
+	}
 }
