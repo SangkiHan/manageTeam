@@ -25,5 +25,14 @@ public class CompetitionTeamController {
 	public void save(@RequestBody CompetitionTeamDto.Save request) {
 		competitionTeamService.save(request);
 	}
+	
+	/**
+	 * @description 대회를 취소한다.
+	 * @author skhan
+	 */
+	@PostMapping("/v1/cancel")
+	public void cancel(@RequestBody CompetitionTeamDto.CompetitionTeamId request) {
+		competitionTeamService.cancel(request);
+	}
 
 }

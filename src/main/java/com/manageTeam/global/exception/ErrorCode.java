@@ -32,7 +32,8 @@ public enum ErrorCode {
 	COMPETITION_DATE("COP0002","대회가 해당 시간에 이미 등록되어있습니다."),
 	
 	//COMPETITION_TEAM
-	COMPETITION_TEAM_DATE("COT0001","해당 날짜에 타 대회가 이미 등록되어있습니다."),
+	COMPETITION_TEAM_UNKNOWN("COT0001","대회가 존재하지 않습니다."),
+	COMPETITION_TEAM_DATE("COT0002","해당 날짜에 타 대회가 이미 등록되어있습니다."),
 	
 	//AES
 	ENCRYPT_ERROR("ENC0001", "암호화 중 에러가 발생하였습니다."),

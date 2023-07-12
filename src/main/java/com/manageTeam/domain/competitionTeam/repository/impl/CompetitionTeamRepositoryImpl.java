@@ -24,8 +24,8 @@ public class CompetitionTeamRepositoryImpl implements CompetitionTeamRepositoryC
 				.on(competitionTeam.activateStatus.eq(ActivateStatus.YES))
 				.where(
 						competitionTeam.team.teamId.eq(request.getTeamId()),
-						competitionTeam.competition.startDate.goe(request.getEndDate()),
-						competitionTeam.competition.endDate.loe(request.getStartDate())
+						competitionTeam.competition.startDate.loe(request.getEndDate()),
+						competitionTeam.competition.endDate.goe(request.getStartDate())
 						)
 				.fetchOne()<1;
 	}

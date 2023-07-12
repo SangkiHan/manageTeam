@@ -14,7 +14,6 @@ import com.manageTeam.domain.member.dto.MemberConditionDto;
 import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.repository.MemberRepositoryCustom;
 import com.manageTeam.global.entity.ActivateStatus;
-
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -88,7 +87,10 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 		return queryFactory
 				.select(member.count())
 				.from(member)
-				.where(member.activateStatus.eq(ActivateStatus.YES))
+				.where(
+						member.activateStatus.eq(ActivateStatus.YES),
+						member.rsdntRgnmb.eq(rsdntRgnmb)
+						)
 				.fetchOne()<1;
 	}
 }

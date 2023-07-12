@@ -7,6 +7,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 public class CompetitionTeamDto {
+	@ApiModel(value = "CompetitionTeamId Dto")
+	@Getter
+	@RequiredArgsConstructor
+	public static class CompetitionTeamId{
+		private Long competitionTeamId;
+	}
+	
 	
 	@ApiModel(value = "대회 참가 Dto")
 	@Getter

@@ -34,6 +34,10 @@ public class MemberService {
 	 * @author skhan
 	 * */
 	public void save(MemberDto.Save request) {
+		if(!memberRepository.existsByRsdntRgnmb(AESUtil.encrypt(request.getRsdntRgnmb()))) {
+			throw new GlobalException(ErrorCode.USER_EXIST);
+		}
+		
 		Team team = teamRepository.findById(request.getTeamId())
 				.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_UNKNOWN));
 		Member member = new Member(request);
@@ -86,8 +90,8 @@ public class MemberService {
 	 * @author skhan
 	 * */
 	public void existsByRsdntRgnmb(String rsdntRgnmb){
-		if(memberRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
-			new GlobalException(ErrorCode.USER_EXIST);
+		if(!memberRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
+			throw new GlobalException(ErrorCode.USER_EXIST);
 		}
 	}
 }

@@ -16,12 +16,14 @@ import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.global.entity.ActivateStatus;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /*
  * 대회참가팀 테이블
  * */
 @Entity
 @Getter
+@RequiredArgsConstructor
 public class CompetitionTeam {
 	
 	@Id @GeneratedValue
@@ -39,6 +41,10 @@ public class CompetitionTeam {
 	public CompetitionTeam(CompetitionTeamDto.Save competitionTeam) {
 		this.competitionTeamId = competitionTeam.getCompetitionTeamId();
 		this.activateStatus = (competitionTeam.getActivateStatus()==null)?ActivateStatus.YES:competitionTeam.getActivateStatus();
+	}
+	
+	public void cancel() {
+		this.activateStatus = ActivateStatus.NO;
 	}
 	
 	public void createTeam(Team team) {

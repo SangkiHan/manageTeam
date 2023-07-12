@@ -51,4 +51,11 @@ public class CompetitionTeamService {
 		
 		competitionTeamRepository.save(competitionTeam);
 	}
+	
+	public void cancel(CompetitionTeamDto.CompetitionTeamId request) {
+		CompetitionTeam competitionTeam = competitionTeamRepository.findById(request.getCompetitionTeamId())
+				.orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_TEAM_UNKNOWN));
+		
+		competitionTeam.cancel();
+	}
 }
