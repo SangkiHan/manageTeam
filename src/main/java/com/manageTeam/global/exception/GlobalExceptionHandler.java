@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 	 * @author skhan
 	 */
 	@ExceptionHandler(GlobalException.class)
-	protected ResponseEntity<ErrorDto> handleTesseractException(GlobalException e){
+	protected ResponseEntity<ErrorDto> handleGlobalException(GlobalException e){
 		e.printStackTrace();
 		ErrorDto errorDto = new ErrorDto(e.getErrorCode());
 		return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
 	 * @author skhan
 	 */
 	@ExceptionHandler(Exception.class)
-	protected ResponseEntity<ErrorDto> handleTesseractException(Exception e){
+	protected ResponseEntity<ErrorDto> handleException(Exception e){
 		e.printStackTrace();
 		ErrorDto errorDto = new ErrorDto("ERROR", "시스템에서 알수없는 에러가 발생했습니다.");
 		return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
