@@ -1,6 +1,6 @@
 package com.manageTeam.domain.competition.dto;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 import com.manageTeam.global.entity.ActivateStatus;
 
@@ -38,11 +38,11 @@ public class CompetitionDto {
 		/**
 		 * 시작 날짜
 		 */
-		private LocalDateTime startDate;
+		private Date startDate;
 		/**
 		 * 종료 날짜
 		 */
-		private LocalDateTime endDate;
+		private Date endDate;
 		
 		/**
 		 * 테스트용

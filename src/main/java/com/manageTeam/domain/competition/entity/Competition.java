@@ -1,6 +1,6 @@
 package com.manageTeam.domain.competition.entity;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,11 +54,11 @@ public class Competition {
 	/**
 	 * 시작 날짜
 	 */
-	private LocalDateTime startDate;
+	private Date startDate;
 	/**
 	 * 종료 날짜
 	 */
-	private LocalDateTime endDate;
+	private Date endDate;
 	/**
 	 * 대회 참가팀 List
 	 */

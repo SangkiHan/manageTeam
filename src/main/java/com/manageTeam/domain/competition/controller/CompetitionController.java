@@ -11,7 +11,7 @@ import com.manageTeam.domain.competition.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/competition")
+@RequestMapping("/api/competition")
 @RequiredArgsConstructor
 public class CompetitionController {
 	
