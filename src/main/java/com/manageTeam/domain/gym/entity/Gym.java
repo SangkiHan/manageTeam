@@ -20,12 +20,14 @@ import com.manageTeam.global.entity.Address;
 import com.manageTeam.global.entity.BaseEntity;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /*
  * 체육관 테이블
  * */
 @Entity
 @Getter
+@RequiredArgsConstructor
 public class Gym extends BaseEntity{
 	
 	@Id @GeneratedValue
@@ -41,8 +43,6 @@ public class Gym extends BaseEntity{
 	private List<Competition> competition = new ArrayList<>();
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
-	
-	public Gym() {};
 	
 	public Gym(GymDto.Save gym) {
 		this.gymId = gym.getGymId();

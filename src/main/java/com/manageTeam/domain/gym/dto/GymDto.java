@@ -5,12 +5,14 @@ import com.manageTeam.global.dto.AddressDto;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 public class GymDto {
 	
 	@ApiModel(value = "체육관 등록,수정 Dto")
 	@Getter
+	@RequiredArgsConstructor
 	public static class Save{
 		/**
 		 * 체육관 ID
@@ -24,7 +26,7 @@ public class GymDto {
 		 * 체육관 주소
 		 */
 		private AddressDto address;
-
+		
 		/**
 		 * Entity to Dto Constructor
 		 */

@@ -25,6 +25,9 @@ public class GymService {
 	 * @author skhan
 	 * */
 	public void save(GymDto.Save request) {
+		if(gymRepository.checkGymExist(request.getAddress().getZipcode(), request.getGymName())) {
+			throw new GlobalException(ErrorCode.GYM_EXIST);
+		}
 		Gym gym = new Gym(request);
 		gymRepository.save(gym);
 	}
