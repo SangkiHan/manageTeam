@@ -17,6 +17,7 @@ import com.manageTeam.global.entity.BaseEntity;
 import com.manageTeam.global.util.AESUtil;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @description 사용자 테이블 Entity
@@ -24,6 +25,7 @@ import lombok.Getter;
  */
 @Entity
 @Getter
+@RequiredArgsConstructor
 public class User extends BaseEntity{
 	
 	/**
@@ -68,8 +70,6 @@ public class User extends BaseEntity{
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 	
-	public User() {};
-	
 	/**
 	 * @description 소속팀을 세팅해준다.
 	 * @author skhan
@@ -90,6 +90,6 @@ public class User extends BaseEntity{
 		this.phone = AESUtil.encrypt(user.getPhone());
 		this.address = new Address(user.getAddress());
 		this.auth = user.getAuth();
-		this.activateStatus = user.getActivateStatus();
+		this.activateStatus = (user.getActivateStatus()==null)?ActivateStatus.YES:user.getActivateStatus();
 	}
 }

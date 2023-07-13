@@ -30,6 +30,10 @@ public class UserService {
 	 * @author skhan
 	 */
 	public void save(UserDto.Save request) throws Exception{
+		if(!userRepository.existsByRsdntRgnmb(AESUtil.encrypt(request.getRsdntRgnmb()))) {
+			throw new GlobalException(ErrorCode.USER_EXIST);
+		}
+		
 		Team team = teamRepository.findById(request.getTeam_id())
 				.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_UNKNOWN));
 		User user = new User(request);
@@ -55,8 +59,8 @@ public class UserService {
 	 * @author skhan
 	 */
 	public void existsByRsdntRgnmb(String rsdntRgnmb){
-		if(userRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
-			new GlobalException(ErrorCode.USER_EXIST);
+		if(!userRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
+			throw new GlobalException(ErrorCode.USER_EXIST);
 		}
 	}
 }

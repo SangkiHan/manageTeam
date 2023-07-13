@@ -50,8 +50,11 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 		return queryFactory
 				.select(user.count())
 				.from(user)
-				.where(user.activateStatus.eq(ActivateStatus.YES))
-				.fetchOne() < 0;
+				.where(
+						user.activateStatus.eq(ActivateStatus.YES),
+						user.rsdntRgnmb.eq(rsdntRgnmb)
+						)
+				.fetchOne() < 1;
 	}
 
 	@Override
