@@ -16,6 +16,8 @@ import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.domain.team.repository.TeamRepositoryCustom;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Position;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
@@ -56,6 +58,10 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 
 	@Override
 	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
+		Predicate predicate = new BooleanBuilder()
+				.and(teamnameEq(conditionDto.getTeamName()))
+				.and(activatestatusEq(conditionDto.getActivateStatus()))
+				.and(cityEq(conditionDto.getCity()));
 		
 		List<TeamDto.Info> results = queryFactory
 				.select(Projections.bean(TeamDto.Info.class,
@@ -82,11 +88,7 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 						))
 				.from(team)
 				.leftJoin(team.members, member)
-				.where(
-						teamnameEq(conditionDto.getTeamName()),
-						activatestatusEq(conditionDto.getActivateStatus()),
-						cityEq(conditionDto.getCity())
-						)
+				.where(predicate)
 				.offset(pageable.getOffset())
 				.limit(pageable.getPageSize())
 				.groupBy(team.teamId)
@@ -94,7 +96,8 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 		
 		JPAQuery<Long> countQuery = queryFactory
 				.select(team.count())
-				.from(team);
+				.from(team)
+				.where(predicate);
 		
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
 	}

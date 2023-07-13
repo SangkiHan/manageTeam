@@ -7,6 +7,7 @@ import com.manageTeam.global.entity.ActivateStatus;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 public class CompetitionDto {
@@ -51,6 +52,47 @@ public class CompetitionDto {
 			this.gymId = gymId;
 			this.teamCnt = teamCnt;
 		}
+	}
+	
+	@Getter
+	@Setter
+	public static class Info{
+		/**
+		 * 대회ID
+		 */
+		private Long competitionId;
+		/**
+		 * 대회에 참여 가능한 팀수
+		 */
+		private int teamCnt;
+		/**
+		 * 대회 신청한 팀수
+		 */
+		private int oteamCnt;
+		/**
+		 * 체육관ID
+		 */
+		private Long gymId;
+		/**
+		 * 체육관 이름
+		 */
+		private String gymName;
+		/**
+		 * 개최지
+		 */
+		private String city;
+		/**
+		 * 활성화 상태
+		 */
+		private ActivateStatus activateStatus;
+		/**
+		 * 시작 날짜
+		 */
+		private Date startDate;
+		/**
+		 * 종료 날짜
+		 */
+		private Date endDate;
 	}
 
 }

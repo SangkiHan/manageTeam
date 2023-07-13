@@ -2,6 +2,8 @@ package com.manageTeam.domain.competition.service;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.manageTeam.domain.competition.dto.CompetitionConditionDto;
@@ -38,6 +40,14 @@ public class CompetitionService {
 				.orElseThrow(() -> new GlobalException(ErrorCode.GYM_UNKNOWN));
 		competition.createCompetition(gym);
 		competitionRepository.save(competition);
+	}
+	
+	/**
+	 * @description 현재 등록되어 있는 대회목록을 조회한다.
+	 * @author skhan
+	 */
+	public Page<CompetitionDto.Info> findAllByCondition(CompetitionConditionDto request, Pageable pageable){
+		return competitionRepository.findAllByCondition(request, pageable);
 	}
 
 }
