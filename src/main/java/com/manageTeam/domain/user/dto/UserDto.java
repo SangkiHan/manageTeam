@@ -6,6 +6,7 @@ import com.manageTeam.global.entity.Auth;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ public class UserDto {
 	
 	@ApiModel(value = "관리인 사용자 화원가입 Dto")
 	@Getter
+	@RequiredArgsConstructor
 	public static class Save{
 		/**
 		 * 사용자 ID

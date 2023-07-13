@@ -4,9 +4,11 @@ import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
+import lombok.Setter;
 
 @ApiModel(value = "팀원 검색조건 Dto")
 @Getter
+@Setter
 public class MemberConditionDto {
 
 	/**

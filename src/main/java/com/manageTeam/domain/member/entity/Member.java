@@ -20,6 +20,7 @@ import com.manageTeam.global.entity.Position;
 import com.manageTeam.global.util.AESUtil;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @description 팀원 테이블 Entity
@@ -27,6 +28,7 @@ import lombok.Getter;
  */
 @Entity
 @Getter
+@RequiredArgsConstructor
 public class Member extends BaseEntity{
 	/**
 	 * 팀원ID
@@ -72,8 +74,6 @@ public class Member extends BaseEntity{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
 	private Team team;
-	
-	public Member() {}
 	
 	/**
 	 * @description 팀원의 활성화 상태를 변경하는 메소드

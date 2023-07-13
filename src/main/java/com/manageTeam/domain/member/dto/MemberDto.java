@@ -3,12 +3,13 @@ package com.manageTeam.domain.member.dto;
 import com.manageTeam.domain.member.entity.Member;
 import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
-import com.manageTeam.global.entity.Address;
+import com.manageTeam.global.entity.Position;
 import com.manageTeam.global.util.AESUtil;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.ToString;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 public class MemberDto {
 	
@@ -77,9 +78,10 @@ public class MemberDto {
 		}
 	}
 	
-	@ApiModel(value = "팀원 정보 Dto")
+	@ApiModel(value = "팀원 목록 정보 Dto")
 	@Getter
-	@ToString
+	@Setter
+	@RequiredArgsConstructor
 	public static class Info{
 		/**
 		 * 팀원ID
@@ -112,25 +114,7 @@ public class MemberDto {
 		/**
 		 * 포지션
 		 */
-		private String position;
-		
-		public Info(Long memberId, 
-				String memberName, 
-				int age, 
-				String rsdntRgnmb, 
-				String phone,
-				Address address, 
-				String position,
-				String teamName) {
-			this.memberId = memberId;
-			this.memberName = memberName;
-			this.age = age;
-			this.rsdntRgnmb = rsdntRgnmb;
-			this.phone = phone;
-			this.address = new AddressDto(address);
-			this.teamName= teamName;
-			this.position = position;
-		}
+		private Position position;
 		
 		/**
 		 * Entity to Dto Constructor
@@ -142,7 +126,19 @@ public class MemberDto {
 			this.rsdntRgnmb = AESUtil.decrypt(member.getRsdntRgnmb());
 			this.phone = AESUtil.decrypt(member.getPhone());
 			this.address = new AddressDto(member.getAddress());
-			this.position = member.getPosition().toString();
+			this.position = member.getPosition();
+		}
+
+		public Info(Long memberId, String memberName, int age, String rsdntRgnmb, String phone, AddressDto address,
+				String teamName, Position position) {
+			this.memberId = memberId;
+			this.memberName = memberName;
+			this.age = age;
+			this.rsdntRgnmb = AESUtil.decrypt(rsdntRgnmb);
+			this.phone = AESUtil.decrypt(phone);
+			this.address = address;
+			this.teamName = teamName;
+			this.position = position;
 		}
 	}
 }

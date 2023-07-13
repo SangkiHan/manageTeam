@@ -56,7 +56,7 @@ public class TeamService {
 	 * @throws Exception
 	 * @author skhan
 	 */
-	public TeamDto.Info findById(TeamDto.TeamId request) {
+	public TeamDto.DetailInfo findById(TeamDto.TeamId request) {
 		return  teamRepository.findTeamInfo(request.getTeamId());
 	}
 	

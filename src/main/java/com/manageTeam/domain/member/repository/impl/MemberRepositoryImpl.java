@@ -13,7 +13,9 @@ import org.springframework.util.StringUtils;
 import com.manageTeam.domain.member.dto.MemberConditionDto;
 import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.repository.MemberRepositoryCustom;
+import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -29,7 +31,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	
 	@Override
 	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable) {
-		Predicate predicate = usernameEq(memberConditionDto.getMemberName())
+		Predicate predicate = new BooleanBuilder()
+				.and(membernameEq(memberConditionDto.getMemberName()))
 	            .and(teamEq(memberConditionDto.getTeamName()))
 	            .and(ageGoe(memberConditionDto.getAgeGoe()))
 	            .and(ageLoe(memberConditionDto.getAgeLoe()))
@@ -37,15 +40,19 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	            .and(activateStatusEq(memberConditionDto.getActivateStatus()));
 		
 		List<MemberDto.Info> results = queryFactory
-				.select(Projections.bean(MemberDto.Info.class,
+				.select(Projections.constructor(MemberDto.Info.class,
 						member.memberId,
 						member.membername,
 						member.age,
 						member.rsdntRgnmb,
 						member.phone,
-						member.address,
-						member.position,
-						team.teamName
+						Projections.constructor(AddressDto.class,
+								member.address.city,
+								member.address.street,
+								member.address.zipcode
+								),
+						team.teamName,
+						member.position
 						))
 				.from(member)
 				.join(member.team, team)
@@ -63,17 +70,17 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 		return PageableExecutionUtils.getPage(results, pageable, totalQuery::fetchOne);
 	}
 	
-	public BooleanExpression usernameEq(String membername) {
+	public BooleanExpression membernameEq(String membername) {
 		return StringUtils.hasText(membername) ? member.membername.eq(membername) : null;
 	}
 	public BooleanExpression teamEq(String teamName) {
 		return StringUtils.hasText(teamName) ? member.team.teamName.eq(teamName) : null;
 	}
 	public BooleanExpression ageGoe(Integer age) {
-		return age!=null ? member.age.goe(age): null;
+		return age!=0 ? member.age.goe(age): null;
 	}
 	public BooleanExpression ageLoe(Integer age) {
-		return age!=null ? member.age.loe(age) : null;
+		return age!=0 ? member.age.loe(age) : null;
 	}
 	public BooleanExpression cityEq(String city) {
 		return StringUtils.hasText(city) ? member.address.city.eq(city) : null;

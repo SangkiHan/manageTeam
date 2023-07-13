@@ -52,4 +52,5 @@ public class AESUtil {
 			throw new GlobalException(ErrorCode.DECRYPT_ERROR);
 		}
     }
+   
 }
