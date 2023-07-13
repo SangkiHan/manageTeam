@@ -2,6 +2,7 @@ package com.manageTeam.domain.team.repository.impl;
 
 import static com.manageTeam.domain.member.entity.QMember.member;
 import static com.manageTeam.domain.team.entity.QTeam.team;
+import static com.manageTeam.domain.user.entity.QUser.user;
 
 import java.util.List;
 
@@ -30,22 +31,21 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	private final JPAQueryFactory queryFactory;
 	
 	@Override
-	public TeamDto.Info findTeamInfo(Long teamId) {
+	public TeamDto.DetailInfo findTeamInfo(Long teamId) {
 		
-		TeamDto.Info results = queryFactory
-				.select(Projections.bean(TeamDto.Info.class,
+		TeamDto.DetailInfo results = queryFactory
+				.select(Projections.bean(TeamDto.DetailInfo.class,
 						team.teamId,
 						team.teamName,
 						team.city,
-						new CaseBuilder().when(member.position.eq(Position.C)).then(1).otherwise(Expressions.nullExpression()).count().as("centerCnt"),
-						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count().as("pointCnt"),
-						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count().as("shootCnt"),
-						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count().as("sforwardCnt"),
-						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count().as("ffowardCnt"),
-						team.activateStatus
-						))
+						user.username.coalesce("담당자 없음").as("leader"),
+						Expressions.stringTemplate(
+								"DATE_FORMAT({0}, '%Y-%m-%d')",
+								team.createdDate).as("regDate")
+						)
+						)
 				.from(team)
-				.leftJoin(team.members, member)
+				.leftJoin(team.users, user)
 				.where(
 						team.teamId.eq(teamId)
 						)
@@ -66,10 +66,18 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 							.when(
 								member.position.eq(Position.C)).then(1)
 							.otherwise(Expressions.nullExpression()).count().as("centerCnt"),
-						new CaseBuilder().when(member.position.eq(Position.PG)).then(1).otherwise(Expressions.nullExpression()).count().as("pointCnt"),
-						new CaseBuilder().when(member.position.eq(Position.SG)).then(1).otherwise(Expressions.nullExpression()).count().as("shootCnt"),
-						new CaseBuilder().when(member.position.eq(Position.SF)).then(1).otherwise(Expressions.nullExpression()).count().as("sforwardCnt"),
-						new CaseBuilder().when(member.position.eq(Position.PF)).then(1).otherwise(Expressions.nullExpression()).count().as("ffowardCnt"),
+						new CaseBuilder()
+							.when(member.position.eq(Position.PG)).then(1)
+							.otherwise(Expressions.nullExpression()).count().as("pointCnt"),
+						new CaseBuilder()
+							.when(member.position.eq(Position.SG)).then(1)
+							.otherwise(Expressions.nullExpression()).count().as("shootCnt"),
+						new CaseBuilder()
+							.when(member.position.eq(Position.SF)).then(1)
+							.otherwise(Expressions.nullExpression()).count().as("sfowardCnt"),
+						new CaseBuilder()
+							.when(member.position.eq(Position.PF)).then(1)
+							.otherwise(Expressions.nullExpression()).count().as("ffowardCnt"),
 						team.activateStatus
 						))
 				.from(team)

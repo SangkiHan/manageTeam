@@ -48,7 +48,7 @@ public class TeamController {
 	 * @author skhan
 	 */
 	@PostMapping("/v1/findById")
-	public TeamDto.Info findById(@RequestBody TeamDto.TeamId request) {
+	public TeamDto.DetailInfo findById(@RequestBody TeamDto.TeamId request) {
 		return teamService.findById(request);
 	}
 	

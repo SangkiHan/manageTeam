@@ -1,6 +1,5 @@
 package com.manageTeam.domain.team.dto;
 
-import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
@@ -86,21 +85,20 @@ public class TeamDto {
 		 * 도시
 		 */
 		private String city;
-		
 		/**
-		 * Entity to Dto Constructor
+		 * 대표자
 		 */
-		public DetailInfo(Team team) {
-			this.teamId = team.getTeamId();
-			this.teamName = team.getTeamName();
-			this.city = team.getCity();
-		}
+		private String leader;
+		/**
+		 * 팀등록일
+		 */
+		private String regDate;
 	}
 	
 	@ApiModel(value = "팀 목록 Dto")
 	@Getter
 	@Setter
-	@ToString
+	@RequiredArgsConstructor
 	public static class Info{
 		/**
 		 * 팀 ID
@@ -129,26 +127,15 @@ public class TeamDto {
 		/**
 		 * 스몰포워드 명수
 		 */
-		private Long sFowardCnt;
+		private Long sfowardCnt;
 		/**
 		 * 파워포워드 명수
 		 */
-		private Long fFowardCnt;
+		private Long ffowardCnt;
 		/**
 		 * 활성화 상태
 		 */
 		private ActivateStatus activateStatus;
 		
-		public Info(){};
-		
-		/**
-		 * Entity to Dto Constructor
-		 */
-		public Info(Team team) {
-			this.teamId = team.getTeamId();
-			this.teamName = team.getTeamName();
-			this.city = team.getCity();
-			this.activateStatus = team.getActivateStatus();
-		}
 	}
 }
