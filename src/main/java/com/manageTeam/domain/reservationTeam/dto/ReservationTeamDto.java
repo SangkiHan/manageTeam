@@ -6,7 +6,6 @@ import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.ToString;
 
 public class ReservationTeamDto {
 	
@@ -36,7 +35,6 @@ public class ReservationTeamDto {
 	
 	@ApiModel(value = "팀 체육관 예약 목록 Dto")
 	@Getter
-	@ToString
 	public static class Info{
 		/**
 		 * 예약 팀 ID

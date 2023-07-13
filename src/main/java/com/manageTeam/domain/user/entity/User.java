@@ -17,7 +17,7 @@ import com.manageTeam.global.entity.BaseEntity;
 import com.manageTeam.global.util.AESUtil;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * @description 사용자 테이블 Entity
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Entity
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class User extends BaseEntity{
 	
 	/**

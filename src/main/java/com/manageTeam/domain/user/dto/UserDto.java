@@ -6,15 +6,14 @@ import com.manageTeam.global.entity.Auth;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 public class UserDto {
 	
 	@ApiModel(value = "관리인 사용자 화원가입 Dto")
 	@Getter
-	@RequiredArgsConstructor
+	@NoArgsConstructor
 	public static class Save{
 		/**
 		 * 사용자 ID
@@ -72,7 +71,6 @@ public class UserDto {
 	@ApiModel(value = "대회 등록 Dto")
 	@Getter
 	@Setter
-	@ToString
 	public static class Info{
 		private String userId;
 		private Long teamId;

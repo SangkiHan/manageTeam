@@ -8,7 +8,7 @@ import com.manageTeam.global.util.AESUtil;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class MemberDto {
@@ -81,7 +81,7 @@ public class MemberDto {
 	@ApiModel(value = "팀원 목록 정보 Dto")
 	@Getter
 	@Setter
-	@RequiredArgsConstructor
+	@NoArgsConstructor
 	public static class Info{
 		/**
 		 * 팀원ID

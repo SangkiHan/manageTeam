@@ -16,14 +16,14 @@ import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.global.entity.ActivateStatus;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /*
  * 대회참가팀 테이블
  * */
 @Entity
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class CompetitionTeam {
 	
 	@Id @GeneratedValue

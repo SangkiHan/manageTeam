@@ -3,8 +3,25 @@ package com.manageTeam.domain.competition.dto;
 import java.sql.Date;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
 public class CompetitionConditionDto {
+	/**
+	 * 체육관ID
+	 */
+	private Long gymId;
+	/**
+	 * 시작 날짜
+	 */
+	private Date startDate;
+	/**
+	 * 종료 날짜
+	 */
+	private Date endDate;
+	
+	
 	
 	@Getter
 	public static class DateCheck{

@@ -5,14 +5,13 @@ import com.manageTeam.global.dto.AddressDto;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 public class GymDto {
 	
 	@ApiModel(value = "체육관 등록,수정 Dto")
 	@Getter
-	@RequiredArgsConstructor
+	@NoArgsConstructor
 	public static class Save{
 		/**
 		 * 체육관 ID
@@ -38,7 +37,7 @@ public class GymDto {
 	
 	@ApiModel(value = "체육관 정보 Dto")
 	@Getter
-	@ToString
+	@NoArgsConstructor
 	public static class Info{
 		/**
 		 * 체육관 ID

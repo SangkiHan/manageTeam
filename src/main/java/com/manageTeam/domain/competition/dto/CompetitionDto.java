@@ -6,7 +6,7 @@ import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 
 public class CompetitionDto {
@@ -17,7 +17,7 @@ public class CompetitionDto {
 	 */
 	@ApiModel(value = "대회 등록 Dto")
 	@Getter
-	@RequiredArgsConstructor
+	@NoArgsConstructor
 	public static class Save{
 		/**
 		 * 대회ID

@@ -20,14 +20,14 @@ import com.manageTeam.global.entity.Address;
 import com.manageTeam.global.entity.BaseEntity;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /*
  * 체육관 테이블
  * */
 @Entity
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Gym extends BaseEntity{
 	
 	@Id @GeneratedValue

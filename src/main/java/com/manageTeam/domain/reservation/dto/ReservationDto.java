@@ -7,7 +7,6 @@ import com.manageTeam.global.entity.Address;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.ToString;
 
 public class ReservationDto {
 	
@@ -62,7 +61,6 @@ public class ReservationDto {
 	
 	@ApiModel(value = "예약 목록 Dto")
 	@Getter
-	@ToString
 	public static class Info{
 		/**
 		 * 예약ID

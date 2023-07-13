@@ -4,15 +4,14 @@ import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 public class TeamDto {
 	
 	@ApiModel(value = "TeamId Dto")
 	@Getter
-	@RequiredArgsConstructor
+	@NoArgsConstructor
 	public static class TeamId{
 		/**
 		 * 팀 ID
@@ -71,7 +70,6 @@ public class TeamDto {
 	@ApiModel(value = "팀 상세 Dto")
 	@Getter
 	@Setter
-	@ToString
 	public static class DetailInfo{
 		/**
 		 * 팀 ID
@@ -98,7 +96,7 @@ public class TeamDto {
 	@ApiModel(value = "팀 목록 Dto")
 	@Getter
 	@Setter
-	@RequiredArgsConstructor
+	@NoArgsConstructor
 	public static class Info{
 		/**
 		 * 팀 ID
