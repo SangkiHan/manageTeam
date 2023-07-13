@@ -29,6 +29,12 @@ public class CompetitionController {
 	public void save(@RequestBody CompetitionDto.Save request) {
 		competitionService.save(request);
 	}
+	/**
+	 * @description 대회를 상세 조회 한다.
+	 * @author skhan
+	 */
+	
+	
 	
 	/**
 	 * @description 현재 등록되어 있는 대회목록을 조회한다.
@@ -37,6 +43,15 @@ public class CompetitionController {
 	@GetMapping(value = "/v1/findAll")
 	public Page<CompetitionDto.Info> findAllByContidtion(CompetitionConditionDto condition, Pageable pageable){
 		return competitionService.findAllByCondition(condition, pageable);
+	}
+	
+	/**
+	 * @description 대회 개최를 취소한다.
+	 * @author skhan
+	 */
+	@GetMapping(value = "/v1/cancel")
+	public void cancel(CompetitionDto.CompetitionId request) {
+		competitionService.cancel(request);
 	}
 
 }

@@ -13,6 +13,16 @@ import lombok.Setter;
 public class CompetitionDto {
 	
 	/**
+	 * @description competitionId
+	 * @author skhan
+	 */
+	@Getter
+	@Setter
+	public static class CompetitionId{
+		private Long competitionId;
+	}
+	
+	/**
 	 * @description 대회를 등록 및 수정 DTO
 	 * @author skhan
 	 */

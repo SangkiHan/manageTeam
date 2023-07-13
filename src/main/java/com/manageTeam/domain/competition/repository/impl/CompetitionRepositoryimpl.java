@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 
 import com.manageTeam.domain.competition.dto.CompetitionConditionDto;
 import com.manageTeam.domain.competition.dto.CompetitionDto;
+import com.manageTeam.domain.competition.entity.Competition;
 import com.manageTeam.domain.competition.repository.CompetitionRepositoryCustom;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.querydsl.core.BooleanBuilder;
@@ -25,7 +26,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
+public class CompetitionRepositoryimpl implements CompetitionRepositoryCustom{
 	
 	private final JPAQueryFactory queryFactory;
 
@@ -77,6 +78,8 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
 	}
 	
+	
+	
 	public BooleanExpression startDateGeo(Date startDate) {
 		return startDate!=null ? competition.startDate.goe(startDate) : null;
 	}
@@ -88,5 +91,15 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 	}
 	public BooleanExpression activateStatusEq(ActivateStatus activateStatus) {
 		return activateStatus!=null ? competition.activateStatus.eq(activateStatus) : null;
+	}
+
+	@Override
+	public Competition findCompetition(Long competitionId) {
+		return queryFactory
+				.select(competition)
+				.from(competition)
+				.join(competition.CompetitionTeams, competitionTeam)
+				.fetchJoin()
+				.fetchOne();
 	}
 }

@@ -65,7 +65,7 @@ public class Competition {
 	 * 대회 참가팀 List
 	 */
 	@OneToMany(mappedBy = "competition")
-	private List<CompetitionTeam> CompetitionTeams = new ArrayList<>();
+	private List<CompetitionTeam> competitionTeams = new ArrayList<>();
 	
 	public Competition(CompetitionDto.Save competition) {
 		this.competitionId = competition.getCompetitionId();
@@ -80,5 +80,10 @@ public class Competition {
 	public void createCompetition(Gym gym) {
 		this.gym = gym;
 		gym.getCompetition().add(this);
+	}
+	
+	public void cancel() {
+		this.activateStatus = ActivateStatus.NO;
+		competitionTeams.forEach(competitionTeam -> competitionTeam.cancel());
 	}
 }
