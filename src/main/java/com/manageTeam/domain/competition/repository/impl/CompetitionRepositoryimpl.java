@@ -5,6 +5,7 @@ import static com.manageTeam.domain.competitionTeam.entity.QCompetitionTeam.comp
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CompetitionRepositoryimpl implements CompetitionRepositoryCustom{
+public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 	
 	private final JPAQueryFactory queryFactory;
 
@@ -54,6 +55,7 @@ public class CompetitionRepositoryimpl implements CompetitionRepositoryCustom{
 		List<CompetitionDto.Info> results = queryFactory
 				.select(Projections.bean(CompetitionDto.Info.class, 
 						competition.competitionId,
+						competition.competitionName,
 						competition.teamCnt,
 						competitionTeam.count().intValue().as("oteamCnt"),
 						competition.gym.gymName,
@@ -64,7 +66,7 @@ public class CompetitionRepositoryimpl implements CompetitionRepositoryCustom{
 						competition.endDate
 						))
 				.from(competition)
-				.leftJoin(competition.CompetitionTeams, competitionTeam)
+				.leftJoin(competition.competitionTeams, competitionTeam)
 				.on(competitionTeam.activateStatus.eq(ActivateStatus.YES))
 				.where(predicate)
 				.groupBy(competition.competitionId)
@@ -94,12 +96,13 @@ public class CompetitionRepositoryimpl implements CompetitionRepositoryCustom{
 	}
 
 	@Override
-	public Competition findCompetition(Long competitionId) {
-		return queryFactory
+	public Optional<Competition> findCompetition(Long competitionId) {
+		return Optional.ofNullable(queryFactory
 				.select(competition)
 				.from(competition)
-				.join(competition.CompetitionTeams, competitionTeam)
+				.join(competition.competitionTeams, competitionTeam)
 				.fetchJoin()
-				.fetchOne();
+				.where(competition.activateStatus.eq(ActivateStatus.YES))
+				.fetchOne());
 	}
 }

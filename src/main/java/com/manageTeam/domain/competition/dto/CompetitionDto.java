@@ -1,7 +1,10 @@
 package com.manageTeam.domain.competition.dto;
 
 import java.sql.Date;
+import java.util.List;
 
+import com.manageTeam.domain.team.dto.TeamDto;
+import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
@@ -34,6 +37,10 @@ public class CompetitionDto {
 		 * 대회ID
 		 */
 		private Long competitionId;
+		/**
+		 * 대회이름
+		 */
+		private String competitionName;
 		/**
 		 * 대회 개최지
 		 */
@@ -72,6 +79,10 @@ public class CompetitionDto {
 		 */
 		private Long competitionId;
 		/**
+		 * 대회이름
+		 */
+		private String competitionName;
+		/**
 		 * 대회에 참여 가능한 팀수
 		 */
 		private int teamCnt;
@@ -91,6 +102,55 @@ public class CompetitionDto {
 		 * 개최지
 		 */
 		private String city;
+		/**
+		 * 활성화 상태
+		 */
+		private ActivateStatus activateStatus;
+		/**
+		 * 시작 날짜
+		 */
+		private Date startDate;
+		/**
+		 * 종료 날짜
+		 */
+		private Date endDate;
+	}
+	
+	@Getter
+	@Setter
+	public static class DetailInfo{
+		/**
+		 * 대회ID
+		 */
+		private Long competitionId;
+		/**
+		 * 대회이름
+		 */
+		private String competitionName;
+		/**
+		 * 대회에 참여 가능한 팀수
+		 */
+		private int teamCnt;
+		/**
+		 * 대회 신청한 팀수
+		 */
+		private int oteamCnt;
+		/**
+		 * 대회 신청한 팀 리스트
+		 */
+		private List<TeamDto.List> teamList;
+		/**
+		 * 체육관ID
+		 */
+		private Long gymId;
+		/**
+		 * 체육관 이름
+		 */
+		private String gymName;
+		/**
+		 * 상세주소
+		 */
+		private AddressDto address;
 		/**
 		 * 활성화 상태
 		 */

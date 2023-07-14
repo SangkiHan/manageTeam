@@ -38,6 +38,10 @@ public class Competition {
 	@Column(name = "competition_id")
 	private Long competitionId;
 	/**
+	 * 대회이름
+	 */
+	private String competitionName;
+	/**
 	 * 대회에 참여 가능한 팀수
 	 */
 	@Column(name = "team_count")
@@ -69,6 +73,7 @@ public class Competition {
 	
 	public Competition(CompetitionDto.Save competition) {
 		this.competitionId = competition.getCompetitionId();
+		this.competitionName = competition.getCompetitionName();
 		this.teamCnt = competition.getTeamCnt();
 		this.activateStatus = (competition.getActivateStatus()==null)?ActivateStatus.YES:competition.getActivateStatus();
 		this.startDate = competition.getStartDate();
