@@ -47,9 +47,9 @@ public class TeamController {
 	 * @throws Exception
 	 * @author skhan
 	 */
-	@PostMapping("/v1/findById")
-	public TeamDto.DetailInfo findById(@RequestBody TeamDto.TeamId request) {
-		return teamService.findById(request);
+	@PostMapping("/v1/findOne")
+	public TeamDto.DetailInfo findOne(@RequestBody TeamDto.TeamId request) {
+		return teamService.findOne(request);
 	}
 	
 	/**

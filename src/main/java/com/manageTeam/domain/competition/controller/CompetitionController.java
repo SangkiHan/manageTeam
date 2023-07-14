@@ -34,7 +34,10 @@ public class CompetitionController {
 	 * @description 대회를 상세 조회 한다.
 	 * @author skhan
 	 */
-	
+	@GetMapping("/v1/findOne")
+	public CompetitionDto.DetailInfo findOne(Long competitionId){
+		return competitionService.findOne(competitionId);
+	}
 	
 	
 	/**

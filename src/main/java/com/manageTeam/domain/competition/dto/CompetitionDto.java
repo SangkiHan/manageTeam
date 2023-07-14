@@ -2,7 +2,9 @@ package com.manageTeam.domain.competition.dto;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.manageTeam.domain.competition.entity.Competition;
 import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
@@ -163,6 +165,22 @@ public class CompetitionDto {
 		 * 종료 날짜
 		 */
 		private Date endDate;
+		public DetailInfo(Competition competition) {
+			this.competitionId = competition.getCompetitionId();
+			this.competitionName = competition.getCompetitionName();
+			this.teamCnt = competition.getTeamCnt();
+			this.teamList = competition.getCompetitionTeams().stream()
+					.filter(o -> o.getActivateStatus() == ActivateStatus.YES)
+					.map(o -> new TeamDto.List(o.getTeam().getTeamId(), o.getTeam().getTeamName()))
+					.collect(Collectors.toList());
+			this.oteamCnt = teamList.size();
+			this.gymId = competition.getGym().getGymId();
+			this.gymName = competition.getGym().getGymName();
+			this.address = new AddressDto(competition.getGym().getAddress());
+			this.activateStatus = competition.getActivateStatus();
+			this.startDate = competition.getStartDate();
+			this.endDate = competition.getEndDate();
+		}
 	}
 
 }

@@ -33,7 +33,7 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	private final JPAQueryFactory queryFactory;
 	
 	@Override
-	public TeamDto.DetailInfo findTeamInfo(Long teamId) {
+	public TeamDto.DetailInfo findOne(Long teamId) {
 		
 		TeamDto.DetailInfo results = queryFactory
 				.select(Projections.bean(TeamDto.DetailInfo.class,

@@ -2,6 +2,7 @@ package com.manageTeam.domain.competition.repository.impl;
 
 import static com.manageTeam.domain.competition.entity.QCompetition.competition;
 import static com.manageTeam.domain.competitionTeam.entity.QCompetitionTeam.competitionTeam;
+import static com.manageTeam.domain.gym.entity.QGym.gym;
 
 import java.sql.Date;
 import java.util.List;
@@ -103,6 +104,15 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 				.join(competition.competitionTeams, competitionTeam)
 				.fetchJoin()
 				.where(competition.activateStatus.eq(ActivateStatus.YES))
+				.fetchOne());
+	}
+
+	@Override
+	public Optional<Competition> findOne(Long competitionId) {
+		return Optional.ofNullable(queryFactory
+				.select(competition)
+				.from(competition)
+				.join(competition.gym, gym).fetchJoin()
 				.fetchOne());
 	}
 }

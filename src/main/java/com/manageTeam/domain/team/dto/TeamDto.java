@@ -136,4 +136,24 @@ public class TeamDto {
 		private ActivateStatus activateStatus;
 		
 	}
+	
+	@ApiModel(value = "팀 목록 Dto")
+	@Getter
+	@Setter
+	@NoArgsConstructor
+	public static class List{
+		/**
+		 * 팀 ID
+		 */
+		private Long teamId;
+		/**
+		 * 팀명
+		 */
+		private String teamName;
+		
+		public List(Long teamId, String teamName) {
+			this.teamId = teamId;
+			this.teamName = teamName;
+		}
+	}
 }

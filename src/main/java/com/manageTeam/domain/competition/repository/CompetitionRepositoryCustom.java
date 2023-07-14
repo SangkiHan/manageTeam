@@ -13,4 +13,5 @@ public interface CompetitionRepositoryCustom {
 	public boolean checkCompetitionGym(CompetitionConditionDto.DateCheck request);
 	public Page<CompetitionDto.Info> findAllByCondition(CompetitionConditionDto request, Pageable pageable);
 	public Optional<Competition> findCompetition(Long competitionId);
+	public Optional<Competition> findOne(Long competitionId);
 }

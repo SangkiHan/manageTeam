@@ -42,6 +42,15 @@ public class CompetitionService {
 		competitionRepository.save(competition);
 	}
 	
+	public CompetitionDto.DetailInfo findOne(Long competitionId) {
+		Competition competition = competitionRepository.findOne(competitionId)
+				.orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_UNKNOWN));
+		
+		CompetitionDto.DetailInfo result = new CompetitionDto.DetailInfo(competition);
+		
+		return result;
+	}
+	
 	/**
 	 * @description 현재 등록되어 있는 대회목록을 조회한다.
 	 * @author skhan
