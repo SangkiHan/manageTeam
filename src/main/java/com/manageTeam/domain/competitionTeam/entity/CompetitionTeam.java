@@ -43,6 +43,9 @@ public class CompetitionTeam {
 		this.activateStatus = (competitionTeam.getActivateStatus()==null)?ActivateStatus.YES:competitionTeam.getActivateStatus();
 	}
 	
+	/**
+	 * 대회 참가 취소 
+	 */
 	public void cancel() {
 		this.activateStatus = ActivateStatus.NO;
 	}

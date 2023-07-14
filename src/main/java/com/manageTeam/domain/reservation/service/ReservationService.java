@@ -34,7 +34,6 @@ public class ReservationService {
 	/**
 	 * @api /api/reservation/v1/save
 	 * @description 체육관 예약을 등록한다.
-	 * @throws Exception
 	 * @author skhan
 	 * */
 	public void save(ReservationDto.Save request) {
@@ -47,7 +46,7 @@ public class ReservationService {
 	/**
 	 * @api /api/reservation/v1/cancel
 	 * @description 체육관 예약등록을 취소한다.
-	 * @throws GlobalException, Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 * */
 	public void cancel(ReservationDto.Id request) {
@@ -57,6 +56,7 @@ public class ReservationService {
 		reservation.cancel();
 		
 		List<ReservationTeam> teams = reservation.getReservationTeams();
+		//체육관이 취소되었을경우 각 팀 대표자들에게 문자 전송
 		if(teams.size()>0) {
 			for(ReservationTeam team : teams) {
 				User user = userRepository.findByTeam(team.getTeam())
@@ -71,7 +71,6 @@ public class ReservationService {
 	/**
 	 * @api /api/reservation/v1/findAll
 	 * @description 등록된 체육관 예약목록을 조회한다.
-	 * @throws Exception
 	 * @author skhan
 	 * */
 	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition reservationConditionDto, Pageable pageable) {

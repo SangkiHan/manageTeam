@@ -2,23 +2,21 @@ package com.manageTeam.domain.competitionTeam.dto;
 
 import java.sql.Date;
 
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 
 public class CompetitionTeamContidtionDto {
 	
 	@Getter
 	public static class checkDate{
-		/**
-		 * TeamId
-		 */
+		
+		@ApiParam(value = "팀 ID")
 		private Long teamId;
-		/**
-		 * 날짜 <=
-		 */
+		
+		@ApiParam(value = "시작 날짜 <=")
 		private Date startDate;
-		/**
-		 * 날짜 >=
-		 */
+		
+		@ApiParam(value = "날짜 >=")
 		private Date endDate;
 		
 		public checkDate(Long teamId, Date startDate, Date endDate) {

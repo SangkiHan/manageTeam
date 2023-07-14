@@ -32,6 +32,10 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 	
 	private final JPAQueryFactory queryFactory;
 
+	/**
+	 * @description 해당 날짜에 이미 등록된 대회가 있는 지 조회
+	 * @author skhan
+	 */
 	@Override
 	public boolean checkCompetitionGym(CompetitionConditionDto.DateCheck request) {
 		return queryFactory
@@ -45,6 +49,11 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 				.fetchOne()<1;
 	}
 
+	/**
+	 * @description 등록된 대회 목록 조회
+	 * @author skhan
+	 * @where endDate, startDate, city, activateStatus
+	 */
 	@Override
 	public Page<CompetitionDto.Info> findAllByCondition(CompetitionConditionDto request, Pageable pageable) {
 		Predicate predicate = new BooleanBuilder()
@@ -81,32 +90,39 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
 	}
 	
-	
-	
+	/**
+	 * @description startDate >= request
+	 * @author skhan
+	 */
 	public BooleanExpression startDateGeo(Date startDate) {
 		return startDate!=null ? competition.startDate.goe(startDate) : null;
 	}
+	/**
+	 * @description endDate <= request
+	 * @author skhan
+	 */
 	public BooleanExpression endDateLoe(Date endDate) {
 		return endDate!=null ? competition.endDate.loe(endDate) : null;
 	}
+	/**
+	 * @description city = request
+	 * @author skhan
+	 */
 	public BooleanExpression cityEq(String city) {
 		return StringUtils.hasText(city) ? competition.gym.address.city.eq(city) : null;
 	}
+	/**
+	 * @description activateStatus = request
+	 * @author skhan
+	 */
 	public BooleanExpression activateStatusEq(ActivateStatus activateStatus) {
 		return activateStatus!=null ? competition.activateStatus.eq(activateStatus) : null;
 	}
-
-	@Override
-	public Optional<Competition> findCompetition(Long competitionId) {
-		return Optional.ofNullable(queryFactory
-				.select(competition)
-				.from(competition)
-				.join(competition.competitionTeams, competitionTeam)
-				.fetchJoin()
-				.where(competition.activateStatus.eq(ActivateStatus.YES))
-				.fetchOne());
-	}
-
+	
+	/**
+	 * @description competition entity 조회
+	 * @author skhan
+	 */
 	@Override
 	public Optional<Competition> findOne(Long competitionId) {
 		return Optional.ofNullable(queryFactory
@@ -116,6 +132,10 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 				.fetchOne());
 	}
 
+	/**
+	 * @description 대회에 참가신청한 팀수 조회
+	 * @author skhan
+	 */
 	@Override
 	public Long regTeamCount(Long competitionId) {
 		return queryFactory

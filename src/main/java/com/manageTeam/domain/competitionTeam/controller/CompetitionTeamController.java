@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageTeam.domain.competitionTeam.dto.CompetitionTeamDto;
 import com.manageTeam.domain.competitionTeam.service.CompetitionTeamService;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -17,19 +18,13 @@ public class CompetitionTeamController {
 	
 	private final CompetitionTeamService competitionTeamService;
 	
-	/**
-	 * @description 대회를 등록 및 수정한다.
-	 * @author skhan
-	 */
+	@ApiOperation(value="대회 참가 신청을 한다.")
 	@PostMapping("/v1/save")
 	public void save(@RequestBody CompetitionTeamDto.Save request) {
 		competitionTeamService.save(request);
 	}
 	
-	/**
-	 * @description 대회를 취소한다.
-	 * @author skhan
-	 */
+	@ApiOperation(value="대회 참가 신청을 취소한다.")
 	@PostMapping("/v1/cancel")
 	public void cancel(@RequestBody CompetitionTeamDto.CompetitionTeamId request) {
 		competitionTeamService.cancel(request);

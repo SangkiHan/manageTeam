@@ -3,7 +3,7 @@ package com.manageTeam.global.exception;
 import lombok.Getter;
 
 /**
- * @description 에러 메시지, 에러코드를 커스텀하기 위한 커스텀 Exception.class
+ * @description 에러 메시지, 에러코드를 커스텀 하기위한 커스텀 Exception.class
  * @author skhan
  * */
 @Getter

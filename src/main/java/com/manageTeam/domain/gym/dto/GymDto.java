@@ -4,6 +4,7 @@ import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.global.dto.AddressDto;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,17 +14,14 @@ public class GymDto {
 	@Getter
 	@NoArgsConstructor
 	public static class Save{
-		/**
-		 * 체육관 ID
-		 */
+		
+		@ApiParam(value = "체육관ID")
 		private Long gymId;
-		/**
-		 * 체육관 명
-		 */
+		
+		@ApiParam(value = "체육관 명")
 		private String gymName;
-		/**
-		 * 체육관 주소
-		 */
+		
+		@ApiParam(value = "체육관 주소")
 		private AddressDto address;
 		
 		/**
@@ -39,17 +37,14 @@ public class GymDto {
 	@Getter
 	@NoArgsConstructor
 	public static class Info{
-		/**
-		 * 체육관 ID
-		 */
+		
+		@ApiParam(value = "체육관ID")
 		private Long gymId;
-		/**
-		 * 체육관 명
-		 */
+		
+		@ApiParam(value = "체육관 명")
 		private String gymName;
-		/**
-		 * 체육관 주소
-		 */
+		
+		@ApiParam(value = "체육관 주소")
 		private AddressDto address;
 		
 		/**

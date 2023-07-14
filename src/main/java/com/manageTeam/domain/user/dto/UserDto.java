@@ -5,6 +5,7 @@ import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Auth;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,41 +16,32 @@ public class UserDto {
 	@Getter
 	@NoArgsConstructor
 	public static class Save{
-		/**
-		 * 사용자 ID
-		 */
+		
+		@ApiParam(value = "사용자 ID")
 		private String userId;
-		/**
-		 * 팀 ID
-		 */
+		
+		@ApiParam(value = "팀 ID")
 		private Long team_id;
-		/**
-		 * 비밀번호
-		 */
+		
+		@ApiParam(value = "비밀번호")
 		private String password;
-		/**
-		 * 사용자명
-		 */
+		
+		@ApiParam(value = "사용자명")
 		private String username;
-		/**
-		 * 주민등록번호
-		 */
+		
+		@ApiParam(value = "주민등록번호")
 		private String rsdntRgnmb;
-		/**
-		 * 전화번호
-		 */
+		
+		@ApiParam(value = "전화번호")
 		private String phone;
-		/**
-		 * 주소
-		 */
+		
+		@ApiParam(value = "주소")
 		private AddressDto address;
-		/**
-		 * 권한
-		 */
+		
+		@ApiParam(value = "권한")
 		private Auth auth;
-		/**
-		 * 활성화 상태
-		 */
+		
+		@ApiParam(value = "활성화 상태")
 		private ActivateStatus activateStatus;
 		/**
 		 * Entity to Dto Constructor
@@ -68,21 +60,40 @@ public class UserDto {
 		}
 	}
 	
-	@ApiModel(value = "대회 등록 Dto")
+	@ApiModel(value = "사용자정보DTO")
 	@Getter
 	@Setter
 	public static class Info{
+		
+		@ApiParam(value = "사용자ID")
 		private String userId;
+		
+		@ApiParam(value = "팀ID")
 		private Long teamId;
+		
+		@ApiParam(value = "팀명")
 		private String teamName;
+		
+		@ApiParam(value = "비밀번호")
 		private String password;
+		
+		@ApiParam(value = "사용자명")
 		private String username;
+		
+		@ApiParam(value = "주민등록번호")
 		private String rsdntRgnmb;
+		
+		@ApiParam(value = "휴대전화")
 		private String phone;
+		
+		@ApiParam(value = "주소")
 		private AddressDto address;
+		
+		@ApiParam(value = "권한(GYM:체육관장, TEAM:팀장)")
 		private Auth auth;
+		
+		@ApiParam(value = "활성화상태")
 		private ActivateStatus activateStatus;
 		
-		public Info() {};
 	}
 }

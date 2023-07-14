@@ -32,7 +32,7 @@ public class ReservationTeamService {
 	/**
 	 * @api /api/reservationTeam/v1/save
 	 * @description 특정팀의 체육관을 예약한다.
-	 * @throws GlobalException, Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 * */
 	public void save(ReservationTeamDto.Save request) {
@@ -43,11 +43,12 @@ public class ReservationTeamService {
 		
 		int teamCnt = reservation.getTotalTeamCnt();
 		int joinTeamCnt = reservationRepository.findTeamCntReservation(request.getReservationId()).intValue();
-		
+		//체육관 예약 팀수와 예약한 팀의 수가 동일 할 시 예약 불가
 		if(teamCnt==joinTeamCnt) {
 			throw new GlobalException(ErrorCode.RESERVATION_END);
 		}
 		
+		//해당 팀이 예약 시간에 이미 등록되어 있는 체육관이 있는 지 체크
 		checkTime(reservation, team.getTeamId());
 		
 		ReservationTeam reservationTeam = new ReservationTeam(request.getActivateStatus());
@@ -60,7 +61,6 @@ public class ReservationTeamService {
 	/**
 	 * @api /api/reservationTeam/v1/findAllbyTeam
 	 * @description 특정팀이 예약한 체육관 목록을 조회한다.
-	 * @throws Exception
 	 * @author skhan
 	 * */
 	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){

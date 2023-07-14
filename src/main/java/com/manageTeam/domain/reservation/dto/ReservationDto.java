@@ -6,19 +6,19 @@ import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.Address;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class ReservationDto {
 	
 	@ApiModel(value = "Id Dto")
 	@Getter
+	@NoArgsConstructor
 	public static class Id{
-		/**
-		 * 예약ID
-		 */
-		private Long reservationId;
 		
-		public Id() {};
+		@ApiParam(value = "예약ID")
+		private Long reservationId;
 		
 		public Id(Long reservationId) {
 			this.reservationId = reservationId;
@@ -27,29 +27,23 @@ public class ReservationDto {
 	
 	@ApiModel(value = "예약 등록 Dto")
 	@Getter
+	@NoArgsConstructor
 	public static class Save{
-		/**
-		 * 예약ID
-		 */
-		private Long reservationId;
-		/**
-		 * 체육관 예약가능한 팀수
-		 */
-		private int totalTeamCnt;
-		/**
-		 * 체육관ID
-		 */
-		private Long gymId;
-		/**
-		 * 시작날짜
-		 */
-		private LocalDateTime startTime;
-		/**
-		 * 종료날짜
-		 */
-		private LocalDateTime endTime;
 		
-		public Save() {};
+		@ApiParam(value = "예약ID")
+		private Long reservationId;
+		
+		@ApiParam(value = "체육관 예약가능한 팀수")
+		private int totalTeamCnt;
+		
+		@ApiParam(value = "체육관ID")
+		private Long gymId;
+		
+		@ApiParam(value = "시작날짜")
+		private LocalDateTime startTime;
+		
+		@ApiParam(value = "종료날짜")
+		private LocalDateTime endTime;
 		
 		public Save(int totalTeamCnt, Long gymId, LocalDateTime startTime, LocalDateTime endTime) {
 			this.totalTeamCnt = totalTeamCnt;
@@ -61,41 +55,32 @@ public class ReservationDto {
 	
 	@ApiModel(value = "예약 목록 Dto")
 	@Getter
+	@NoArgsConstructor
 	public static class Info{
-		/**
-		 * 예약ID
-		 */
-		private Long reservationId;
-		/**
-		 * 체육관 예약가능한 팀수
-		 */
-		private int totalTeamCnt;
-		/**
-		 * 현재 예약한 팀의 수
-		 */
-		private Long joinTeam;
-		/**
-		 * 체육관ID
-		 */
-		private Long gymId;
-		/**
-		 * 체육관 이름
-		 */
-		private String gymName;
-		/**
-		 * 체육관 주소
-		 */
-		private AddressDto address;
-		/**
-		 * 예약 시작시작
-		 */
-		private LocalDateTime startTime;
-		/**
-		 * 예약 종료시간
-		 */
-		private LocalDateTime endTime;
 		
-		public Info() {};
+		@ApiParam(value = "예약ID")
+		private Long reservationId;
+		
+		@ApiParam(value = "체육관 예약가능한 팀수")
+		private int totalTeamCnt;
+		
+		@ApiParam(value = "현재 예약한 팀의 수")
+		private Long joinTeam;
+		
+		@ApiParam(value = "체육관ID")
+		private Long gymId;
+		
+		@ApiParam(value = "체육관 이름")
+		private String gymName;
+		
+		@ApiParam(value = "체육관 주소")
+		private AddressDto address;
+		
+		@ApiParam(value = "예약 시작시작")
+		private LocalDateTime startTime;
+		
+		@ApiParam(value = "예약 종료시간")
+		private LocalDateTime endTime;
 		
 		/**
 		 * Entity to Dto Constructor

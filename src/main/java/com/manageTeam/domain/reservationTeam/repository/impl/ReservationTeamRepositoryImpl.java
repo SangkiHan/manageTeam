@@ -25,6 +25,10 @@ public class ReservationTeamRepositoryImpl implements ReservationTeamRepositoryC
 	
 	private final JPAQueryFactory queryFactory;
 
+	/**
+	 * @description 특정팀이 예약한 체육관 목록을 조회한다.
+	 * @author skhan
+	 * */
 	@Override
 	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable) {
 		
@@ -62,6 +66,10 @@ public class ReservationTeamRepositoryImpl implements ReservationTeamRepositoryC
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
 	}
 	
+	/**
+	 * @description activateStatus = request
+	 * @author skhan
+	 * */
 	public BooleanExpression activateStatus(ActivateStatus activateStatus) {
 		return activateStatus!=null ? reservationTeam.activateStatus.eq(activateStatus) : null;
 	}

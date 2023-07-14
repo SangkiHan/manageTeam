@@ -1,7 +1,7 @@
 package com.manageTeam.domain.reservation.repository.impl;
 
-import static com.manageTeam.domain.reservation.entity.QReservation.reservation;
 import static com.manageTeam.domain.gym.entity.QGym.gym;
+import static com.manageTeam.domain.reservation.entity.QReservation.reservation;
 import static com.manageTeam.domain.reservationTeam.entity.QReservationTeam.reservationTeam;
 
 import java.time.LocalDateTime;
@@ -29,6 +29,10 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	
 	private final JPAQueryFactory queryFactory;
 
+	/**
+	 * @description 등록된 체육관 예약목록을 조회한다.
+	 * @author skhan
+	 * */
 	@Override
 	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable) {
 		
@@ -69,6 +73,10 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
 	}
 	
+	/**
+	 * @description 해당 시간에 이미 등록된 체육관이 있는지 체크한다.
+	 * @author skhan
+	 * */
 	@Override
 	public boolean findReservationByDate(ReservationConditionDto.DateCondition condition, Long teamId) {
 		
@@ -84,29 +92,60 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 						)
 				.fetchOne() < 0;
 	}
-	
+	/**
+	 * @description gymName = request
+	 * @author skhan
+	 */
 	public BooleanExpression gymnameLike(String gymname) {
 		return StringUtils.hasText(gymname) ? gym.gymName.contains(gymname) : null;
 	}
+	/**
+	 * @description startDate <= request
+	 * @author skhan
+	 */
 	public BooleanExpression startGoe(LocalDateTime dateGoe) {
 		return dateGoe!=null ? reservation.startTime.goe(dateGoe) : null;
 	}
+	/**
+	 * @description endDate >= request
+	 * @author skhan
+	 */
 	public BooleanExpression endLoe(LocalDateTime dateLoe) {
 		return dateLoe!=null ? reservation.endTime.loe(dateLoe) : null;
 	}
+	/**
+	 * @description startDate >= request
+	 * @author skhan
+	 */
 	public BooleanExpression startLoe(LocalDateTime dateGoe) {
 		return dateGoe!=null ? reservation.startTime.loe(dateGoe) : null;
 	}
+	/**
+	 * @description endDate <= request
+	 * @author skhan
+	 */
 	public BooleanExpression endGoe(LocalDateTime dateLoe) {
 		return dateLoe!=null ? reservation.endTime.goe(dateLoe) : null;
 	}
+	/**
+	 * @description city = request
+	 * @author skhan
+	 */
 	public BooleanExpression cityLike(String city) {
 		return StringUtils.hasText(city) ? gym.address.city.contains(city) : null;
 	}
+	/**
+	 * @description activateStatus = request
+	 * @author skhan
+	 */
 	public BooleanExpression activateEq(ActivateStatus activateStatus) {
 		return activateStatus!=null ? reservation.activateStatus.eq(activateStatus) : null;
 	}
-
+	
+	/**
+	 * @description 체육관에 예약 되어 있는 팀의 수를 조회한다.
+	 * @author skhan
+	 */
 	@Override
 	public Long findTeamCntReservation(Long reservationId) {
 		Long count = queryFactory

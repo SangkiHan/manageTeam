@@ -30,10 +30,11 @@ public class MemberService {
 	/**
 	 * @api /api/member/v1/save
 	 * @description 팀원을 저장 및 수정한다.
-	 * @throws GlobalException, Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 * */
 	public void save(MemberDto.Save request) {
+		//주민번호 암호화하여 이미 등록된 팀원인지 체크
 		if(!memberRepository.existsByRsdntRgnmb(AESUtil.encrypt(request.getRsdntRgnmb()))) {
 			throw new GlobalException(ErrorCode.USER_EXIST);
 		}
@@ -49,7 +50,7 @@ public class MemberService {
 	/**
 	 * @api /api/member/v1/status
 	 * @description 팀원의 상태를 변경한다.
-	 * @throws GlobalException, Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 * */
 	public void status(MemberDto.Status request) {
@@ -61,7 +62,7 @@ public class MemberService {
 	/**
 	 * @api /api/member/v1/findById
 	 * @description 팀원을 상세조회한다.
-	 * @throws GlobalException ,Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 * */
 	public MemberDto.Info findById(Long memberId) {
@@ -75,7 +76,6 @@ public class MemberService {
 	/**
 	 * @api /api/member/v1/findAll
 	 * @description 팀원의 목록을 조회한다.
-	 * @throws Exception
 	 * @author skhan
 	 * */
 	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto conditionDto, Pageable pageable) {
@@ -86,7 +86,7 @@ public class MemberService {
 	/**
 	 * @api /api/member/v1/existsByRsdntRgnmb
 	 * @description 이미 등록된 주민번호 인지 체크한다.
-	 * @throws GlobalException, Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 * */
 	public void existsByRsdntRgnmb(String rsdntRgnmb){

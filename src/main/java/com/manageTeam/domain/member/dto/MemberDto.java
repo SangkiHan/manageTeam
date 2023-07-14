@@ -7,6 +7,7 @@ import com.manageTeam.global.entity.Position;
 import com.manageTeam.global.util.AESUtil;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,56 +16,45 @@ public class MemberDto {
 	
 	@ApiModel(value = "팀원 상태 변경 Dto")
 	@Getter
+	@NoArgsConstructor
 	public static class Status{
-		/**
-		 * 팀원ID
-		 */
+		
+		@ApiParam(value = "팀ID")
 		private Long memberId;
-		/**
-		 * 활성화 상태
-		 */
+		
+		@ApiParam(value = "활성화 상태")
 		private ActivateStatus activateStatus;
 		
-		public Status() {};
 	}
 	
 	@ApiModel(value = "팀원 저장 Dto")
 	@Getter
+	@NoArgsConstructor
 	public static class Save{
-		/**
-		 * 팀원ID
-		 */
-		private Long memberId;
-		/**
-		 * 팀ID
-		 */
-		private Long teamId;
-		/**
-		 * 팀원이름
-		 */
-		private String memberName;
-		/**
-		 * 나이
-		 */
-		private int age;
-		/**
-		 * 주민번호
-		 */
-		private String rsdntRgnmb;
-		/**
-		 * 전화번호
-		 */
-		private String phone;
-		/**
-		 * 주소
-		 */
-		private AddressDto address;
-		/**
-		 * 포지션
-		 */
-		private String position;
 		
-		public Save() {};
+		@ApiParam(value = "팀원ID")
+		private Long memberId;
+		
+		@ApiParam(value = "팀ID")
+		private Long teamId;
+		
+		@ApiParam(value = "팀원이름")
+		private String memberName;
+		
+		@ApiParam(value = "나이")
+		private int age;
+		
+		@ApiParam(value = "주민번호")
+		private String rsdntRgnmb;
+		
+		@ApiParam(value = "전화번호")
+		private String phone;
+		
+		@ApiParam(value = "주소")
+		private AddressDto address;
+		
+		@ApiParam(value = "팀포지션")
+		private String position;
 		
 		public Save(Long teamId, String memberName, int age, String rsdntRgnmb, String phone, AddressDto address,
 				String position) {
@@ -83,37 +73,29 @@ public class MemberDto {
 	@Setter
 	@NoArgsConstructor
 	public static class Info{
-		/**
-		 * 팀원ID
-		 */
+		
+		@ApiParam(value = "팀원ID")
 		private Long memberId;
-		/**
-		 * 팀원이름
-		 */
+		
+		@ApiParam(value = "팀원이름")
 		private String memberName;
-		/**
-		 * 나이
-		 */
+		
+		@ApiParam(value = "나이")
 		private int age;
-		/**
-		 * 주민번호
-		 */
+		
+		@ApiParam(value = "주민번호")
 		private String rsdntRgnmb;
-		/**
-		 * 전화번호
-		 */
+		
+		@ApiParam(value = "전화번호")
 		private String phone;
-		/**
-		 * 주소
-		 */
+		
+		@ApiParam(value = "주소")
 		private AddressDto address;
-		/**
-		 * 팀명
-		 */
+		
+		@ApiParam(value = "팀명")
 		private String teamName;
-		/**
-		 * 포지션
-		 */
+		
+		@ApiParam(value = "포지션")
 		private Position position;
 		
 		/**

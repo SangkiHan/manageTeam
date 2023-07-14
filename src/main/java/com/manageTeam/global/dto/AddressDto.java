@@ -3,30 +3,25 @@ package com.manageTeam.global.dto;
 import com.manageTeam.global.entity.Address;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @ApiModel(value = "주소 Dto")
 @Getter
 @Setter
-@ToString
+@NoArgsConstructor
 public class AddressDto {
-	/**
-	 * 도시
-	 */
+	
+	@ApiParam(value = "도시")
 	private String city;
-	/**
-	 * 도로명
-	 */
+	
+	@ApiParam(value = "도로명")
 	private String street;
-	/**
-	 * 우편번호
-	 */
+	
+	@ApiParam(value = "우편번호")
 	private String zipcode;
-	
-	public AddressDto() {};
-	
 	
 	/**
 	 * Entity to Dto Constructor

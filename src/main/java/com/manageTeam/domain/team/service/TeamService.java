@@ -25,14 +25,13 @@ public class TeamService {
 	/**
 	 * @api /api/team/v1/save
 	 * @description 팀 저장 및 수정한다.
-	 * @throws Exception
 	 * @author skhan
 	 */
 	public void save(TeamDto.Save request) {
+		//이미 등록된 팀인지 체크한다.
 		if(!teamRepository.checkTeamExist(request)) {
 			throw new GlobalException(ErrorCode.TEAM_EXIST);
 		}
-		
 		Team team = new Team(request);
 		team.setStatus(request.getActivateStatus());
 		teamRepository.save(team);
@@ -41,7 +40,7 @@ public class TeamService {
 	/**
 	 * @api /api/team/v1/status
 	 * @description 팀의 활성화 상태를 번경한다.
-	 * @throws GlobalException, Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 */
 	public void status(TeamDto.Status request) {
@@ -53,17 +52,15 @@ public class TeamService {
 	/**
 	 * @api /api/team/v1/findById
 	 * @description 팀상세를 조회한다.
-	 * @throws Exception
 	 * @author skhan
 	 */
 	public TeamDto.DetailInfo findOne(TeamDto.TeamId request) {
-		return  teamRepository.findOne(request.getTeamId());
+		return teamRepository.findOne(request.getTeamId());
 	}
 	
 	/**
 	 * @api /api/team/v1/findAll
 	 * @description 팀목록을 조회한다.
-	 * @throws Exception
 	 * @author skhan
 	 */
 	public Page<TeamDto.Info> findAllByCondition (TeamConditionDto conditionDto, Pageable pageable){

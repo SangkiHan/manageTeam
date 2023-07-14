@@ -32,6 +32,10 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	
 	private final JPAQueryFactory queryFactory;
 	
+	/**
+	 * @description 팀상세를 조회한다.
+	 * @author skhan
+	 */
 	@Override
 	public TeamDto.DetailInfo findOne(Long teamId) {
 		
@@ -56,6 +60,10 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 		return results;
 	}
 
+	/**
+	 * @description 팀목록을 조회한다.
+	 * @author skhan
+	 */
 	@Override
 	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
 		Predicate predicate = new BooleanBuilder()
@@ -102,6 +110,10 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
 	}
 	
+	/**
+	 * @description 이미 등록된 팀인지 체크한다.
+	 * @author skhan
+	 */
 	public boolean checkTeamExist(TeamDto.Save request) {
 		return queryFactory
 				.select(team.count())
@@ -112,13 +124,24 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 						)
 				.fetchOne()<1;
 	}
-	
+	/**
+	 * @description memberName = request
+	 * @author skhan
+	 * */
 	public BooleanExpression teamnameEq(String membername) {
 		return StringUtils.hasText(membername) ? team.teamName.eq(membername) : null;
 	}
+	/**
+	 * @description activateStatus = request
+	 * @author skhan
+	 * */
 	public BooleanExpression activatestatusEq(ActivateStatus activateStatus) {
 		return activateStatus!=null ? team.activateStatus.eq(activateStatus) : null;
 	}
+	/**
+	 * @description city = request
+	 * @author skhan
+	 * */
 	public BooleanExpression cityEq(String city) {
 		return StringUtils.hasText(city) ? team.city.eq(city) : null;
 	}

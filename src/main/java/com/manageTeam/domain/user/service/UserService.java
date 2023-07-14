@@ -26,10 +26,11 @@ public class UserService {
 	/**
 	 * @api /api/user/v1/save
 	 * @description 회원가입 및 사용자를 수정한다.
-	 * @throws GlobalException, Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 */
 	public void save(UserDto.Save request) throws Exception{
+		//이미 등록되어 있는 사용자인지 체크한다.
 		if(!userRepository.existsByRsdntRgnmb(AESUtil.encrypt(request.getRsdntRgnmb()))) {
 			throw new GlobalException(ErrorCode.USER_EXIST);
 		}
@@ -44,7 +45,6 @@ public class UserService {
 	/**
 	 * @api /api/user/v1/findUserInfo
 	 * @description 사용자를 상세 조회한다.
-	 * @throws Exception
 	 * @author skhan
 	 */
 	public UserDto.Info findUserInfo(String userId){
@@ -55,7 +55,7 @@ public class UserService {
 	/**
 	 * @api /api/user/v1/existsByRsdntRgnmb
 	 * @description 주민등록번호로 이미 등록된 사용자인지 체크한다.
-	 * @throws GlobalException, Exception
+	 * @throws GlobalException
 	 * @author skhan
 	 */
 	public void existsByRsdntRgnmb(String rsdntRgnmb){

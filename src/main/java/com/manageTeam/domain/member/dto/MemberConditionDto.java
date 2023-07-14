@@ -3,6 +3,7 @@ package com.manageTeam.domain.member.dto;
 import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,29 +12,22 @@ import lombok.Setter;
 @Setter
 public class MemberConditionDto {
 
-	/**
-	 * 팀명
-	 */
+	@ApiParam(value = "팀명")
 	private String teamName;
-	/**
-	 * 선수명
-	 */
+	
+	@ApiParam(value = "선수명")
 	private String memberName;
-	/**
-	 * 나이
-	 */
+	
+	@ApiParam(value = "나이 <=")
 	private int ageGoe;
-	/**
-	 * 나이
-	 */
+	
+	@ApiParam(value = "나이 >=")
 	private int ageLoe;
-	/**
-	 * 도시
-	 */
+	
+	@ApiParam(value = "도시")
 	private String city;
-	/**
-	 * 활성화 상태
-	 */
+	
+	@ApiParam(value = "활성화 상태")
 	private ActivateStatus activateStatus;
 
 }

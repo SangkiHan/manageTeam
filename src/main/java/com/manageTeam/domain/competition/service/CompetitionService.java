@@ -26,6 +26,7 @@ public class CompetitionService {
 	private final GymRepository gymRepository;
 	
 	/**
+	 * @api /api/competition/v1/save
 	 * @description 대회를 등록 및 수정한다.
 	 * @author skhan
 	 */
@@ -42,6 +43,11 @@ public class CompetitionService {
 		competitionRepository.save(competition);
 	}
 	
+	/**
+	 * @api /api/competition/v1/findOne
+	 * @description 대회를 상세조회한다.
+	 * @author skhan
+	 */
 	public CompetitionDto.DetailInfo findOne(Long competitionId) {
 		Competition competition = competitionRepository.findOne(competitionId)
 				.orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_UNKNOWN));
@@ -52,6 +58,7 @@ public class CompetitionService {
 	}
 	
 	/**
+	 * @api /api/competition/v1/findAll
 	 * @description 현재 등록되어 있는 대회목록을 조회한다.
 	 * @author skhan
 	 */
@@ -60,12 +67,13 @@ public class CompetitionService {
 	}
 	
 	/**
+	 * @api /api/competition/v1/cancel
 	 * @description 대회개최를 취소한다.
 	 * @author skhan
 	 */
 	public void cancel(CompetitionDto.CompetitionId request) {
 		Long competitionId = request.getCompetitionId();
-		Competition competition = competitionRepository.findCompetition(competitionId)
+		Competition competition = competitionRepository.findOne(competitionId)
 				.orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_UNKNOWN));
 		
 		competition.cancel();

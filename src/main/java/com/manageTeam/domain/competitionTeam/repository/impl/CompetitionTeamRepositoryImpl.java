@@ -15,6 +15,10 @@ public class CompetitionTeamRepositoryImpl implements CompetitionTeamRepositoryC
 	
 	private final JPAQueryFactory jpaQueryFactory;
 
+	/**
+	 * @description 해당 날짜에 이미 등록되어있는 대회여부를 조회한다.
+	 * @author skhan
+	 */
 	@Override
 	public boolean checkCompetitionTeamDate(CompetitionTeamContidtionDto.checkDate request) {
 		return jpaQueryFactory

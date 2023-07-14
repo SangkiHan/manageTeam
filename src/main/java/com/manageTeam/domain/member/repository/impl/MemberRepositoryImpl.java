@@ -29,6 +29,10 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	
 	private final JPAQueryFactory queryFactory;
 	
+	/**
+	 * @description 팀원의 목록을 조회한다.
+	 * @author skhan
+	 */
 	@Override
 	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable) {
 		Predicate predicate = new BooleanBuilder()
@@ -69,26 +73,53 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 		
 		return PageableExecutionUtils.getPage(results, pageable, totalQuery::fetchOne);
 	}
-	
+	/**
+	 * @description membername = request
+	 * @author skhan
+	 */
 	public BooleanExpression membernameEq(String membername) {
 		return StringUtils.hasText(membername) ? member.membername.eq(membername) : null;
 	}
+	/**
+	 * @description teamName = request
+	 * @author skhan
+	 */
 	public BooleanExpression teamEq(String teamName) {
 		return StringUtils.hasText(teamName) ? member.team.teamName.eq(teamName) : null;
 	}
+	/**
+	 * @description age <= request
+	 * @author skhan
+	 */
 	public BooleanExpression ageGoe(Integer age) {
 		return age!=0 ? member.age.goe(age): null;
 	}
+	/**
+	 * @description age >= request
+	 * @author skhan
+	 */
 	public BooleanExpression ageLoe(Integer age) {
 		return age!=0 ? member.age.loe(age) : null;
 	}
+	/**
+	 * @description city = request
+	 * @author skhan
+	 */
 	public BooleanExpression cityEq(String city) {
 		return StringUtils.hasText(city) ? member.address.city.eq(city) : null;
 	}
+	/**
+	 * @description activateStatus = request
+	 * @author skhan
+	 */
 	public BooleanExpression activateStatusEq(ActivateStatus activateStatus) {
 		return activateStatus!=null ? member.activateStatus.eq(activateStatus) : null;
 	}
 
+	/**
+	 * @description 이미 등록된 주민번호 인지 체크한다.
+	 * @author skhan
+	 */
 	@Override
 	public boolean existsByRsdntRgnmb(String rsdntRgnmb) {
 		return queryFactory

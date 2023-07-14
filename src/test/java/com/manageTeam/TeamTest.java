@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.manageTeam.domain.team.dto.TeamDto;
+import com.manageTeam.domain.team.dto.TeamDto.DetailInfo;
 import com.manageTeam.domain.team.service.TeamService;
 
 @SpringBootTest
@@ -29,7 +30,7 @@ public class TeamTest {
 	@Test	
 	void findById() {
 		TeamDto.TeamId teamId = new TeamDto.TeamId(21L);
-		TeamDto.Info team = teamService.findById(teamId);
+		DetailInfo team = teamService.findOne(teamId);
 		System.out.println(team);
 	}
 

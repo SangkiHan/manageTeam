@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageTeam.domain.reservationTeam.dto.ReservationTeamDto;
 import com.manageTeam.domain.reservationTeam.service.ReservationTeamService;
 import com.manageTeam.global.entity.ActivateStatus;
-import com.manageTeam.global.exception.GlobalException;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,21 +22,13 @@ public class ReservationTeamController {
 	
 	private final ReservationTeamService reservationTeamService;
 	
-	/**
-	 * @description 특정팀의 체육관을 예약한다.
-	 * @throws GlobalException
-	 * @author skhan
-	 * */
+	@ApiOperation(value="특정팀의 체육관을 예약한다.")
 	@PostMapping("/v1/save")
 	public void save(@RequestBody ReservationTeamDto.Save request){
 		reservationTeamService.save(request);
 	}
 	
-	/**
-	 * @description 특정팀이 예약한 체육관 목록을 조회한다.
-	 * @throws GlobalException, Exception
-	 * @author skhan
-	 * */
+	@ApiOperation(value="특정팀이 예약한 체육관 목록을 조회한다.")
 	@GetMapping("/v1/findAllbyTeam")
 	public Page<ReservationTeamDto.Info> findAllbyTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable){
 		return reservationTeamService.findAllByTeam(teamId, activateStatus, pageable);

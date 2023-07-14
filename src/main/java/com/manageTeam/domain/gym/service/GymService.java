@@ -22,6 +22,7 @@ public class GymService {
 	/**
 	 * @api /api/gym/v1/save
 	 * @description 체육관를 저장 및 수정한다.
+	 * @throws GlobalException
 	 * @author skhan
 	 * */
 	public void save(GymDto.Save request) {

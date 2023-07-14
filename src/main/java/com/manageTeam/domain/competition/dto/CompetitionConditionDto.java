@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import com.manageTeam.global.entity.ActivateStatus;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,36 +14,30 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CompetitionConditionDto {
-	/**
-	 * 시작 날짜
-	 */
+	
+	@ApiParam(value = "시작 날짜")
 	private Date startDate;
-	/**
-	 * 종료 날짜
-	 */
+	
+	@ApiParam(value = "종료 날짜")
 	private Date endDate;
-	/**
-	 * 활성화 상태
-	 */
+	
+	@ApiParam(value = "활성화 상태")
 	private ActivateStatus activateStatus;
-	/**
-	 * 개최지
-	 */
+	
+	@ApiParam(value = "개최지")
 	private String city;
 	
+	@ApiModel(value = "등록되어있는 대회 날짜 체크 DTO")
 	@Getter
 	public static class DateCheck{
-		/**
-		 * 체육관ID
-		 */
+		
+		@ApiParam(value = "체육관ID")
 		private Long gymId;
-		/**
-		 * 시작 날짜
-		 */
+		
+		@ApiParam(value = "시작 날짜")
 		private Date startDate;
-		/**
-		 * 종료 날짜
-		 */
+		
+		@ApiParam(value = "종료 날짜")
 		private Date endDate;
 		
 		public DateCheck(CompetitionDto.Save competition) {
