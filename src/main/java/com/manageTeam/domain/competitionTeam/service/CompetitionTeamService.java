@@ -27,10 +27,17 @@ public class CompetitionTeamService {
 	private final CompetitionRepository competitionRepository;
 	
 	public void save(CompetitionTeamDto.Save request) {
+		Long competitionId = request.getCompetitionId();
+		
 		CompetitionTeam competitionTeam = new CompetitionTeam(request);
 		
-		Competition competition = competitionRepository.findById(request.getCompetitionId())
+		Competition competition = competitionRepository.findById(competitionId)
 				.orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_UNKNOWN));
+		
+		Long count = competitionRepository.regTeamCount(competitionId);
+		if(competition.getTeamCnt()==count) {
+			throw new GlobalException(ErrorCode.COMPETITION_DEADLINE);
+		}
 		
 		CompetitionTeamContidtionDto.checkDate condiContidtionDto = 
 				new CompetitionTeamContidtionDto.checkDate(

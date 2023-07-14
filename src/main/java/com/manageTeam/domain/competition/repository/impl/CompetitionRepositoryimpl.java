@@ -115,4 +115,16 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 				.join(competition.gym, gym).fetchJoin()
 				.fetchOne());
 	}
+
+	@Override
+	public Long regTeamCount(Long competitionId) {
+		return queryFactory
+				.select(competitionTeam.count())
+				.from(competitionTeam)
+				.where(
+						competitionTeam.competition.competitionId.eq(competitionId),
+						competitionTeam.activateStatus.eq(ActivateStatus.YES)
+						)
+				.fetchOne();
+	}
 }

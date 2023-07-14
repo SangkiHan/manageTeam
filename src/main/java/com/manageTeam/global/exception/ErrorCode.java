@@ -30,6 +30,7 @@ public enum ErrorCode {
 	//COMPETITION
 	COMPETITION_UNKNOWN("COP0001","대회가 존재하지 않습니다."),
 	COMPETITION_DATE("COP0002","대회가 해당 시간에 이미 등록되어있습니다."),
+	COMPETITION_DEADLINE("COP0003","이미 마감된 대회입니다."),
 	
 	//COMPETITION_TEAM
 	COMPETITION_TEAM_UNKNOWN("COT0001","대회가 존재하지 않습니다."),

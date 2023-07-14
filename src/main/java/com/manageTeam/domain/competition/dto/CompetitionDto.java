@@ -136,7 +136,7 @@ public class CompetitionDto {
 		/**
 		 * 대회 신청한 팀수
 		 */
-		private int oteamCnt;
+		private int regTeamCount;
 		/**
 		 * 대회 신청한 팀 리스트
 		 */
@@ -165,6 +165,7 @@ public class CompetitionDto {
 		 * 종료 날짜
 		 */
 		private Date endDate;
+		
 		public DetailInfo(Competition competition) {
 			this.competitionId = competition.getCompetitionId();
 			this.competitionName = competition.getCompetitionName();
@@ -173,7 +174,7 @@ public class CompetitionDto {
 					.filter(o -> o.getActivateStatus() == ActivateStatus.YES)
 					.map(o -> new TeamDto.List(o.getTeam().getTeamId(), o.getTeam().getTeamName()))
 					.collect(Collectors.toList());
-			this.oteamCnt = teamList.size();
+			this.regTeamCount = teamList.size();
 			this.gymId = competition.getGym().getGymId();
 			this.gymName = competition.getGym().getGymName();
 			this.address = new AddressDto(competition.getGym().getAddress());
