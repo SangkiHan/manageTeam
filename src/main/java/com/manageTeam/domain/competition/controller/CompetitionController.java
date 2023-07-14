@@ -29,6 +29,7 @@ public class CompetitionController {
 	public void save(@RequestBody CompetitionDto.Save request) {
 		competitionService.save(request);
 	}
+	
 	/**
 	 * @description 대회를 상세 조회 한다.
 	 * @author skhan
@@ -49,8 +50,8 @@ public class CompetitionController {
 	 * @description 대회 개최를 취소한다.
 	 * @author skhan
 	 */
-	@GetMapping(value = "/v1/cancel")
-	public void cancel(CompetitionDto.CompetitionId request) {
+	@PostMapping(value = "/v1/cancel")
+	public void cancel(@RequestBody CompetitionDto.CompetitionId request) {
 		competitionService.cancel(request);
 	}
 

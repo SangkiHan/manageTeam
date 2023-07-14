@@ -1,7 +1,5 @@
 package com.manageTeam.domain.competition.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -12,7 +10,6 @@ import com.manageTeam.domain.competition.dto.CompetitionConditionDto;
 import com.manageTeam.domain.competition.dto.CompetitionDto;
 import com.manageTeam.domain.competition.entity.Competition;
 import com.manageTeam.domain.competition.repository.CompetitionRepository;
-import com.manageTeam.domain.competitionTeam.entity.CompetitionTeam;
 import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.domain.gym.repository.GymRepository;
 import com.manageTeam.global.exception.ErrorCode;
@@ -59,7 +56,8 @@ public class CompetitionService {
 	 */
 	public void cancel(CompetitionDto.CompetitionId request) {
 		Long competitionId = request.getCompetitionId();
-		Competition competition = competitionRepository.findCompetition(competitionId);
+		Competition competition = competitionRepository.findCompetition(competitionId)
+				.orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_UNKNOWN));
 		
 		competition.cancel();
 	}
