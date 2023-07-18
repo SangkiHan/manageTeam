@@ -10,7 +10,7 @@
     <form action="/login" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-        <h2>로그인</h2> 
+        <h2>로그인</h2>
             <div>
                 <input type="text" name="id" placeholder="UserId"/>
             </div>
