@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageTeam.domain.competitionTeam.dto.CompetitionTeamDto;
 import com.manageTeam.domain.competitionTeam.service.CompetitionTeamService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
+@Api("대회 참가 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/competitionTeam")

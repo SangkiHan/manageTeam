@@ -12,9 +12,11 @@ import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
 import com.manageTeam.domain.reservation.dto.ReservationDto;
 import com.manageTeam.domain.reservation.service.ReservationService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
+@Api("체육관 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/reservation")

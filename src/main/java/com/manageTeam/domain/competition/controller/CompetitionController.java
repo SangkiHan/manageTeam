@@ -12,9 +12,11 @@ import com.manageTeam.domain.competition.dto.CompetitionConditionDto;
 import com.manageTeam.domain.competition.dto.CompetitionDto;
 import com.manageTeam.domain.competition.service.CompetitionService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
+@Api("대회API")
 @RestController
 @RequestMapping("/api/competition")
 @RequiredArgsConstructor

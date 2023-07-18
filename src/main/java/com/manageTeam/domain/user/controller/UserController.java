@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageTeam.domain.user.dto.UserDto;
 import com.manageTeam.domain.user.service.UserService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
+@Api("사용자 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")

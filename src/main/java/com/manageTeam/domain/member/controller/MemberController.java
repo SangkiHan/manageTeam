@@ -13,9 +13,11 @@ import com.manageTeam.domain.member.dto.MemberConditionDto;
 import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.service.MemberService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
+@Api("팀원 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/member")

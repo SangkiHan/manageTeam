@@ -12,9 +12,11 @@ import com.manageTeam.domain.reservationTeam.dto.ReservationTeamDto;
 import com.manageTeam.domain.reservationTeam.service.ReservationTeamService;
 import com.manageTeam.global.entity.ActivateStatus;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
+@Api("체육관 예약 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/reservationTeam")

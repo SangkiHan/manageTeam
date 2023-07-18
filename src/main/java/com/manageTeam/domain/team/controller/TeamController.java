@@ -12,9 +12,11 @@ import com.manageTeam.domain.team.dto.TeamConditionDto;
 import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.domain.team.service.TeamService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
+@Api("팀 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/team")

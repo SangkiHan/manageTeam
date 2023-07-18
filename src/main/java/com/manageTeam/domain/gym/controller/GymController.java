@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageTeam.domain.gym.dto.GymDto;
 import com.manageTeam.domain.gym.service.GymService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
+@Api("체육관 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/gym")
