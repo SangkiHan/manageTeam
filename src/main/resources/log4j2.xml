@@ -8,8 +8,8 @@
 		</Console>
 		
 		<RollingRandomAccessFile name="manageTeam"
-			fileName="/home/tkdrl8908/Project/logs/manageTeam/manageTeam.log"
-			filePattern="/home/tkdrl8908/Project/logs/manageTeam/$${date:yyyyMMdd}/manageTeam.%d{yyyyMMdd}-%i.log.zip"
+			fileName="/var/log/project/manageteam/manageTeam.log"
+			filePattern="/var/log/project/manageteam/$${date:yyyyMMdd}/manageTeam.%d{yyyyMMdd}-%i.log.zip"
 			immediateFlush="false" append="true">
 			<PatternLayout pattern="%p %d [%t] [%c] %M %m%n" />
 			<Policies>
@@ -18,8 +18,8 @@
 		</RollingRandomAccessFile>
 		
 		<RollingRandomAccessFile name="manageTeam-error"
-			fileName= "/home/tkdrl8908/Project/logs/manageTeam/manageTeam_error.log"
-			filePattern="/home/tkdrl8908/Project/logs/manageTeam/$${date:yyyyMMdd}/manageTeam_error.%d{yyyyMMdd}-%i.log.zip"
+			fileName= "/var/log/project/manageteam/manageTeam_error.log"
+			filePattern="/var/log/project/manageteam/$${date:yyyyMMdd}/manageTeam_error.%d{yyyyMMdd}-%i.log.zip"
 			immediateFlush="false" append="false">
 			<PatternLayout pattern="%p %d [%t] [%c] %-15.15M %m%n" />
 			<Policies>

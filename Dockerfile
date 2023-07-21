@@ -8,4 +8,6 @@ WORKDIR /home/project
 
 COPY ${WAR_FILE} /home/project/app.war
 
+VOLUME /var/log/project/
+
 ENTRYPOINT java -jar /home/project/app.war 
