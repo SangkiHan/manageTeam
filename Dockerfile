@@ -7,7 +7,8 @@ RUN mkdir -p /home/project
 WORKDIR /home/project
 
 COPY ${WAR_FILE} /home/project/app.war
+COPY /build/resources/main/log4j2.xml /home/project/log4j2.xml
 
 VOLUME /var/log/project/
 
-ENTRYPOINT java -jar /home/project/app.war 
+ENTRYPOINT java -Dlog4j.configurationFile=/home/project/log4j2.xml -jar /home/project/app.war 
