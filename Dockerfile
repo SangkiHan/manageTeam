@@ -1,5 +1,5 @@
-# FROM adoptopenjdk:11-jre-hotspot
-FROM openjdk:8-jdk-alpine
+FROM adoptopenjdk:11-jre-hotspot
+
 ARG WAR_FILE=/build/libs/manageTeam-0.0.1-SNAPSHOT.war
 ARG APP_NAME=app
 
