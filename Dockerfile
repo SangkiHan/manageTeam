@@ -11,4 +11,4 @@ COPY /build/resources/main/log4j2.xml /home/project/log4j2.xml
 
 VOLUME /var/log/project/
 
-ENTRYPOINT java -Dlog4j.configurationFile=/home/project/log4j2.xml -jar /home/project/app.war 
+ENTRYPOINT java -jar /home/project/app.war 
