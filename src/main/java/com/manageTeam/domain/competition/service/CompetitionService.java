@@ -32,13 +32,16 @@ public class CompetitionService {
 	 */
 	public void save(CompetitionDto.Save request) {
 		CompetitionConditionDto.DateCheck conditionDto = new CompetitionConditionDto.DateCheck(request);
+		
 		if(!competitionRepository.checkCompetitionGym(conditionDto)) {
 			throw new GlobalException(ErrorCode.COMPETITION_DATE);
 		}
 		
 		Competition competition = new Competition(request);
+		
 		Gym gym = gymRepository.findById(request.getGymId())
 				.orElseThrow(() -> new GlobalException(ErrorCode.GYM_UNKNOWN));
+		
 		competition.createCompetition(gym);
 		competitionRepository.save(competition);
 	}

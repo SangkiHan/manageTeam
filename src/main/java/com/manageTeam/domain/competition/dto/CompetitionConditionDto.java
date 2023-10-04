@@ -41,7 +41,6 @@ public class CompetitionConditionDto {
 		private Date endDate;
 		
 		public DateCheck(CompetitionDto.Save competition) {
-			super();
 			this.gymId = competition.getGymId();
 			this.startDate = competition.getStartDate();
 			this.endDate = competition.getEndDate();

@@ -25,7 +25,7 @@ public class UserService {
 	
 	/**
 	 * @api /api/user/v1/save
-	 * @description 회원가입 및 사용자를 수정한다.
+	 * @description 회원가입
 	 * @throws GlobalException
 	 * @author skhan
 	 */

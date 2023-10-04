@@ -22,7 +22,7 @@ public class MemberTest {
 	void save() {
 		for(int i=0; i<5; i++) {
 			AddressDto address = new AddressDto("수원시","화서로"+i,"16225");
-			MemberDto.Save member = new MemberDto.Save(21L, "케이저"+i, 28+i, "970212","01076409148", address, "SG");
+			MemberDto.Save member = new MemberDto.Save(21L, "창공"+i, 28+i, "970212","01076409148", address, "SG");
 			memberService.save(member);
 		}
 	}

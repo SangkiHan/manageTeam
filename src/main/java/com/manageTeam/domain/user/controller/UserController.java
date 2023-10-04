@@ -22,7 +22,7 @@ public class UserController {
 	
 	private final UserService userService;
 	
-	@ApiOperation(value="회원가입 및 사용자를 수정한다.")
+	@ApiOperation(value="회원가입")
 	@PostMapping("/v1/save")
 	public void save(@RequestBody UserDto.Save request) throws Exception {
 		userService.save(request);
