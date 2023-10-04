@@ -11,13 +11,13 @@ queryDsl 연습 및 실습용 프로젝트
 ------------
 
 ### 구현내용
-1. 팀원 관리 API
-2. 팀 관리 API
-3. 체육관 관리 API
-4. 예약관리 API
-5. 대회 관리 API
-6. ControllerAdvice 공통예외처리
-7. filter, log4j2 로깅처리
+1. 팀원 관리 API ✔️
+2. 팀 관리 API ✔️
+3. 체육관 관리 API ✔️
+4. 예약관리 API ✔️
+5. 대회 관리 API ✔️
+6. ControllerAdvice 공통예외처리 ✔️
+7. filter, log4j2 로깅처리 ✔️
 
 ------------
 
