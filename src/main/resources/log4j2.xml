@@ -38,6 +38,7 @@
 	
 	<Loggers>
 		<Root level="DEBUG" additivity="false">
+		<AppenderRef ref="Console" />
 			<AppenderRef ref="Async-log" />
 			<AppenderRef ref="Async-error" level="WARN"/>
 		</Root>

@@ -17,3 +17,6 @@ spring:
         default_batch_fetch_size: 100
         jdbc:
           exception-handling: ignore
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
