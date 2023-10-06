@@ -5,6 +5,7 @@ queryDsl 연습 및 실습용 프로젝트
 
 ### 💻 사용기술
 <div align="center">
+  <img src="https://img.shields.io/badge/Java-FF160B?style=for-the-badge&logoColor=white"/></br>
   <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/></br>
   <img src="https://img.shields.io/badge/SpringDataJPA-6DB33F?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/QueryDsl-4479A1?style=for-the-badge"/></br>
