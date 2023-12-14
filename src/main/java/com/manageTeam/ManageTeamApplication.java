@@ -23,4 +23,10 @@ public class ManageTeamApplication extends SpringBootServletInitializer{
 		return new JPAQueryFactory(em);
 	}
 
+	@Bean
+	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>
+	webServerFactoryCustomizer() {
+		return factory -> factory.setContextPath("/manageteam");
+	}
+
 }
