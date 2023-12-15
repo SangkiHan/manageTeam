@@ -28,6 +28,7 @@ queryDsl 연습 및 실습용 프로젝트
 5. 대회 관리 API ✔️
 6. ControllerAdvice 공통예외처리 ✔️
 7. filter, log4j2 로깅처리 ✔️
+8. 테스트코드 작성중 ❌
 
 ------------
 
