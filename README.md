@@ -37,7 +37,7 @@ queryDsl 연습 및 실습용 프로젝트
 ------------
 
 ### 📜 Swagger
-[http://218.155.95.66:8090/swagger-ui/index.html#/](https://sangkihan.kro.kr/manageteam/swagger-ui/index.html#/)
+https://sangkihan.kro.kr/manageteam/swagger-ui/index.html#
 
 ![Swagger](https://github.com/SangkiHan/manageTeam/assets/68369248/156cb07e-90a1-4abb-9f89-87dc554137bf)
 
