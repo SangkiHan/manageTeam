@@ -6,6 +6,7 @@ import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
+import lombok.Builder;
 import lombok.Getter;
 
 
@@ -47,8 +48,9 @@ public class ReservationConditionDto {
 		
 		@ApiParam(value = "종료날짜")
 		private LocalDateTime endDate;
-		
-		public DateCondition(LocalDateTime startDate, LocalDateTime endDate) {
+
+		@Builder
+		private DateCondition(LocalDateTime startDate, LocalDateTime endDate) {
 			this.startDate = startDate;
 			this.endDate = endDate;
 		}

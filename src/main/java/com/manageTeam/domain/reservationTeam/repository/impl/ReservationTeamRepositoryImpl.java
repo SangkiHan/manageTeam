@@ -6,6 +6,7 @@ import static com.manageTeam.domain.reservationTeam.entity.QReservationTeam.rese
 
 import java.util.List;
 
+import com.manageTeam.domain.reservationTeam.dto.ReservationTeamResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
@@ -30,10 +31,10 @@ public class ReservationTeamRepositoryImpl implements ReservationTeamRepositoryC
 	 * @author skhan
 	 * */
 	@Override
-	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable) {
+	public Page<ReservationTeamResponse.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable) {
 		
-		List<ReservationTeamDto.Info> results = queryFactory
-				.select(Projections.bean(ReservationTeamDto.Info.class,
+		List<ReservationTeamResponse.Info> results = queryFactory
+				.select(Projections.bean(ReservationTeamResponse.Info.class,
 						reservationTeam.reservationTeamId,
 						reservationTeam.team.teamId,
 						reservation.reservationId,

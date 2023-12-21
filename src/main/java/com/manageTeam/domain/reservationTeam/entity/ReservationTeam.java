@@ -15,7 +15,9 @@ import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.BaseEntity;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @description 팀 체육관 예약 테이블 Entity
@@ -23,6 +25,7 @@ import lombok.Getter;
  */
 @Entity
 @Getter
+@NoArgsConstructor
 public class ReservationTeam extends BaseEntity{
 	/**
 	 * 예약 팀 ID
@@ -47,9 +50,14 @@ public class ReservationTeam extends BaseEntity{
 	 */
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
-	
-	public ReservationTeam() {}
-	
+
+	@Builder
+	private ReservationTeam(Team team, Reservation reservation, ActivateStatus activateStatus) {
+		this.team = team;
+		this.reservation = reservation;
+		this.activateStatus = activateStatus;
+	}
+
 	/**
 	 * @description 팀예약건의 활성화 상태를 변경한다.
 	 * @author skhan
@@ -64,24 +72,5 @@ public class ReservationTeam extends BaseEntity{
 	 * */
 	public void cancel() {
 		this.activateStatus = ActivateStatus.NO;
-	}
-	
-	/**
-	 * @description 팀예약건에 팀을 세팅해준다.
-	 * @author skhan
-	 * */
-	public void createTeam(Team team) {
-		team.checkMemberCnt();
-		this.team = team;
-		team.getReservationTeams().add(this);
-	}
-	
-	/**
-	 * @description 팀예약건에 예약을 세팅해준다.
-	 * @author skhan
-	 * */
-	public void createReservation(Reservation reservation) {
-		this.reservation = reservation;
-		reservation.getReservationTeams().add(this);
 	}
 }

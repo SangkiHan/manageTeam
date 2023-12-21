@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.manageTeam.domain.competition.entity.Competition;
-import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
 

@@ -21,7 +21,10 @@ import com.manageTeam.domain.reservationTeam.entity.ReservationTeam;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.BaseEntity;
 
+import com.manageTeam.global.exception.ErrorCode;
+import com.manageTeam.global.exception.GlobalException;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @description 체육관 예약 테이블 Entity
@@ -29,6 +32,7 @@ import lombok.Getter;
  */
 @Entity
 @Getter
+@NoArgsConstructor
 public class Reservation extends BaseEntity{
 	/**
 	 * 예약ID
@@ -60,13 +64,15 @@ public class Reservation extends BaseEntity{
 	 */
 	private int totalTeamCnt;
 	/**
+	 * 예약 가능한 팀 수
+	 */
+	private int reservationTeamCnt;
+	/**
 	 * 활성화 상태
 	 */
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
-	
-	public Reservation() {}
-	
+
 	/**
 	 * @description 예약건을 취소할 시 예약이 되어있는 팀들의 예약도 취소시킨다.
 	 * @author skhan
@@ -95,4 +101,10 @@ public class Reservation extends BaseEntity{
 		this.totalTeamCnt = reservation.getTotalTeamCnt();
 		this.activateStatus = ActivateStatus.YES;
 	};
+
+	public void checkCnt(){
+		if(reservationTeamCnt==totalTeamCnt){
+			throw new GlobalException(ErrorCode.RESERVATION_END);
+		}
+	}
 }

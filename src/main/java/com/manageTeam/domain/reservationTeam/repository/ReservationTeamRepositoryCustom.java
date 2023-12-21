@@ -1,11 +1,10 @@
 package com.manageTeam.domain.reservationTeam.repository;
 
+import com.manageTeam.domain.reservationTeam.dto.ReservationTeamResponse;
+import com.manageTeam.global.entity.ActivateStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.manageTeam.domain.reservationTeam.dto.ReservationTeamDto;
-import com.manageTeam.global.entity.ActivateStatus;
-
 public interface ReservationTeamRepositoryCustom {
-	public Page<ReservationTeamDto.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus,  Pageable pageable);
+	public Page<ReservationTeamResponse.Info> findAllByTeam(Long teamId, ActivateStatus activateStatus, Pageable pageable);
 }
