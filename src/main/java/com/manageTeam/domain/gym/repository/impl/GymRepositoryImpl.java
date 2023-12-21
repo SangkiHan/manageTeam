@@ -19,7 +19,7 @@ public class GymRepositoryImpl implements GymRepositoryCustom{
 	 */
 	@Override
 	public boolean checkGymExist(String zipCode, String name) {
-		return queryFactory
+		Long count = queryFactory
 				.select(gym.count())
 				.from(gym)
 				.where(
@@ -27,7 +27,9 @@ public class GymRepositoryImpl implements GymRepositoryCustom{
 					gym.gymName.eq(name),
 					gym.activateStatus.eq(ActivateStatus.YES)
 				)
-				.fetchOne() > 0;
+				.fetchOne();
+
+		return count != null && count < 0;
 	}
 
 }

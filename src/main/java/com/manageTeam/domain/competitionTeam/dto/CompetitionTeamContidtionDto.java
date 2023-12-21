@@ -3,6 +3,7 @@ package com.manageTeam.domain.competitionTeam.dto;
 import java.sql.Date;
 
 import io.swagger.annotations.ApiParam;
+import lombok.Builder;
 import lombok.Getter;
 
 public class CompetitionTeamContidtionDto {
@@ -18,8 +19,9 @@ public class CompetitionTeamContidtionDto {
 		
 		@ApiParam(value = "날짜 >=")
 		private Date endDate;
-		
-		public checkDate(Long teamId, Date startDate, Date endDate) {
+
+		@Builder
+		private checkDate(Long teamId, Date startDate, Date endDate) {
 			this.teamId = teamId;
 			this.startDate = startDate;
 			this.endDate = endDate;

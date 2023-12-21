@@ -2,18 +2,17 @@ package com.manageTeam.domain.competitionTeam.service;
 
 import javax.transaction.Transactional;
 
+import com.manageTeam.domain.competition.service.CompetitionReadService;
+import com.manageTeam.domain.competitionTeam.dto.CompetitionTeamRequest;
+import com.manageTeam.domain.competitionTeam.dto.CompetitionTeamResponse;
+import com.manageTeam.domain.competitionTeam.entity.CompetitionTeam;
+import com.manageTeam.domain.team.service.TeamReadService;
 import org.springframework.stereotype.Service;
 
 import com.manageTeam.domain.competition.entity.Competition;
-import com.manageTeam.domain.competition.repository.CompetitionRepository;
 import com.manageTeam.domain.competitionTeam.dto.CompetitionTeamContidtionDto;
-import com.manageTeam.domain.competitionTeam.dto.CompetitionTeamDto;
-import com.manageTeam.domain.competitionTeam.entity.CompetitionTeam;
 import com.manageTeam.domain.competitionTeam.repository.CompetitionTeamRepository;
 import com.manageTeam.domain.team.entity.Team;
-import com.manageTeam.domain.team.repository.TeamRepository;
-import com.manageTeam.global.exception.ErrorCode;
-import com.manageTeam.global.exception.GlobalException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,48 +22,31 @@ import lombok.RequiredArgsConstructor;
 public class CompetitionTeamService {
 	
 	private final CompetitionTeamRepository competitionTeamRepository;
-	private final TeamRepository teamRepository;
-	private final CompetitionRepository competitionRepository;
+	private final CompetitionTeamReadService competitionTeamReadService;
+	private final TeamReadService teamReadService;
+	private final CompetitionReadService competitionReadService;
 	
 	/**
 	 * @api /api/competitionTeam/v1/save
 	 * @description 대회 참가 신청을 한다.
 	 * @author skhan
 	 */
-	public void save(CompetitionTeamDto.Save request) {
-		Long competitionId = request.getCompetitionId();
-		
-		CompetitionTeam competitionTeam = new CompetitionTeam(request);
-		
+	public CompetitionTeamResponse.Save save(CompetitionTeamRequest.Save request) {
 		//대회를 조회한다.
-		Competition competition = competitionRepository.findById(competitionId)
-				.orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_UNKNOWN));
-		
+		Competition competition = competitionReadService.findById(request.getCompetitionId());
 		//대회 참가 신청을 한 팀의 수를 조회한다. 
-		Long count = competitionRepository.regTeamCount(competitionId);
-		if(competition.getTeamCnt()==count) {
-			throw new GlobalException(ErrorCode.COMPETITION_DEADLINE);
-		}
-		
-		CompetitionTeamContidtionDto.checkDate condiContidtionDto = 
-				new CompetitionTeamContidtionDto.checkDate(
-						request.getTeamId(),
-						competition.getStartDate(),
-						competition.getEndDate()
-						);
+		competition.checkTeamCnt();
+
 		//해당 날짜에 이미 등록되어있는 대회여부를 조회한다.
-		if(!competitionTeamRepository.checkCompetitionTeamDate(condiContidtionDto)) {
-			throw new GlobalException(ErrorCode.COMPETITION_TEAM_DATE);
-		}
-		//대회세팅
-		competitionTeam.createCompetition(competition);
-		//참가하려는 팀을 조회한다.
-		Team team = teamRepository.findById(request.getTeamId())
-				.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_UNKNOWN));
-		//팀 세팅
-		competitionTeam.createTeam(team);
-		
-		competitionTeamRepository.save(competitionTeam);
+		competitionTeamReadService.checkCompetitionTeamDate(CompetitionTeamContidtionDto.checkDate.builder()
+			.teamId(request.getTeamId())
+			.startDate(competition.getStartDate())
+			.endDate(competition.getEndDate())
+			.build());
+
+		Team team = teamReadService.findById(request.getTeamId());
+		competition.addRegTeamCnt();
+		return CompetitionTeamResponse.Save.of(competitionTeamRepository.save(request.toEntity(competition, team)));
 	}
 	
 	/**
@@ -72,11 +54,7 @@ public class CompetitionTeamService {
 	 * @description 대회 참가를 취소한다.
 	 * @author skhan
 	 */
-	public void cancel(CompetitionTeamDto.CompetitionTeamId request) {
-		//취소하려는 팀 조회
-		CompetitionTeam competitionTeam = competitionTeamRepository.findById(request.getCompetitionTeamId())
-				.orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_TEAM_UNKNOWN));
-		
-		competitionTeam.cancel();
+	public void cancel(CompetitionTeamRequest.CompetitionTeamId request) {
+		competitionReadService.findById(request.getCompetitionTeamId()).cancel();
 	}
 }

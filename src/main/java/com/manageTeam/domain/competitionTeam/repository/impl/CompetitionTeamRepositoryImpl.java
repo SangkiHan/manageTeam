@@ -21,7 +21,7 @@ public class CompetitionTeamRepositoryImpl implements CompetitionTeamRepositoryC
 	 */
 	@Override
 	public boolean checkCompetitionTeamDate(CompetitionTeamContidtionDto.checkDate request) {
-		return jpaQueryFactory
+		Long count = jpaQueryFactory
 				.select(competitionTeam.count())
 				.from(competitionTeam)
 				.join(competitionTeam.team, team)
@@ -31,6 +31,8 @@ public class CompetitionTeamRepositoryImpl implements CompetitionTeamRepositoryC
 						competitionTeam.competition.startDate.loe(request.getEndDate()),
 						competitionTeam.competition.endDate.goe(request.getStartDate())
 						)
-				.fetchOne()<1;
+				.fetchOne();
+
+		return count != null && count < 0;
 	}
 }

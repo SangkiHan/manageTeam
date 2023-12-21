@@ -11,10 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.manageTeam.domain.competition.entity.Competition;
-import com.manageTeam.domain.competitionTeam.dto.CompetitionTeamDto;
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.global.entity.ActivateStatus;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -37,23 +37,23 @@ public class CompetitionTeam {
 	private Competition competition;
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
-	
-	public CompetitionTeam(CompetitionTeamDto.Save competitionTeam) {
-		this.competitionTeamId = competitionTeam.getCompetitionTeamId();
-		this.activateStatus = (competitionTeam.getActivateStatus()==null)?ActivateStatus.YES:competitionTeam.getActivateStatus();
+
+	@Builder
+	private CompetitionTeam(Team team, Competition competition, ActivateStatus activateStatus) {
+		this.team = team;
+		this.competition = competition;
+		this.activateStatus = activateStatus;
 	}
-	
+
 	/**
 	 * 대회 참가 취소 
 	 */
 	public void cancel() {
 		this.activateStatus = ActivateStatus.NO;
 	}
-	
-	public void createTeam(Team team) {
-		team.checkMemberCnt();
+
+	public void updateTeam(Team team){
 		this.team = team;
-		team.getCompetitionTeams().add(this);
 	}
 	
 	public void createCompetition(Competition competition) {

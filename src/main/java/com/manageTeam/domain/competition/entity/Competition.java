@@ -1,27 +1,17 @@
 package com.manageTeam.domain.competition.entity;
 
+import com.manageTeam.domain.competition.dto.CompetitionDto;
+import com.manageTeam.domain.competitionTeam.entity.CompetitionTeam;
+import com.manageTeam.global.entity.ActivateStatus;
+import com.manageTeam.global.exception.ErrorCode;
+import com.manageTeam.global.exception.GlobalException;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.manageTeam.domain.competition.dto.CompetitionDto;
-import com.manageTeam.domain.competitionTeam.entity.CompetitionTeam;
-import com.manageTeam.domain.gym.entity.Gym;
-import com.manageTeam.global.entity.ActivateStatus;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * @description 대회테이블 Entity
@@ -35,23 +25,19 @@ public class Competition {
 	 * 대회ID
 	 */
 	@Id @GeneratedValue
-	@Column(name = "competition_id")
 	private Long competitionId;
 	/**
-	 * 대회이름
+	 * 대회 이름
 	 */
 	private String competitionName;
 	/**
 	 * 대회에 참여 가능한 팀수
 	 */
-	@Column(name = "team_count")
 	private int teamCnt;
 	/**
-	 * 체육관ID
+	 * 대회에 참여한 팀수
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "gym_id")
-	private Gym gym;
+	private int regTeamCnt;
 	/**
 	 * 활성화 상태
 	 */
@@ -68,7 +54,7 @@ public class Competition {
 	/**
 	 * 대회 참가팀 List
 	 */
-	@OneToMany(mappedBy = "competition")
+	@OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CompetitionTeam> competitionTeams = new ArrayList<>();
 	
 	public Competition(CompetitionDto.Save competition) {
@@ -79,16 +65,19 @@ public class Competition {
 		this.startDate = competition.getStartDate();
 		this.endDate = competition.getEndDate();
 	}
-	/**
-	 * 대회 개최 체육관 세팅
-	 */
-	public void createCompetition(Gym gym) {
-		this.gym = gym;
-		gym.getCompetition().add(this);
+
+	public void checkTeamCnt(){
+		if(teamCnt==regTeamCnt) {
+			throw new GlobalException(ErrorCode.COMPETITION_DEADLINE);
+		}
 	}
 	
 	public void cancel() {
 		this.activateStatus = ActivateStatus.NO;
-		competitionTeams.forEach(competitionTeam -> competitionTeam.cancel());
+		competitionTeams.forEach(CompetitionTeam::cancel);
+	}
+
+	public void addRegTeamCnt(){
+		this.regTeamCnt++;
 	}
 }

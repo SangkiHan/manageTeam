@@ -38,7 +38,7 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 	 */
 	@Override
 	public boolean checkCompetitionGym(CompetitionConditionDto.DateCheck request) {
-		return queryFactory
+		Long count = queryFactory
 				.select(competition.count())
 				.from(competition)
 				.where(
@@ -46,7 +46,9 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 						endDateLoe(request.getStartDate()),
 						competition.gym.gymId.eq(request.getGymId())
 						)
-				.fetchOne()<1;
+				.fetchOne();
+
+		return count != null && count < 0;
 	}
 
 	/**
@@ -130,21 +132,5 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 				.from(competition)
 				.join(competition.gym, gym).fetchJoin()
 				.fetchOne());
-	}
-
-	/**
-	 * @description 대회에 참가신청한 팀수 조회
-	 * @author skhan
-	 */
-	@Override
-	public Long regTeamCount(Long competitionId) {
-		return queryFactory
-				.select(competitionTeam.count())
-				.from(competitionTeam)
-				.where(
-						competitionTeam.competition.competitionId.eq(competitionId),
-						competitionTeam.activateStatus.eq(ActivateStatus.YES)
-						)
-				.fetchOne();
 	}
 }
