@@ -11,14 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Address;
 import com.manageTeam.global.entity.BaseEntity;
 import com.manageTeam.global.entity.Position;
-import com.manageTeam.global.util.AESUtil;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -74,7 +73,19 @@ public class Member extends BaseEntity{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
 	private Team team;
-	
+
+	@Builder
+	private Member(String membername, int age, String rsdntRgnmb, String phone, Address address, Position position, ActivateStatus activateStatus, Team team) {
+		this.membername = membername;
+		this.age = age;
+		this.rsdntRgnmb = rsdntRgnmb;
+		this.phone = phone;
+		this.address = address;
+		this.position = position;
+		this.activateStatus = activateStatus;
+		this.team = team;
+	}
+
 	/**
 	 * @description 팀원의 활성화 상태를 변경하는 메소드
 	 * @param activateStatus Enum.class
@@ -82,30 +93,5 @@ public class Member extends BaseEntity{
 	 */
 	public void changeStatus(ActivateStatus activateStatus) {
 		this.activateStatus = activateStatus;
-	}
-	
-	/**
-	 * @description 팀원의 팀을 세팅해주는 메소드
-	 * @param Team Entity
-	 * @author skhan
-	 */
-	public void changeTeam(Team team) {
-		this.team = team;
-		team.getMembers().add(this);
-		team.addMember();
-	}
-	
-	/**
-	 * Dto to Entity Constructor
-	 */
-	public Member(MemberDto.Save member) {
-		this.memberId = member.getMemberId();
-		this.membername = member.getMemberName();
-		this.age = member.getAge();
-		this.rsdntRgnmb = AESUtil.encrypt(member.getRsdntRgnmb());
-		this.phone = AESUtil.encrypt(member.getPhone());
-		this.address = new Address(member.getAddress());
-		this.position = Position.valueOf(member.getPosition());
-		this.activateStatus = ActivateStatus.YES;
 	}
 }

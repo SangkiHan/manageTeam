@@ -38,4 +38,12 @@ public class AddressDto {
 			.zipcode(zipcode)
 			.build();
 	}
+
+	public static AddressDto of(Address address){
+		return AddressDto.builder()
+			.city(address.getCity())
+			.street(address.getStreet())
+			.zipcode(address.getZipcode())
+			.build();
+	}
 }

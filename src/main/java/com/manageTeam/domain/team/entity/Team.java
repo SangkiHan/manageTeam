@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.manageTeam.domain.member.entity.Member;
 import com.manageTeam.domain.user.entity.User;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.BaseEntity;
@@ -55,8 +56,8 @@ public class Team extends BaseEntity{
 	/**
 	 * 속해있는 팀원 List
 	 */
-//	@OneToMany(mappedBy = "team")
-//	private List<Member> members = new ArrayList<>();
+	@OneToMany(mappedBy = "team")
+	private List<Member> members = new ArrayList<>();
 	/**
 	 * 속해있는 관리자 List
 	 */

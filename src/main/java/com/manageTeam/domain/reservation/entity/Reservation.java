@@ -79,16 +79,12 @@ public class Reservation extends BaseEntity{
 	 */
 	public void cancel() {
 		this.activateStatus = ActivateStatus.NO;
+		this.reservationTeamCnt = 0;
 		reservationTeams.forEach(ReservationTeam::cancel);
 	}
-	
-	/**
-	 * @description 예약건에 체육관을 세팅한다.
-	 * @author skhan
-	 */
-	public void createReservation(Gym gym) {
-		this.gym = gym;
-		gym.getReservations().add(this);
+
+	public void plusReservationTeamCnt(){
+		this.reservationTeamCnt++;
 	}
 
 	public void checkCnt(){

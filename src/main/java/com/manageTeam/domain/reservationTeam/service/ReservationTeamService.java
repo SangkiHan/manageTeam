@@ -40,6 +40,7 @@ public class ReservationTeamService {
 		
 		//해당 팀이 예약 시간에 이미 등록되어 있는 체육관이 있는 지 체크
 		checkTime(reservation, team.getTeamId());
+		reservation.plusReservationTeamCnt();
 		
 		reservationTeamRepository.save(request.toEntity(reservation,team));
 	}

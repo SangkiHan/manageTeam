@@ -5,13 +5,13 @@ import static com.manageTeam.domain.team.entity.QTeam.team;
 
 import java.util.List;
 
+import com.manageTeam.domain.member.dto.MemberResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.util.StringUtils;
 
 import com.manageTeam.domain.member.dto.MemberConditionDto;
-import com.manageTeam.domain.member.dto.MemberDto;
 import com.manageTeam.domain.member.repository.MemberRepositoryCustom;
 import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
@@ -34,7 +34,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	 * @author skhan
 	 */
 	@Override
-	public Page<MemberDto.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable) {
+	public Page<MemberResponse.Info> findAllByCondition(MemberConditionDto memberConditionDto, Pageable pageable) {
 		Predicate predicate = new BooleanBuilder()
 				.and(membernameEq(memberConditionDto.getMemberName()))
 	            .and(teamEq(memberConditionDto.getTeamName()))
@@ -43,8 +43,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	            .and(cityEq(memberConditionDto.getTeamName()))
 	            .and(activateStatusEq(memberConditionDto.getActivateStatus()));
 		
-		List<MemberDto.Info> results = queryFactory
-				.select(Projections.constructor(MemberDto.Info.class,
+		List<MemberResponse.Info> results = queryFactory
+				.select(Projections.constructor(MemberResponse.Info.class,
 						member.memberId,
 						member.membername,
 						member.age,
@@ -122,13 +122,15 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 	 */
 	@Override
 	public boolean existsByRsdntRgnmb(String rsdntRgnmb) {
-		return queryFactory
+		Long count = queryFactory
 				.select(member.count())
 				.from(member)
 				.where(
 						member.activateStatus.eq(ActivateStatus.YES),
 						member.rsdntRgnmb.eq(rsdntRgnmb)
 						)
-				.fetchOne()<1;
+				.fetchOne();
+
+		return count != null && count < 0;
 	}
 }
