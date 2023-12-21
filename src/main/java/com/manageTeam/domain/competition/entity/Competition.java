@@ -1,10 +1,11 @@
 package com.manageTeam.domain.competition.entity;
 
-import com.manageTeam.domain.competition.dto.CompetitionDto;
 import com.manageTeam.domain.competitionTeam.entity.CompetitionTeam;
+import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +27,9 @@ public class Competition {
 	 */
 	@Id @GeneratedValue
 	private Long competitionId;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Gym gym;
 	/**
 	 * 대회 이름
 	 */
@@ -56,14 +60,17 @@ public class Competition {
 	 */
 	@OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CompetitionTeam> competitionTeams = new ArrayList<>();
-	
-	public Competition(CompetitionDto.Save competition) {
-		this.competitionId = competition.getCompetitionId();
-		this.competitionName = competition.getCompetitionName();
-		this.teamCnt = competition.getTeamCnt();
-		this.activateStatus = (competition.getActivateStatus()==null)?ActivateStatus.YES:competition.getActivateStatus();
-		this.startDate = competition.getStartDate();
-		this.endDate = competition.getEndDate();
+
+	@Builder
+	private Competition(String competitionName, Gym gym, int teamCnt, int regTeamCnt, ActivateStatus activateStatus, Date startDate, Date endDate, List<CompetitionTeam> competitionTeams) {
+		this.competitionName = competitionName;
+		this.gym = gym;
+		this.teamCnt = teamCnt;
+		this.regTeamCnt = regTeamCnt;
+		this.activateStatus = activateStatus;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.competitionTeams = competitionTeams;
 	}
 
 	public void checkTeamCnt(){

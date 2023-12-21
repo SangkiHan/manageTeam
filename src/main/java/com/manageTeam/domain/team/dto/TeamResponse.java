@@ -148,9 +148,17 @@ public class TeamResponse {
          */
         private String teamName;
 
-        public List(Long teamId, String teamName) {
+        @Builder
+        private List(Long teamId, String teamName) {
             this.teamId = teamId;
             this.teamName = teamName;
+        }
+
+        public static List of(Team team){
+            return List.builder()
+                .teamId(team.getTeamId())
+                .teamName(team.getTeamName())
+                .build();
         }
     }
 }

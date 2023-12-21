@@ -1,5 +1,6 @@
 package com.manageTeam.domain.competition.service;
 
+import com.manageTeam.domain.competition.dto.CompetitionConditionDto;
 import com.manageTeam.domain.competition.entity.Competition;
 import com.manageTeam.domain.competition.repository.CompetitionRepository;
 import com.manageTeam.global.exception.ErrorCode;
@@ -18,5 +19,11 @@ public class CompetitionReadService {
     public Competition findById(Long competitionId){
         return competitionRepository.findById(competitionId)
             .orElseThrow(() -> new GlobalException(ErrorCode.COMPETITION_UNKNOWN));
+    }
+
+    public void checkCompetitionGym(CompetitionConditionDto.DateCheck conditionDto){
+        if(!competitionRepository.checkCompetitionGym(conditionDto)) {
+            throw new GlobalException(ErrorCode.COMPETITION_DATE);
+        }
     }
 }

@@ -8,13 +8,13 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.manageTeam.domain.competition.dto.CompetitionResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.util.StringUtils;
 
 import com.manageTeam.domain.competition.dto.CompetitionConditionDto;
-import com.manageTeam.domain.competition.dto.CompetitionDto;
 import com.manageTeam.domain.competition.entity.Competition;
 import com.manageTeam.domain.competition.repository.CompetitionRepositoryCustom;
 import com.manageTeam.global.entity.ActivateStatus;
@@ -57,15 +57,15 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 	 * @where endDate, startDate, city, activateStatus
 	 */
 	@Override
-	public Page<CompetitionDto.Info> findAllByCondition(CompetitionConditionDto request, Pageable pageable) {
+	public Page<CompetitionResponse.Info> findAllByCondition(CompetitionConditionDto request, Pageable pageable) {
 		Predicate predicate = new BooleanBuilder()
 						.and(startDateGeo(request.getEndDate()))
 						.and(endDateLoe(request.getStartDate()))
 						.and(cityEq(request.getCity()))
 						.and(activateStatusEq(request.getActivateStatus()));
 		
-		List<CompetitionDto.Info> results = queryFactory
-				.select(Projections.bean(CompetitionDto.Info.class, 
+		List<CompetitionResponse.Info> results = queryFactory
+				.select(Projections.bean(CompetitionResponse.Info.class,
 						competition.competitionId,
 						competition.competitionName,
 						competition.teamCnt,

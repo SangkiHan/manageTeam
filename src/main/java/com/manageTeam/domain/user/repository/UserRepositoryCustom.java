@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface UserRepositoryCustom {
 	public boolean existsByRsdntRgnmb(String rsdntRgnmb);
+	public CustumUserDetails findUser(String userId);
 }

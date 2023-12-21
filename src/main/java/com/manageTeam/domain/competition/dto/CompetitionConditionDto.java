@@ -6,6 +6,7 @@ import com.manageTeam.global.entity.ActivateStatus;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,11 +40,12 @@ public class CompetitionConditionDto {
 		
 		@ApiParam(value = "종료 날짜")
 		private Date endDate;
-		
-		public DateCheck(CompetitionDto.Save competition) {
-			this.gymId = competition.getGymId();
-			this.startDate = competition.getStartDate();
-			this.endDate = competition.getEndDate();
+
+		@Builder
+		private DateCheck(Long gymId, Date startDate, Date endDate) {
+			this.gymId = gymId;
+			this.startDate = startDate;
+			this.endDate = endDate;
 		}
 	}
 }

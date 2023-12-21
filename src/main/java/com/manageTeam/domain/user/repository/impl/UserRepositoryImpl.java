@@ -15,13 +15,27 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 	private final JPAQueryFactory queryFactory;
 	@Override
 	public boolean existsByRsdntRgnmb(String rsdntRgnmb) {
-		return queryFactory
+		Long count = queryFactory
 				.select(user.count())
 				.from(user)
 				.where(
 						user.activateStatus.eq(ActivateStatus.YES),
 						user.rsdntRgnmb.eq(rsdntRgnmb)
 						)
-				.fetchOne() < 1;
+				.fetchOne();
+
+		return count != null && count < 0;
+	}
+
+	@Override
+	public CustumUserDetails findUser(String userId) {
+		return queryFactory
+			.select(Projections.bean(CustumUserDetails.class,
+				user.userId.as("username"),
+				user.password
+			))
+			.from(user)
+			.where(user.userId.eq(userId))
+			.fetchOne();
 	}
 }
