@@ -1,18 +1,7 @@
 package com.manageTeam.domain.team.repository.impl;
 
-import static com.manageTeam.domain.member.entity.QMember.member;
-import static com.manageTeam.domain.team.entity.QTeam.team;
-import static com.manageTeam.domain.user.entity.QUser.user;
-
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.support.PageableExecutionUtils;
-import org.springframework.util.StringUtils;
-
 import com.manageTeam.domain.team.dto.TeamConditionDto;
-import com.manageTeam.domain.team.dto.TeamDto;
+import com.manageTeam.domain.team.dto.TeamResponse;
 import com.manageTeam.domain.team.repository.TeamRepositoryCustom;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Position;
@@ -24,8 +13,17 @@ import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
+
+import static com.manageTeam.domain.member.entity.QMember.member;
+import static com.manageTeam.domain.team.entity.QTeam.team;
+import static com.manageTeam.domain.user.entity.QUser.user;
 
 @RequiredArgsConstructor
 public class TeamRepositoryImpl implements TeamRepositoryCustom{
@@ -37,10 +35,9 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	 * @author skhan
 	 */
 	@Override
-	public TeamDto.DetailInfo findOne(Long teamId) {
-		
-		TeamDto.DetailInfo results = queryFactory
-				.select(Projections.bean(TeamDto.DetailInfo.class,
+	public TeamResponse.DetailInfo findOne(Long teamId) {
+		return queryFactory
+				.select(Projections.bean(TeamResponse.DetailInfo.class,
 						team.teamId,
 						team.teamName,
 						team.city,
@@ -56,8 +53,6 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 						team.teamId.eq(teamId)
 						)
 				.fetchOne();
-		
-		return results;
 	}
 
 	/**
@@ -65,14 +60,14 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	 * @author skhan
 	 */
 	@Override
-	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
+	public Page<TeamResponse.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
 		Predicate predicate = new BooleanBuilder()
 				.and(teamnameEq(conditionDto.getTeamName()))
 				.and(activatestatusEq(conditionDto.getActivateStatus()))
 				.and(cityEq(conditionDto.getCity()));
 		
-		List<TeamDto.Info> results = queryFactory
-				.select(Projections.bean(TeamDto.Info.class,
+		List<TeamResponse.Info> results = queryFactory
+				.select(Projections.bean(TeamResponse.Info.class,
 						team.teamId,
 						team.teamName,
 						team.city,
@@ -108,21 +103,6 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 				.where(predicate);
 		
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
-	}
-	
-	/**
-	 * @description 이미 등록된 팀인지 체크한다.
-	 * @author skhan
-	 */
-	public boolean checkTeamExist(TeamDto.Save request) {
-		return queryFactory
-				.select(team.count())
-				.from(team)
-				.where(
-						team.teamName.eq(request.getTeamName()),
-						team.city.eq(request.getCity())
-						)
-				.fetchOne()<1;
 	}
 	/**
 	 * @description memberName = request

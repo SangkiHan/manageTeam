@@ -1,15 +1,12 @@
 package com.manageTeam.domain.team.controller;
 
+import com.manageTeam.domain.team.dto.TeamRequest;
+import com.manageTeam.domain.team.dto.TeamResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.manageTeam.domain.team.dto.TeamConditionDto;
-import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.domain.team.service.TeamService;
 
 import io.swagger.annotations.Api;
@@ -26,25 +23,25 @@ public class TeamController {
 	
 	@ApiOperation(value="팀 저장 및 수정한다.")
 	@PostMapping("/v1/save")
-	public void save(@RequestBody TeamDto.Save request) {
+	public void save(@RequestBody TeamRequest.Save request) {
 		teamService.save(request);
 	}
 	
 	@ApiOperation(value="팀의 활성화 상태를 번경한다.")
 	@PostMapping("/v1/status")
-	public void status(@RequestBody TeamDto.Status request) {
+	public void status(@RequestBody TeamRequest.Status request) {
 		teamService.status(request);
 	}
 	
 	@ApiOperation(value="팀상세를 조회한다.")
-	@PostMapping("/v1/findOne")
-	public TeamDto.DetailInfo findOne(@RequestBody TeamDto.TeamId request) {
-		return teamService.findOne(request);
+	@GetMapping("/v1/{teamId}")
+	public TeamResponse.DetailInfo findOne(@PathVariable(name = "teamId") Long teamId) {
+		return teamService.findOne(teamId);
 	}
 	
 	@ApiOperation(value="팀목록을 조회한다.")
 	@GetMapping("/v1/findAll")
-	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
+	public Page<TeamResponse.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
 		return teamService.findAllByCondition(conditionDto, pageable);
 	}
 }

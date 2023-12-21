@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.manageTeam.domain.team.entity.Team;
 
 public interface TeamRepository extends JpaRepository<Team, Long>, TeamRepositoryCustom{
-	
+	boolean existsByTeamNameAndCity(String teamName, String city);
 }

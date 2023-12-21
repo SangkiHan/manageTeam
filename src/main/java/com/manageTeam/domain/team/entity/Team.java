@@ -11,10 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.manageTeam.domain.competitionTeam.entity.CompetitionTeam;
-import com.manageTeam.domain.member.entity.Member;
-import com.manageTeam.domain.reservationTeam.entity.ReservationTeam;
-import com.manageTeam.domain.team.dto.TeamDto;
 import com.manageTeam.domain.user.entity.User;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.BaseEntity;

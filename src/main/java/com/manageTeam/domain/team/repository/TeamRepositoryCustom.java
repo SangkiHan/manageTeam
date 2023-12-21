@@ -1,13 +1,12 @@
 package com.manageTeam.domain.team.repository;
 
+import com.manageTeam.domain.team.dto.TeamResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.manageTeam.domain.team.dto.TeamConditionDto;
-import com.manageTeam.domain.team.dto.TeamDto;
 
 public interface TeamRepositoryCustom {
-	public Page<TeamDto.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable);
-	public TeamDto.DetailInfo findOne(Long teamId);
-	public boolean checkTeamExist(TeamDto.Save request);
+	public Page<TeamResponse.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable);
+	public TeamResponse.DetailInfo findOne(Long teamId);
 }
