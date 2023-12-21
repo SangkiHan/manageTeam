@@ -1,22 +1,19 @@
 package com.manageTeam.global.security;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.manageTeam.domain.user.dto.UserResponse;
+import com.manageTeam.domain.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.manageTeam.domain.user.dto.UserDto;
-import com.manageTeam.domain.user.service.UserService;
-
-import lombok.RequiredArgsConstructor;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @descreption: Spring Security 로그인 성공 시 CustomHandler
@@ -33,7 +30,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 			Authentication authentication) throws IOException, ServletException {
        
 		String userId = authentication.getName();
-		UserDto.Info userInfo = userService.findUserInfo(userId);
+		UserResponse.Info userInfo = userService.findUserInfo(userId);
 
 		response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

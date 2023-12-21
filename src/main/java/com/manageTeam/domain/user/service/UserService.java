@@ -1,19 +1,18 @@
 package com.manageTeam.domain.user.service;
 
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.team.repository.TeamRepository;
-import com.manageTeam.domain.user.dto.UserDto;
+import com.manageTeam.domain.user.dto.UserRequest;
+import com.manageTeam.domain.user.dto.UserResponse;
 import com.manageTeam.domain.user.entity.User;
 import com.manageTeam.domain.user.repository.UserRepository;
 import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 import com.manageTeam.global.util.AESUtil;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +21,7 @@ public class UserService {
 	
 	private final UserRepository userRepository;
 	private final TeamRepository teamRepository;
+	private final UserReadService userReadService;
 	
 	/**
 	 * @api /api/user/v1/save
@@ -29,17 +29,17 @@ public class UserService {
 	 * @throws GlobalException
 	 * @author skhan
 	 */
-	public void save(UserDto.Save request) throws Exception{
+	public UserResponse.Info save(UserRequest.Save request){
 		//이미 등록되어 있는 사용자인지 체크한다.
-		if(!userRepository.existsByRsdntRgnmb(AESUtil.encrypt(request.getRsdntRgnmb()))) {
-			throw new GlobalException(ErrorCode.USER_EXIST);
-		}
+		existsByRsdntRgnmb(request.getRsdntRgnmb());
 		
 		Team team = teamRepository.findById(request.getTeam_id())
 				.orElseThrow(() -> new GlobalException(ErrorCode.TEAM_UNKNOWN));
-		User user = new User(request);
-		user.setTeam(team);
-		userRepository.save(user);
+
+		User user = request.toEntity();
+		user.changeTeam(team);
+
+		return UserResponse.Info.of(userRepository.save(user));
 	}
 	
 	/**
@@ -47,9 +47,8 @@ public class UserService {
 	 * @description 사용자를 상세 조회한다.
 	 * @author skhan
 	 */
-	public UserDto.Info findUserInfo(String userId){
-		return userRepository.findUserInfo(userId)
-				.orElseThrow(() -> new GlobalException(ErrorCode.USER_UNKNOWN));
+	public UserResponse.Info findUserInfo(String userId){
+		return UserResponse.Info.of(userReadService.findByUserId(userId));
 	}
 	
 	/**

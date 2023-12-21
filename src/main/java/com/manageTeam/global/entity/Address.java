@@ -4,6 +4,7 @@ import javax.persistence.Embeddable;
 
 import com.manageTeam.global.dto.AddressDto;
 
+import lombok.Builder;
 import lombok.Getter;
 
 /**
@@ -27,13 +28,12 @@ public class Address {
 	private String zipcode;
 	
 	public Address() {}
-	
-	/**
-	 * Dto to Entity Constructor
-	 */
-	public Address(AddressDto address) {
-		this.city = address.getCity();
-		this.street = address.getStreet();
-		this.zipcode = address.getZipcode();
+
+	@Builder
+	private Address(String city, String street, String zipcode) {
+		this.city = city;
+		this.street = street;
+		this.zipcode = zipcode;
 	}
+
 }

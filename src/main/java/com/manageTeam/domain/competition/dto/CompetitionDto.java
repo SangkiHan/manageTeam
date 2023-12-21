@@ -137,7 +137,7 @@ public class CompetitionDto {
 			this.regTeamCount = teamList.size();
 			this.gymId = competition.getGym().getGymId();
 			this.gymName = competition.getGym().getGymName();
-			this.address = new AddressDto(competition.getGym().getAddress());
+//			this.address = new AddressDto(competition.getGym().getAddress());
 			this.activateStatus = competition.getActivateStatus();
 			this.startDate = competition.getStartDate();
 			this.endDate = competition.getEndDate();

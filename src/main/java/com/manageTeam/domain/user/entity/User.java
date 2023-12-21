@@ -1,23 +1,15 @@
 package com.manageTeam.domain.user.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import com.manageTeam.domain.team.entity.Team;
-import com.manageTeam.domain.user.dto.UserDto;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Address;
 import com.manageTeam.global.entity.Auth;
 import com.manageTeam.global.entity.BaseEntity;
-import com.manageTeam.global.util.AESUtil;
-
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 /**
  * @description 사용자 테이블 Entity
@@ -69,27 +61,25 @@ public class User extends BaseEntity{
 	 */
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
-	
+
+	@Builder
+	private User(Team team, String password, String username, String rsdntRgnmb, String phone, Address address, Auth auth, ActivateStatus activateStatus) {
+		this.team = team;
+		this.password = password;
+		this.username = username;
+		this.rsdntRgnmb = rsdntRgnmb;
+		this.phone = phone;
+		this.address = address;
+		this.auth = auth;
+		this.activateStatus = activateStatus;
+	}
+
 	/**
 	 * @description 소속팀을 세팅해준다.
 	 * @author skhan
 	 */
-	public void setTeam(Team team) {
+	public void changeTeam(Team team) {
 		this.team = team;
 		team.getUsers().add(this);
-	}
-	
-	/**
-	 * Dto to Entity Constructor
-	 */
-	public User(UserDto.Save user){
-		this.userId = user.getUserId();
-		this.password =  AESUtil.encrypt(user.getPassword());
-		this.username = user.getUsername();
-		this.rsdntRgnmb = AESUtil.encrypt(user.getRsdntRgnmb());
-		this.phone = AESUtil.encrypt(user.getPhone());
-		this.address = new Address(user.getAddress());
-		this.auth = user.getAuth();
-		this.activateStatus = (user.getActivateStatus()==null)?ActivateStatus.YES:user.getActivateStatus();
 	}
 }

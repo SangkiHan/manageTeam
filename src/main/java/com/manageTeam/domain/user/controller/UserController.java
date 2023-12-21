@@ -1,18 +1,12 @@
 package com.manageTeam.domain.user.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.manageTeam.domain.user.dto.UserDto;
+import com.manageTeam.domain.user.dto.UserRequest;
+import com.manageTeam.domain.user.dto.UserResponse;
 import com.manageTeam.domain.user.service.UserService;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @Api("사용자 API")
 @RestController
@@ -24,13 +18,13 @@ public class UserController {
 	
 	@ApiOperation(value="회원가입")
 	@PostMapping("/v1/save")
-	public void save(@RequestBody UserDto.Save request) throws Exception {
+	public void save(@RequestBody UserRequest.Save request) throws Exception {
 		userService.save(request);
 	}
 	
 	@ApiOperation(value="사용자를 상세 조회한다.")
 	@GetMapping("/v1/findUserInfo")
-	public UserDto.Info findUserInfo(String userId){
+	public UserResponse.Info findUserInfo(String userId){
 		return userService.findUserInfo(userId);
 	}
 	

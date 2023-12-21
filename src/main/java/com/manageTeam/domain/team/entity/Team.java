@@ -21,7 +21,9 @@ import com.manageTeam.global.entity.BaseEntity;
 import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @description 팀 테이블 Entity
@@ -29,6 +31,7 @@ import lombok.Getter;
  */
 @Entity
 @Getter
+@NoArgsConstructor
 public class Team extends BaseEntity{
 	/**
 	 * 팀 ID
@@ -56,8 +59,8 @@ public class Team extends BaseEntity{
 	/**
 	 * 속해있는 팀원 List
 	 */
-	@OneToMany(mappedBy = "team")
-	private List<Member> members = new ArrayList<>();
+//	@OneToMany(mappedBy = "team")
+//	private List<Member> members = new ArrayList<>();
 	/**
 	 * 속해있는 관리자 List
 	 */
@@ -66,22 +69,19 @@ public class Team extends BaseEntity{
 	/**
 	 * 참가되어있는 대회
 	 */
-	@OneToMany(mappedBy = "team")
-	private List<CompetitionTeam> competitionTeams = new ArrayList<>();
-	@OneToMany(mappedBy = "team")
-	private List<ReservationTeam> reservationTeams = new ArrayList<>();
-	
-	public Team() {}
-	
-	/**
-	 * Dto to Entity Constructor
-	 */
-	public Team(TeamDto.Save team) {
-		this.teamId = team.getTeamId();
-		this.teamName = team.getTeamName();
-		this.city = team.getCity();
-		this.memberCount = 0;
+//	@OneToMany(mappedBy = "team")
+//	private List<CompetitionTeam> competitionTeams = new ArrayList<>();
+//	@OneToMany(mappedBy = "team")
+//	private List<ReservationTeam> reservationTeams = new ArrayList<>();
+
+	@Builder
+	private Team(String teamName, String city, int memberCount, ActivateStatus activateStatus) {
+		this.teamName = teamName;
+		this.city = city;
+		this.memberCount = memberCount;
+		this.activateStatus = activateStatus;
 	}
+
 	/**
 	 * @description 팀의 활성화 상태를 바꿔준다.
 	 * @author skhan
