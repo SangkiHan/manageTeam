@@ -52,7 +52,7 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
 				.where(
 						team.teamId.eq(teamId)
 						)
-				.fetchOne();
+				.fetchOne(); 
 	}
 
 	/**
