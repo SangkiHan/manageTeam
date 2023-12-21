@@ -2,6 +2,7 @@ package com.manageTeam.global.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.manageTeam.domain.user.dto.UserResponse;
+import com.manageTeam.domain.user.service.UserReadService;
 import com.manageTeam.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,13 +25,14 @@ import java.io.IOException;
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 	
 	private final UserService userService;
+	private final UserReadService userReadService;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
+			Authentication authentication) throws IOException {
        
 		String userId = authentication.getName();
-		UserResponse.Info userInfo = userService.findUserInfo(userId);
+		UserResponse.Info userInfo = userReadService.findUserInfo(userId);
 
 		response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

@@ -29,7 +29,7 @@ public class GymRepositoryImpl implements GymRepositoryCustom{
 				)
 				.fetchOne();
 
-		return count != null && count < 0;
+		return count != null && count <= 0;
 	}
 
 }

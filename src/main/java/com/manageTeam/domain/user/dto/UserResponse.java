@@ -61,8 +61,10 @@ public class UserResponse {
                 .userId(user.getUserId())
                 .teamId(user.getTeam().getTeamId())
                 .teamName(user.getTeam().getTeamName())
+                .username(user.getUsername())
                 .rsdntRgnmb(user.getRsdntRgnmb())
                 .phone(user.getPhone())
+                .address(AddressDto.of(user.getAddress()))
                 .auth(user.getAuth())
                 .activateStatus(user.getActivateStatus())
                 .build();

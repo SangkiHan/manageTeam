@@ -61,6 +61,7 @@ public class UserRequest {
 
 		public User toEntity(){
 			return User.builder()
+				.userId(userId)
 				.password(password)
 				.username(username)
 				.rsdntRgnmb(rsdntRgnmb)

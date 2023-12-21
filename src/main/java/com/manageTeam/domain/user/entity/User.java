@@ -63,7 +63,8 @@ public class User extends BaseEntity{
 	private ActivateStatus activateStatus;
 
 	@Builder
-	private User(Team team, String password, String username, String rsdntRgnmb, String phone, Address address, Auth auth, ActivateStatus activateStatus) {
+	private User(String userId, Team team, String password, String username, String rsdntRgnmb, String phone, Address address, Auth auth, ActivateStatus activateStatus) {
+		this.userId = userId;
 		this.team = team;
 		this.password = password;
 		this.username = username;

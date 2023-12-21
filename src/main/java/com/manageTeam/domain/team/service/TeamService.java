@@ -39,21 +39,5 @@ public class TeamService {
 		teamReadService.findById(request.getTeamId()).setStatus(request.getActivateStatus());
 	}
 	
-	/**
-	 * @api /api/team/v1/findById
-	 * @description 팀상세를 조회한다.
-	 * @author skhan
-	 */
-	public TeamResponse.DetailInfo findOne(Long teamId) {
-		return teamRepository.findOne(teamId);
-	}
-	
-	/**
-	 * @api /api/team/v1/findAll
-	 * @description 팀목록을 조회한다.
-	 * @author skhan
-	 */
-	public Page<TeamResponse.Info> findAllByCondition (TeamConditionDto conditionDto, Pageable pageable){
-		return teamRepository.findAllByCondition(conditionDto, pageable);
-	}
+
 }

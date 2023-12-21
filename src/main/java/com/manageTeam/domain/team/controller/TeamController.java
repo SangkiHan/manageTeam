@@ -2,6 +2,7 @@ package com.manageTeam.domain.team.controller;
 
 import com.manageTeam.domain.team.dto.TeamRequest;
 import com.manageTeam.domain.team.dto.TeamResponse;
+import com.manageTeam.domain.team.service.TeamReadService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class TeamController {
 	
 	private final TeamService teamService;
+	private final TeamReadService teamReadService;
 	
 	@ApiOperation(value="팀 저장 및 수정한다.")
 	@PostMapping("/v1/save")
@@ -36,12 +38,12 @@ public class TeamController {
 	@ApiOperation(value="팀상세를 조회한다.")
 	@GetMapping("/v1/{teamId}")
 	public TeamResponse.DetailInfo findOne(@PathVariable(name = "teamId") Long teamId) {
-		return teamService.findOne(teamId);
+		return teamReadService.findOne(teamId);
 	}
 	
 	@ApiOperation(value="팀목록을 조회한다.")
 	@GetMapping("/v1/findAll")
 	public Page<TeamResponse.Info> findAllByCondition(TeamConditionDto conditionDto, Pageable pageable) {
-		return teamService.findAllByCondition(conditionDto, pageable);
+		return teamReadService.findAllByCondition(conditionDto, pageable);
 	}
 }

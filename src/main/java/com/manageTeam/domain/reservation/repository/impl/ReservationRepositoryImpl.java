@@ -89,7 +89,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 						)
 				.fetchOne();
 
-		return count != null && count < 0;
+		return count != null && count <= 0;
 	}
 	/**
 	 * @description gymName = request

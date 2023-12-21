@@ -48,7 +48,7 @@ public class CompetitionRepositoryImpl implements CompetitionRepositoryCustom{
 						)
 				.fetchOne();
 
-		return count != null && count < 0;
+		return count != null && count <= 0;
 	}
 
 	/**

@@ -24,7 +24,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 						)
 				.fetchOne();
 
-		return count != null && count < 0;
+		return count != null && count <= 0;
 	}
 
 	@Override

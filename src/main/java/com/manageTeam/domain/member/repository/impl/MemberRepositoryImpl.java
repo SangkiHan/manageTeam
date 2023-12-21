@@ -131,6 +131,6 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 						)
 				.fetchOne();
 
-		return count != null && count < 0;
+		return count != null && count <= 0;
 	}
 }

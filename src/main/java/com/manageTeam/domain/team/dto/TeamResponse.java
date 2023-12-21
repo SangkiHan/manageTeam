@@ -58,6 +58,7 @@ public class TeamResponse {
 
     @ApiModel(value = "팀 상세 Dto")
     @Getter
+    @Setter
     public static class DetailInfo{
         /**
          * 팀 ID
