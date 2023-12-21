@@ -1,30 +1,19 @@
 package com.manageTeam.domain.reservation.entity;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
 import com.manageTeam.domain.gym.entity.Gym;
-import com.manageTeam.domain.reservation.dto.ReservationDto;
 import com.manageTeam.domain.reservationTeam.entity.ReservationTeam;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.BaseEntity;
-
 import com.manageTeam.global.exception.ErrorCode;
 import com.manageTeam.global.exception.GlobalException;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @description 체육관 예약 테이블 Entity
@@ -73,13 +62,24 @@ public class Reservation extends BaseEntity{
 	@Enumerated(EnumType.STRING)
 	private ActivateStatus activateStatus;
 
+	@Builder
+	public Reservation( LocalDateTime startTime, LocalDateTime endTime, Gym gym, List<ReservationTeam> reservationTeams, int totalTeamCnt, int reservationTeamCnt, ActivateStatus activateStatus) {
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.gym = gym;
+		this.reservationTeams = reservationTeams;
+		this.totalTeamCnt = totalTeamCnt;
+		this.reservationTeamCnt = reservationTeamCnt;
+		this.activateStatus = activateStatus;
+	}
+
 	/**
 	 * @description 예약건을 취소할 시 예약이 되어있는 팀들의 예약도 취소시킨다.
 	 * @author skhan
 	 */
 	public void cancel() {
 		this.activateStatus = ActivateStatus.NO;
-		reservationTeams.forEach(team -> team.cancel());
+		reservationTeams.forEach(ReservationTeam::cancel);
 	}
 	
 	/**
@@ -90,17 +90,6 @@ public class Reservation extends BaseEntity{
 		this.gym = gym;
 		gym.getReservations().add(this);
 	}
-
-	/**
-	 * Dto to Entity Constructor
-	 */
-	public Reservation(ReservationDto.Save reservation) {
-		this.reservationId = reservation.getReservationId();
-		this.startTime = reservation.getStartTime();
-		this.endTime = reservation.getEndTime();
-		this.totalTeamCnt = reservation.getTotalTeamCnt();
-		this.activateStatus = ActivateStatus.YES;
-	};
 
 	public void checkCnt(){
 		if(reservationTeamCnt==totalTeamCnt){

@@ -1,19 +1,7 @@
 package com.manageTeam.domain.reservation.repository.impl;
 
-import static com.manageTeam.domain.gym.entity.QGym.gym;
-import static com.manageTeam.domain.reservation.entity.QReservation.reservation;
-import static com.manageTeam.domain.reservationTeam.entity.QReservationTeam.reservationTeam;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.support.PageableExecutionUtils;
-import org.springframework.util.StringUtils;
-
 import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
-import com.manageTeam.domain.reservation.dto.ReservationDto;
+import com.manageTeam.domain.reservation.dto.ReservationResponse;
 import com.manageTeam.domain.reservation.repository.ReservationRepositoryCustom;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.querydsl.core.types.Predicate;
@@ -21,8 +9,18 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.util.StringUtils;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static com.manageTeam.domain.gym.entity.QGym.gym;
+import static com.manageTeam.domain.reservation.entity.QReservation.reservation;
+import static com.manageTeam.domain.reservationTeam.entity.QReservationTeam.reservationTeam;
 
 @RequiredArgsConstructor
 public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
@@ -34,7 +32,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	 * @author skhan
 	 * */
 	@Override
-	public Page<ReservationDto.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable) {
+	public Page<ReservationResponse.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable) {
 		
 		Predicate predicate = gymnameLike(conditionDto.getGymName())
 						.and(startGoe(conditionDto.getStartDate()))
@@ -42,8 +40,8 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 						.and(cityLike(conditionDto.getCity()))
 						.and(activateEq(conditionDto.getActivateStatus()));
 
-		List<ReservationDto.Info> results = queryFactory
-				.select(Projections.bean(ReservationDto.Info.class, 
+		List<ReservationResponse.Info> results = queryFactory
+				.select(Projections.bean(ReservationResponse.Info.class,
 						reservation.reservationId,
 						reservation.totalTeamCnt,
 						reservationTeam.count().as("joinTeam"),
@@ -79,8 +77,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	 * */
 	@Override
 	public boolean findReservationByDate(ReservationConditionDto.DateCondition condition, Long teamId) {
-		
-		return queryFactory
+		Long count = queryFactory
 				.select(reservationTeam.count())
 				.from(reservationTeam)
 				.join(reservationTeam.reservation, reservation)
@@ -90,7 +87,9 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 						startLoe(condition.getEndDate()),
 						endGoe(condition.getStartDate())
 						)
-				.fetchOne() < 0;
+				.fetchOne();
+
+		return count != null && count < 0;
 	}
 	/**
 	 * @description gymName = request

@@ -32,21 +32,5 @@ public class GymService {
 		Gym gym = new Gym(request);
 		gymRepository.save(gym);
 	}
-	
-	
-	/**
-	 * @api /api/gym/v1/findById
-	 * @description 체육관 상세 조회한다.
-	 * @throws GlobalException
-	 * @author skhan
-	 * */
-	public GymDto.Info findById(Long gymId) {
-		Gym result = gymRepository.findById(gymId)
-				.orElseThrow(() -> new GlobalException(ErrorCode.GYM_UNKNOWN));
-		
-		GymDto.Info gym = new GymDto.Info(result);
-		
-		return gym;
-	}
 
 }
