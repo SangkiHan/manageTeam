@@ -1,5 +1,6 @@
 package com.manageTeam.domain.reservationTeam.service;
 
+import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
 import com.manageTeam.domain.reservationTeam.entity.ReservationTeam;
 import com.manageTeam.domain.reservationTeam.repository.ReservationTeamRepository;
 import com.manageTeam.global.exception.ErrorCode;
@@ -15,4 +16,9 @@ public class ReservationTeamReadService {
 
     private final ReservationTeamRepository reservationTeamRepository;
 
+    public void findReservationByDate(ReservationConditionDto.DateCondition condition, Long teamId){
+        if(!reservationTeamRepository.findReservationByDate(condition,teamId)) {
+            throw new GlobalException(ErrorCode.RESERVATION_TIME);
+        }
+    }
 }

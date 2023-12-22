@@ -13,19 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class ReservationReadService {
-
     private final ReservationRepository reservationRepository;
 
     public Reservation findById(Long reservationId){
         return reservationRepository.findById(reservationId)
             .orElseThrow(() -> new GlobalException(ErrorCode.RESERVATION_UNKNOWN));
     }
-
-    public void findReservationByDate(ReservationConditionDto.DateCondition condition, Long teamId){
-        if(!reservationRepository.findReservationByDate(condition,teamId)) {
-            throw new GlobalException(ErrorCode.RESERVATION_TIME);
-        }
-    }
-
-
 }

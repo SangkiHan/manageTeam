@@ -25,6 +25,7 @@ public class ReservationTeamService {
 	private final ReservationTeamRepository reservationTeamRepository;
 	private final TeamReadService teamReadService;
 	private final ReservationReadService reservationReadService;
+	private final ReservationTeamReadService reservationTeamReadService;
 	
 	/**
 	 * @api /api/reservationTeam/v1/save
@@ -65,7 +66,7 @@ public class ReservationTeamService {
 			.startDate(reservation.getStartTime())
 			.endDate(reservation.getEndTime())
 			.build();
-		reservationReadService.findReservationByDate(condition, teamId);
+		reservationTeamReadService.findReservationByDate(condition, teamId);
 	}
 
 }

@@ -70,27 +70,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 				
 		return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchOne);
 	}
-	
-	/**
-	 * @description 해당 시간에 이미 등록된 체육관이 있는지 체크한다.
-	 * @author skhan
-	 * */
-	@Override
-	public boolean findReservationByDate(ReservationConditionDto.DateCondition condition, Long teamId) {
-		Long count = queryFactory
-				.select(reservationTeam.count())
-				.from(reservationTeam)
-				.join(reservationTeam.reservation, reservation)
-				.where(
-						reservationTeam.team.teamId.eq(teamId),
-						reservationTeam.activateStatus.eq(ActivateStatus.YES),
-						startLoe(condition.getEndDate()),
-						endGoe(condition.getStartDate())
-						)
-				.fetchOne();
 
-		return count != null && count <= 0;
-	}
 	/**
 	 * @description gymName = request
 	 * @author skhan
@@ -111,20 +91,6 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 	 */
 	public BooleanExpression endLoe(LocalDateTime dateLoe) {
 		return dateLoe!=null ? reservation.endTime.loe(dateLoe) : null;
-	}
-	/**
-	 * @description startDate >= request
-	 * @author skhan
-	 */
-	public BooleanExpression startLoe(LocalDateTime dateGoe) {
-		return dateGoe!=null ? reservation.startTime.loe(dateGoe) : null;
-	}
-	/**
-	 * @description endDate <= request
-	 * @author skhan
-	 */
-	public BooleanExpression endGoe(LocalDateTime dateLoe) {
-		return dateLoe!=null ? reservation.endTime.goe(dateLoe) : null;
 	}
 	/**
 	 * @description city = request

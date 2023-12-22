@@ -8,6 +8,5 @@ import com.manageTeam.domain.reservation.dto.ReservationConditionDto;
 
 public interface ReservationRepositoryCustom {
 	public Page<ReservationResponse.Info> findAllByCondition(ReservationConditionDto.ListCondition conditionDto, Pageable pageable);
-	public boolean findReservationByDate(ReservationConditionDto.DateCondition condition, Long teamId);
 	public Long findTeamCntReservation(Long reservationId);
 }

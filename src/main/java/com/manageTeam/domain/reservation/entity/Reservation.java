@@ -27,7 +27,6 @@ public class Reservation extends BaseEntity{
 	 * 예약ID
 	 */
 	@Id @GeneratedValue
-	@Column(name = "reservation_id")
 	private Long reservationId;
 	/**
 	 * 예약시작시간
@@ -41,7 +40,6 @@ public class Reservation extends BaseEntity{
 	 * 체육관ID
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "gym_id")
 	private Gym gym;
 	/**
 	 * 예약한 팀 List
@@ -63,11 +61,10 @@ public class Reservation extends BaseEntity{
 	private ActivateStatus activateStatus;
 
 	@Builder
-	public Reservation( LocalDateTime startTime, LocalDateTime endTime, Gym gym, List<ReservationTeam> reservationTeams, int totalTeamCnt, int reservationTeamCnt, ActivateStatus activateStatus) {
+	public Reservation( LocalDateTime startTime, LocalDateTime endTime, Gym gym, int totalTeamCnt, int reservationTeamCnt, ActivateStatus activateStatus) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.gym = gym;
-		this.reservationTeams = reservationTeams;
 		this.totalTeamCnt = totalTeamCnt;
 		this.reservationTeamCnt = reservationTeamCnt;
 		this.activateStatus = activateStatus;

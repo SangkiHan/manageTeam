@@ -4,10 +4,7 @@ import com.manageTeam.domain.gym.dto.GymRequest;
 import com.manageTeam.domain.gym.dto.GymResponse;
 import com.manageTeam.domain.gym.repository.GymRepository;
 import com.manageTeam.domain.gym.service.GymService;
-import com.manageTeam.domain.member.repository.MemberRepository;
-import com.manageTeam.domain.team.repository.TeamRepository;
 import com.manageTeam.service.CreateEntity;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,15 +18,9 @@ public class GymServiceTest extends CreateEntity {
     private GymRepository gymRepository;
     @Autowired
     private GymService gymService;
-    @Autowired
-    private TeamRepository teamRepository;
-    @Autowired
-    private MemberRepository memberRepository;
 
     @AfterEach
     void tearDown() {
-        memberRepository.deleteAllInBatch();
-        teamRepository.deleteAllInBatch();
         gymRepository.deleteAllInBatch();
     }
 

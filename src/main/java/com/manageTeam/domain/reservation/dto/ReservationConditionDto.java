@@ -54,6 +54,7 @@ public class ReservationConditionDto {
 			this.startDate = startDate;
 			this.endDate = endDate;
 		}
+
 	}
 	
 }

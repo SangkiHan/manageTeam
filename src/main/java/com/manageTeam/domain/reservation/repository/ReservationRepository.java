@@ -10,7 +10,5 @@ import com.manageTeam.domain.reservation.entity.Reservation;
 import com.manageTeam.global.entity.ActivateStatus;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long>, ReservationRepositoryCustom{
-	@Query("select r from Reservation r join fetch r.reservationTeams rt join fetch rt.team where r.reservationId = :id")
-	Optional<Reservation> findById(@Param("id") Long id);
 	Optional<Reservation> findByReservationIdAndActivateStatus(Long id, ActivateStatus activateStatus);
 }
