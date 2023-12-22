@@ -36,7 +36,7 @@ public class TeamReadService {
      * @author skhan
      */
     public TeamResponse.DetailInfo findOne(Long teamId) {
-        return teamRepository.findOne(teamId);
+        return TeamResponse.DetailInfo.of(findById(teamId)) ;
     }
 
     /**

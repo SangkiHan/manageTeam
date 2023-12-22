@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 public class TeamResponse {
     @ApiModel(value = "팀 등록 응답값")
     @Getter
@@ -79,15 +81,25 @@ public class TeamResponse {
         /**
          * 팀등록일
          */
-        private String regDate;
+        private LocalDateTime regDate;
 
         @Builder
-        private DetailInfo(Long teamId, String teamName, String city, String leader, String regDate) {
+        private DetailInfo(Long teamId, String teamName, String city, String leader, LocalDateTime regDate) {
             this.teamId = teamId;
             this.teamName = teamName;
             this.city = city;
             this.leader = leader;
             this.regDate = regDate;
+        }
+
+        public static DetailInfo of(Team team){
+            return DetailInfo.builder()
+                .teamId(team.getTeamId())
+                .teamName(team.getTeamName())
+                .city(team.getCity())
+                .leader(team.getUser()==null ? "담당자 없음" : team.getUser().getUsername())
+                .regDate(team.getCreatedDate())
+                .build();
         }
     }
 

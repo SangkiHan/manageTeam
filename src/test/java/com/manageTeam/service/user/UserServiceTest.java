@@ -11,6 +11,7 @@ import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Auth;
 import com.manageTeam.global.exception.GlobalException;
+import com.manageTeam.service.CreateEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,8 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SpringBootTest
-public class UserServiceTest {
+public class UserServiceTest extends CreateEntity {
 
     @Autowired
     private UserRepository userRepository;
@@ -67,15 +67,6 @@ public class UserServiceTest {
             .isInstanceOf(GlobalException.class);
     }
 
-    private Team createTeam(){
-        return Team.builder()
-            .teamName("창공")
-            .city("SUWON")
-            .activateStatus(ActivateStatus.YES)
-            .memberCount(0)
-            .build();
-    }
-
     private UserRequest.Save createUserSaveDto(Long teamId){
         return UserRequest.Save.builder()
             .userId("tkdrl8908")
@@ -87,14 +78,6 @@ public class UserServiceTest {
             .team_id(teamId)
             .address(createAddress())
             .activateStatus(ActivateStatus.YES)
-            .build();
-    }
-
-    private AddressDto createAddress(){
-        return AddressDto.builder()
-            .city("SUWON")
-            .street("harylero")
-            .zipcode("12345")
             .build();
     }
 

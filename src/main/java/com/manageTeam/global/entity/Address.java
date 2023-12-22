@@ -6,6 +6,7 @@ import com.manageTeam.global.dto.AddressDto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @description 주소 Embeddable 주소가 필요한 Entity에 추가하여 사용한다.
@@ -13,6 +14,7 @@ import lombok.Getter;
  */
 @Embeddable
 @Getter
+@NoArgsConstructor
 public class Address {
 	/**
 	 * 도시
@@ -26,8 +28,6 @@ public class Address {
 	 * 우편번호
 	 */
 	private String zipcode;
-	
-	public Address() {}
 
 	@Builder
 	private Address(String city, String street, String zipcode) {

@@ -28,8 +28,7 @@ public class User extends BaseEntity{
 	/**
 	 * 소속팀
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "team_id")
+	@OneToOne(fetch = FetchType.LAZY)
 	private Team team;
 	/**
 	 * 비밀번호
@@ -44,7 +43,7 @@ public class User extends BaseEntity{
 	 */
 	private String rsdntRgnmb;
 	/**
-	 * 핸드폰번호
+	 * 핸드폰 번호
 	 */
 	private String phone;
 	/**
@@ -81,6 +80,5 @@ public class User extends BaseEntity{
 	 */
 	public void changeTeam(Team team) {
 		this.team = team;
-		team.getUsers().add(this);
 	}
 }

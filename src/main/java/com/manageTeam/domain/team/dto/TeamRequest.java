@@ -27,7 +27,7 @@ public class TeamRequest {
         private ActivateStatus activateStatus;
 
         @Builder
-        private Save(Long teamId, String teamName, String city, ActivateStatus activateStatus) {
+        private Save(String teamName, String city, ActivateStatus activateStatus) {
             this.teamName = teamName;
             this.city = city;
             this.activateStatus = activateStatus;
@@ -54,5 +54,11 @@ public class TeamRequest {
          * 활성화 상태
          */
         private ActivateStatus activateStatus;
+
+        @Builder
+        private Status(Long teamId, ActivateStatus activateStatus) {
+            this.teamId = teamId;
+            this.activateStatus = activateStatus;
+        }
     }
 }

@@ -29,31 +29,6 @@ import static com.manageTeam.domain.user.entity.QUser.user;
 public class TeamRepositoryImpl implements TeamRepositoryCustom{
 	
 	private final JPAQueryFactory queryFactory;
-	
-	/**
-	 * @description 팀상세를 조회한다.
-	 * @author skhan
-	 */
-	@Override
-	public TeamResponse.DetailInfo findOne(Long teamId) {
-		return queryFactory
-				.select(Projections.bean(TeamResponse.DetailInfo.class,
-						team.teamId,
-						team.teamName,
-						team.city,
-						user.username.coalesce("담당자 없음").as("leader"),
-						Expressions.stringTemplate(
-								"DATE_FORMAT({0}, '%Y-%m-%d')",
-								team.createdDate).as("regDate")
-						)
-						)
-				.from(team)
-				.leftJoin(team.users, user)
-				.where(
-						team.teamId.eq(teamId)
-						)
-				.fetchOne(); 
-	}
 
 	/**
 	 * @description 팀목록을 조회한다.

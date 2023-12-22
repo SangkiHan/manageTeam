@@ -3,13 +3,7 @@ package com.manageTeam.domain.team.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.manageTeam.domain.member.entity.Member;
 import com.manageTeam.domain.user.entity.User;
@@ -61,8 +55,8 @@ public class Team extends BaseEntity{
 	/**
 	 * 속해있는 관리자 List
 	 */
-	@OneToMany(mappedBy = "team")
-	private List<User> users = new ArrayList<>();
+	@OneToOne(mappedBy = "team")
+	private User user;
 	/**
 	 * 참가되어있는 대회
 	 */
@@ -109,5 +103,9 @@ public class Team extends BaseEntity{
 		if(count<5) {
 			throw new GlobalException(ErrorCode.TEAM_NUMBER);
 		}
+	}
+
+	public void changeUser(User user){
+		this.user = user;
 	}
 }

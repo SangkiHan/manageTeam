@@ -4,25 +4,33 @@ import com.manageTeam.domain.team.dto.TeamResponse;
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.team.repository.TeamRepository;
 import com.manageTeam.domain.team.service.TeamReadService;
+import com.manageTeam.domain.user.entity.User;
+import com.manageTeam.domain.user.repository.UserRepository;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.exception.GlobalException;
-import org.assertj.core.api.Assertions;
+import com.manageTeam.service.CreateEntity;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SpringBootTest
-public class TeamReadServiceTest {
+public class TeamReadServiceTest extends CreateEntity {
 
     @Autowired
     private TeamReadService teamReadService;
     @Autowired
     private TeamRepository teamRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @AfterEach
+    void tearDown() {
+        userRepository.deleteAllInBatch();
+        teamRepository.deleteAllInBatch();
+    }
 
     @Test
     @DisplayName("팀을 조회한다.")
@@ -58,12 +66,18 @@ public class TeamReadServiceTest {
             .contains(savedTeam.getTeamId(), "창공", "SUWON", "담당자 없음");
     }
 
-    private Team createTeam(){
-        return Team.builder()
-            .teamName("창공")
-            .city("SUWON")
-            .activateStatus(ActivateStatus.YES)
-            .memberCount(0)
-            .build();
+    @Test
+    @DisplayName("저장되어있는 팀의 상세정보를 조회한다.")
+    void findOneWithUserTest(){
+        Team team = createTeam();
+        Team savedTeam = teamRepository.save(team);
+
+        User user = createUser(team);
+        userRepository.save(user);
+
+        TeamResponse.DetailInfo info = teamReadService.findOne(savedTeam.getTeamId());
+
+        assertThat(info).extracting("teamId", "teamName", "city", "leader")
+            .contains(savedTeam.getTeamId(), "창공", "SUWON", "한상기");
     }
 }

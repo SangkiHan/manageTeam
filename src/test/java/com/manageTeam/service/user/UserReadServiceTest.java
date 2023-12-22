@@ -10,6 +10,7 @@ import com.manageTeam.global.dto.AddressDto;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Auth;
 import com.manageTeam.global.exception.GlobalException;
+import com.manageTeam.service.CreateEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,8 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SpringBootTest
-public class UserReadServiceTest {
+public class UserReadServiceTest extends CreateEntity {
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -74,36 +74,5 @@ public class UserReadServiceTest {
 
         assertThatThrownBy(() -> userReadService.existsByRsdntRgnmb("1234561234567"))
             .isInstanceOf(GlobalException.class);
-    }
-
-    private Team createTeam(){
-        return Team.builder()
-            .teamName("창공")
-            .city("SUWON")
-            .activateStatus(ActivateStatus.YES)
-            .memberCount(0)
-            .build();
-    }
-
-    private User createUser(Team team){
-        return User.builder()
-            .userId("tkdrl8908")
-            .team(team)
-            .password("1234")
-            .username("한상기")
-            .rsdntRgnmb("1234561234567")
-            .phone("01012341234")
-            .address(createAddress().toEntity())
-            .auth(Auth.TEAM)
-            .activateStatus(ActivateStatus.YES)
-            .build();
-    }
-
-    private AddressDto createAddress(){
-        return AddressDto.builder()
-            .city("SUWON")
-            .street("harylero")
-            .zipcode("12345")
-            .build();
     }
 }
