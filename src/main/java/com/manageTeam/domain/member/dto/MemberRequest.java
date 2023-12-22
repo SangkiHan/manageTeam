@@ -42,8 +42,9 @@ public class MemberRequest {
         private Position position;
 
         @Builder
-        private Save(String memberName, int age, String rsdntRgnmb, String phone, AddressDto address,
+        private Save(Long teamId, String memberName, int age, String rsdntRgnmb, String phone, AddressDto address,
                      Position position) {
+            this.teamId = teamId;
             this.memberName = memberName;
             this.age = age;
             this.rsdntRgnmb = rsdntRgnmb;

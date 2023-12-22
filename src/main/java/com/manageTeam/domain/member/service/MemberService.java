@@ -3,6 +3,7 @@ package com.manageTeam.domain.member.service;
 import javax.transaction.Transactional;
 
 import com.manageTeam.domain.member.dto.MemberRequest;
+import com.manageTeam.domain.member.dto.MemberResponse;
 import com.manageTeam.domain.team.service.TeamReadService;
 import org.springframework.stereotype.Service;
 
@@ -25,20 +26,18 @@ public class MemberService {
 	/**
 	 * @api /api/member/v1/save
 	 * @description 팀원을 저장 및 수정한다.
-	 * @throws GlobalException
 	 * @author skhan
 	 * */
-	public void save(MemberRequest.Save request) {
+	public MemberResponse.Save save(MemberRequest.Save request) {
 		//주민번호 암호화하여 이미 등록된 팀원인지 체크
 		memberReadService.existsByRsdntRgnmb(request.getRsdntRgnmb());
 		Team team = teamReadService.findById(request.getTeamId());
-		memberRepository.save(request.toEntity(team));
+		return MemberResponse.Save.of(memberRepository.save(request.toEntity(team)));
 	}
 	
 	/**
 	 * @api /api/member/v1/status
 	 * @description 팀원의 상태를 변경한다.
-	 * @throws GlobalException
 	 * @author skhan
 	 * */
 	public void status(MemberRequest.Status request) {

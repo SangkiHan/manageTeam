@@ -21,7 +21,7 @@ public class MemberReadService {
     private final MemberRepository memberRepository;
 
     public void existsByRsdntRgnmb(String rsdntRgnmb){
-        if(!memberRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
+        if(memberRepository.existsByRsdntRgnmb(AESUtil.encrypt(rsdntRgnmb))) {
             throw new GlobalException(ErrorCode.USER_EXIST);
         }
     }
