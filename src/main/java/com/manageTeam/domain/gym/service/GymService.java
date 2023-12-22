@@ -3,6 +3,7 @@ package com.manageTeam.domain.gym.service;
 import javax.transaction.Transactional;
 
 import com.manageTeam.domain.gym.dto.GymRequest;
+import com.manageTeam.domain.gym.dto.GymResponse;
 import org.springframework.stereotype.Service;
 
 import com.manageTeam.domain.gym.repository.GymRepository;
@@ -24,9 +25,9 @@ public class GymService {
 	 * @throws GlobalException
 	 * @author skhan
 	 * */
-	public void save(GymRequest.Save request) {
+	public GymResponse.Save save(GymRequest.Save request) {
 		gymReadService.checkGymExist(request.getAddress().getZipcode(), request.getGymName());
-		gymRepository.save(request.toEntity());
+		return GymResponse.Save.of(gymRepository.save(request.toEntity()));
 	}
 
 }

@@ -24,7 +24,7 @@ public class GymReadService {
     }
 
     public void checkGymExist(String zipCode, String gymName){
-        if(gymRepository.checkGymExist(zipCode, gymName)) {
+        if(!gymRepository.checkGymExist(zipCode, gymName)) {
             throw new GlobalException(ErrorCode.GYM_EXIST);
         }
     }

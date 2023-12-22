@@ -16,9 +16,6 @@ public class GymRequest {
     @NoArgsConstructor
     public static class Save{
 
-        @ApiParam(value = "체육관ID")
-        private Long gymId;
-
         @ApiParam(value = "체육관 명")
         private String gymName;
 
@@ -26,8 +23,7 @@ public class GymRequest {
         private AddressDto address;
 
         @Builder
-        private Save(Long gymId, String gymName, AddressDto address) {
-            this.gymId = gymId;
+        private Save(String gymName, AddressDto address) {
             this.gymName = gymName;
             this.address = address;
         }

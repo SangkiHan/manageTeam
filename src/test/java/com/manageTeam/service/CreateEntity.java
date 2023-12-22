@@ -1,5 +1,6 @@
 package com.manageTeam.service;
 
+import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.domain.member.entity.Member;
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.user.entity.User;
@@ -51,6 +52,14 @@ public class CreateEntity {
             .address(createAddress().toEntity())
             .phone("01012341234")
             .position(Position.C)
+            .activateStatus(ActivateStatus.YES)
+            .build();
+    }
+
+    public Gym createGym(){
+        return Gym.builder()
+            .gymName("보훈원")
+            .address(createAddress().toEntity())
             .activateStatus(ActivateStatus.YES)
             .build();
     }
