@@ -3,6 +3,7 @@ package com.manageTeam.service.reservation;
 import com.manageTeam.domain.gym.entity.Gym;
 import com.manageTeam.domain.gym.repository.GymRepository;
 import com.manageTeam.domain.reservation.dto.ReservationRequest;
+import com.manageTeam.domain.reservation.dto.ReservationResponse;
 import com.manageTeam.domain.reservation.repository.ReservationRepository;
 import com.manageTeam.domain.reservation.service.ReservationService;
 import com.manageTeam.service.CreateEntity;
@@ -12,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReservationServiceTest extends CreateEntity {
 
@@ -38,6 +41,11 @@ public class ReservationServiceTest extends CreateEntity {
             .startTime(LocalDateTime.of(2023,10,31,0,0,0))
             .endTime(LocalDateTime.of(2023,11,1,0,0,0))
             .build();
+
+        ReservationResponse.Save response = reservationService.save(request);
+
+        assertThat(response).extracting("reservationId", "startTime", "endTime", "gymId", "totalTeamCnt", "reservationTeamCnt", "activateStatus")
+            .contains(response.getReservationId(), LocalDateTime.of(2023,10,31,0,0,0), LocalDateTime.of(2023,10,31,0,0,0));
     }
 
 

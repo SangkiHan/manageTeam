@@ -34,7 +34,7 @@ public class ReservationService {
 	
 	/**
 	 * @api /api/reservation/v1/save
-	 * @description 체육관 예약을 등록한다.
+	 * @description 체육관 예약을 등록 한다.
 	 * @author skhan
 	 * */
 	public ReservationResponse.Save save(ReservationRequest.Save request) {
@@ -43,8 +43,7 @@ public class ReservationService {
 	
 	/**
 	 * @api /api/reservation/v1/cancel
-	 * @description 체육관 예약등록을 취소한다.
-	 * @throws GlobalException
+	 * @description 체육관 예약 등록을 취소 한다.
 	 * @author skhan
 	 * */
 	public void cancel(ReservationRequest.Id request) {
@@ -66,7 +65,7 @@ public class ReservationService {
 	
 	/**
 	 * @api /api/reservation/v1/findAll
-	 * @description 등록된 체육관 예약목록을 조회한다.
+	 * @description 등록된 체육관 예약 목록을 조회 한다.
 	 * @author skhan
 	 * */
 	public Page<ReservationResponse.Info> findAllByCondition(ReservationConditionDto.ListCondition reservationConditionDto, Pageable pageable) {

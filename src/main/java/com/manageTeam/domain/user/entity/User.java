@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(name = "users")
 public class User extends BaseEntity{
 	
 	/**

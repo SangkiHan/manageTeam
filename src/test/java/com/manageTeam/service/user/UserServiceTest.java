@@ -41,7 +41,6 @@ public class UserServiceTest extends CreateEntity {
 
     @Test
     @DisplayName("사용자를 저장한다.")
-    @Transactional
     void saveTest(){
         Team team = createTeam();
         Team savedTeam = teamRepository.save(team);
@@ -55,7 +54,6 @@ public class UserServiceTest extends CreateEntity {
 
     @Test
     @DisplayName("동일한 사용자를 저장할시 에러가 발생한다.")
-    @Transactional
     void saveSameUserThrowExceptionTest(){
         Team team = createTeam();
         Team savedTeam = teamRepository.save(team);

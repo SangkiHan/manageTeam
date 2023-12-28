@@ -1,25 +1,15 @@
 package com.manageTeam.domain.member.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Address;
 import com.manageTeam.global.entity.BaseEntity;
 import com.manageTeam.global.entity.Position;
-
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 /**
  * @description 팀원 테이블 Entity
@@ -27,18 +17,16 @@ import lombok.RequiredArgsConstructor;
  */
 @Entity
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Member extends BaseEntity{
 	/**
 	 * 팀원ID
 	 */
 	@Id @GeneratedValue
-	@Column(name = "member_id")
 	private Long memberId;
 	/**
 	 * 팀원명
 	 */
-	@Column(name = "member_name")
 	private String membername;
 	/**
 	 * 나이
@@ -71,7 +59,6 @@ public class Member extends BaseEntity{
 	 * 소속팀
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "team_id")
 	private Team team;
 
 	@Builder

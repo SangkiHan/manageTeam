@@ -57,13 +57,6 @@ public class Team extends BaseEntity{
 	 */
 	@OneToOne(mappedBy = "team")
 	private User user;
-	/**
-	 * 참가되어있는 대회
-	 */
-//	@OneToMany(mappedBy = "team")
-//	private List<CompetitionTeam> competitionTeams = new ArrayList<>();
-//	@OneToMany(mappedBy = "team")
-//	private List<ReservationTeam> reservationTeams = new ArrayList<>();
 
 	@Builder
 	private Team(String teamName, String city, int memberCount, ActivateStatus activateStatus) {

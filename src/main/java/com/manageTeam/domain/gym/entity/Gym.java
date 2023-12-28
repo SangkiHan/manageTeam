@@ -1,22 +1,15 @@
 package com.manageTeam.domain.gym.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Address;
 import com.manageTeam.global.entity.BaseEntity;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-/*
+import javax.persistence.*;
+
+/**
  * 체육관 테이블
  * */
 @Entity

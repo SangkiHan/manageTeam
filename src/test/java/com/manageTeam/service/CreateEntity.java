@@ -10,9 +10,11 @@ import com.manageTeam.global.entity.ActivateStatus;
 import com.manageTeam.global.entity.Auth;
 import com.manageTeam.global.entity.Position;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
 
+@ActiveProfiles("test")
 @SpringBootTest
 public class CreateEntity {
     public Team createTeam(){

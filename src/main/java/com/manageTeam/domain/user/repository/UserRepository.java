@@ -8,6 +8,6 @@ import com.manageTeam.domain.team.entity.Team;
 import com.manageTeam.domain.user.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String>, UserRepositoryCustom{
-	public Optional<User> findByTeam(Team team);
+	Optional<User> findByTeam(Team team);
 	Optional<User> findByUserId(String userId);
 }
